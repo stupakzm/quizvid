@@ -1,5 +1,5 @@
-#ifndef VIDEO_H_
-#define VIDEO_H_
+#ifndef VIDEO_H
+#define VIDEO_H
 
 #include <libavcodec/avcodec.h>
 #include <libavformat/avformat.h>
@@ -17,7 +17,12 @@ typedef struct{
 /* Initialize video encoder */
 int video_init(VideoConfig *config);
 
+/* Write a single frame with solid color */
+int video_write_frame(uint8_t r, uint8_t g, uint8_t b);
+
+/* Get total frames written */
+int video_get_frame_count(void);
+
 /*Close video encoder and write file*/
 void video_close(void);
-
-#endif // VIDEO_H_
+#endif // VIDEO_H

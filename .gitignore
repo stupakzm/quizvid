@@ -8,6 +8,7 @@ build/
 bin/
 *.o
 *.out
+*.mp4
 
 # editor files
 *~
@@ -16,3 +17,6 @@ bin/
 
 # system
 .DS_Store
+
+.dir-locals.el
+compile_commnads.json
