@@ -1,0 +1,18 @@
+.DS_Store
+.idea
+*.log
+tmp/
+
+# build
+build/
+bin/
+*.o
+*.out
+
+# editor files
+*~
+.#*
+\#*\#
+
+# system
+.DS_Store
