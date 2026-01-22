@@ -19,6 +19,7 @@ int video_init(VideoConfig *config){
   avformat_alloc_output_context2(&format_ctx, NULL, NULL, config->output_filename);
   if(!format_ctx){
     fprintf(stderr, "Could not create output context\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -26,6 +27,7 @@ int video_init(VideoConfig *config){
   codec = avcodec_find_encoder(AV_CODEC_ID_H264);
   if (!codec){
     fprintf(stderr, "H.264 codec not found\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -33,6 +35,7 @@ int video_init(VideoConfig *config){
   video_stream = avformat_new_stream(format_ctx, NULL);
   if (!video_stream){
     fprintf(stderr, "Could not create video stream\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -40,6 +43,7 @@ int video_init(VideoConfig *config){
   codec_ctx = avcodec_alloc_context3(codec);
   if(!codec_ctx){
     fprintf(stderr, "Could not allocate codec context\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -56,6 +60,7 @@ int video_init(VideoConfig *config){
   ret = avcodec_open2(codec_ctx, codec, NULL);
   if(ret < 0){
     fprintf(stderr, "Could not open codec\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -63,6 +68,7 @@ int video_init(VideoConfig *config){
   ret = avcodec_parameters_from_context(video_stream->codecpar, codec_ctx);
   if(ret<0){
     fprintf(stderr, "Could not copy codec parameters\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -70,6 +76,7 @@ int video_init(VideoConfig *config){
   frame = av_frame_alloc();
   if(!frame){
     fprintf(stderr, "Could not allocate frame\n");
+    cleanup_on_error();
     return -1;
   }
   frame->format = codec_ctx->pix_fmt;
@@ -79,6 +86,7 @@ int video_init(VideoConfig *config){
   ret = av_frame_get_buffer(frame, 0);
   if(ret < 0){
     fprintf(stderr, "Could not allocate frame buffer\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -86,6 +94,7 @@ int video_init(VideoConfig *config){
   packet = av_packet_alloc();
   if (!packet){
     fprintf(stderr, "Could not allocate packet\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -93,6 +102,7 @@ int video_init(VideoConfig *config){
   ret = avio_open(&format_ctx->pb, config->output_filename, AVIO_FLAG_WRITE);
   if(ret < 0){
     fprintf(stderr, "Could not open output file\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -100,6 +110,7 @@ int video_init(VideoConfig *config){
   ret = avformat_write_header(format_ctx, NULL);
   if(ret < 0){
     fprintf(stderr, "Could not write header\n");
+    cleanup_on_error();
     return -1;
   }
 
@@ -125,6 +136,16 @@ void video_close(void){
   }
 
   printf("Video encoder closed. Total frames: %d\n", frame_count);
+}
+
+static void cleanup_on_error(void){
+  if(packet) av_packet_free(&packet);
+  if(frame) av_frame_free(&frame);
+  if(codec_ctx) avcodec_free_context(&codec_ctx);
+  if(format_ctx) {
+    avio_closep(&format_ctx->pb);
+    avformat_free_context(format_ctx);
+  }
 }
 
 int video_write_frame(uint8_t r, uint8_t g, uint8_t b){
