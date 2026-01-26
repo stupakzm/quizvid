@@ -4,15 +4,15 @@
 # @file
 # @version 0.1
 CC = gcc
-CFLAGS = -Wall -Wextra -I./include
-LDFLAGS = -lavformat -lavcodec -lavutil -lswscale
+CFLAGS = -Wall -Wextra -g -I./include $(shell pkg-config --cflags freetype2)
+LDFLAGS = -lavformat -lavcodec -lavutil -lswscale -lfreetype
 SRC_DIR = src
 BUILD_DIR = build
 BIN_DIR = bin
 
 TARGET = $(BIN_DIR)/quizvid
-SOURCES = $(SRC_DIR)/main.c $(SRC_DIR)/video.c
-OBJECTS = $(BUILD_DIR)/main.o $(BUILD_DIR)/video.o
+SOURCES = $(SRC_DIR)/main.c $(SRC_DIR)/video.c $(SRC_DIR)/text.c
+OBJECTS = $(BUILD_DIR)/main.o $(BUILD_DIR)/video.o $(BUILD_DIR)/text.o
 
 all: $(TARGET)
 

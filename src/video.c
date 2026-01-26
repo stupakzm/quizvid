@@ -228,15 +228,15 @@ int video_get_frame_count(void){
 }
 
 static int rgb_to_yuv_frame(uint8_t *rgb_buffer, int width, int height){
-  int ret = av_frame_make_writeble(frame);
+  int ret = av_frame_make_writable(frame);
   if (ret < 0){
-    fprintf(stderr, "Frame not writtable\n"):
+    fprintf(stderr, "Frame not writtable\n");
     return -1;
   }
 
   /* Convert RGB to YUV */
   for (int y = 0; y < height; y++){
-    for(int x = 0; c < width; x ++){
+    for(int x = 0; x < width; x ++){
       int rgb_index = (y * width + x) * 3;
       uint8_t r = rgb_buffer[rgb_index + 0];
       uint8_t g = rgb_buffer[rgb_index + 1];
@@ -255,19 +255,20 @@ static int rgb_to_yuv_frame(uint8_t *rgb_buffer, int width, int height){
       if(y % 2 == 0 && x % 2 == 0){
         int uv_x = x / 2;
         int uv_y = y / 2;
-        frame->date[1][uv_y * frame->linesize[1] + uv_x] = uval;
-        frame->date[2][uv_y * frame->linesize[2] + uv_x] = vval;
+        frame->data[1][uv_y * frame->linesize[1] + uv_x] = uval;
+        frame->data[2][uv_y * frame->linesize[2] + uv_x] = vval;
       }
     }
   }
-  return = 0;
+  return 0;
 }
 
-int vdieo_write_frame_rgb(uint8_t *rgb_buffer){
+int video_write_frame_rgb(uint8_t *rgb_buffer){
   int ret;
 
   ret = rgb_to_yuv_frame(rgb_buffer, codec_ctx->width, codec_ctx->height);
   if(ret < 0){
+    fprintf(stderr, "Failed convert RGB to YUV\n");
     return -1;
   }
 
@@ -293,17 +294,17 @@ int vdieo_write_frame_rgb(uint8_t *rgb_buffer){
 
     ret = av_interleaved_write_frame(format_ctx, packet);
     if(ret < 0){
-      fprintf(stderr, "Error writing frame\n"):
+      fprintf(stderr, "Error writing frame\n");
       return -1;
     }
 
     av_packet_unref(packet);
   }
   frame_count++;
-  return = 0;
+  return 0;
 }
 
-void video_fill_rgb(uint8_t *rgb_buffer, int width, int height, unit8_t r, unit8_t g, uint8_t b){
+void video_fill_rgb(uint8_t *rgb_buffer, int width, int height, uint8_t r, uint8_t g, uint8_t b){
   int total_pixels = width * height;
   for(int i = 0; i < total_pixels; i++){
     rgb_buffer[i*3+0] = r;
