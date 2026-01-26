@@ -20,6 +20,13 @@ int video_init(VideoConfig *config);
 /* Write a single frame with solid color */
 int video_write_frame(uint8_t r, uint8_t g, uint8_t b);
 
+/* Write a frame from RGB buffer */
+int video_write_frame_rgb(uint8_t *rgb_buffer);
+
+/* Fill RGB buffer with solid color */
+void video_fill_rgb(uint8_t *rgb_buffer, int width, int height,
+                    uint8_t r, uint8_t g, uint8_t b);
+
 /* Get total frames written */
 int video_get_frame_count(void);
 

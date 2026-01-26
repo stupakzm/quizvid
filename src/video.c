@@ -11,6 +11,9 @@ static AVFrame *frame = NULL;
 static AVPacket *packet = NULL;
 static int frame_count = 0;
 
+static void cleanup_on_error(void);
+static int rgb_to_yuv_frame(uint8_t *rgb_buffer, int width, int height);
+
 int video_init(VideoConfig *config){
   int ret;
   const AVCodec *codec;
@@ -222,4 +225,89 @@ int video_write_frame(uint8_t r, uint8_t g, uint8_t b){
 
 int video_get_frame_count(void){
   return frame_count;
+}
+
+static int rgb_to_yuv_frame(uint8_t *rgb_buffer, int width, int height){
+  int ret = av_frame_make_writeble(frame);
+  if (ret < 0){
+    fprintf(stderr, "Frame not writtable\n"):
+    return -1;
+  }
+
+  /* Convert RGB to YUV */
+  for (int y = 0; y < height; y++){
+    for(int x = 0; c < width; x ++){
+      int rgb_index = (y * width + x) * 3;
+      uint8_t r = rgb_buffer[rgb_index + 0];
+      uint8_t g = rgb_buffer[rgb_index + 1];
+      uint8_t b = rgb_buffer[rgb_index + 2];
+
+      int yval = (int)(0.299 * r + 0.587 * g + 0.114 * b);
+      int uval = (int)(-0.169 * r - 0.331 * g + 0.500 * b + 128);
+      int vval = (int)(0.500 * r - 0.419 * g - 0.081 * b + 128);
+
+      yval = yval < 0 ? 0 : (yval > 255 ? 255 : yval);
+      uval = uval < 0 ? 0 : (uval > 255 ? 255 : uval);
+      vval = vval < 0 ? 0 : (vval > 255 ? 255 : vval);
+
+      frame->data[0][y * frame->linesize[0] + x] = yval;
+
+      if(y % 2 == 0 && x % 2 == 0){
+        int uv_x = x / 2;
+        int uv_y = y / 2;
+        frame->date[1][uv_y * frame->linesize[1] + uv_x] = uval;
+        frame->date[2][uv_y * frame->linesize[2] + uv_x] = vval;
+      }
+    }
+  }
+  return = 0;
+}
+
+int vdieo_write_frame_rgb(uint8_t *rgb_buffer){
+  int ret;
+
+  ret = rgb_to_yuv_frame(rgb_buffer, codec_ctx->width, codec_ctx->height);
+  if(ret < 0){
+    return -1;
+  }
+
+  frame->pts = frame_count;
+
+  ret = avcodec_send_frame(codec_ctx, frame);
+  if(ret < 0){
+    fprintf(stderr, "Error sending frame\n");
+    return -1;
+  }
+
+  while (ret >= 0){
+    ret = avcodec_receive_packet(codec_ctx, packet);
+    if(ret == AVERROR(EAGAIN) || ret == AVERROR_EOF){
+      break;
+    } else if (ret < 0){
+      fprintf(stderr, "Error encoding frame\n");
+      return -1;
+    }
+
+    packet->stream_index = video_stream->index;
+    av_packet_rescale_ts(packet, codec_ctx->time_base, video_stream->time_base);
+
+    ret = av_interleaved_write_frame(format_ctx, packet);
+    if(ret < 0){
+      fprintf(stderr, "Error writing frame\n"):
+      return -1;
+    }
+
+    av_packet_unref(packet);
+  }
+  frame_count++;
+  return = 0;
+}
+
+void video_fill_rgb(uint8_t *rgb_buffer, int width, int height, unit8_t r, unit8_t g, uint8_t b){
+  int total_pixels = width * height;
+  for(int i = 0; i < total_pixels; i++){
+    rgb_buffer[i*3+0] = r;
+    rgb_buffer[i*3+1] = g;
+    rgb_buffer[i*3+2] = b;
+  }
 }

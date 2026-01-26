@@ -1,47 +1,61 @@
 #include <stdio.h>
 #include "video.h"
+#include "text.h"
 
 int main(int argc, char *argv[]){
-  (void) argc;
-  (void) argv;
+  (void)argc;
+  (void)argv;
 
   printf("QuizVid - Text to Video Generator\n");
-  printf("FFmpeg version: %s\n\n",av_version_info());
+  printf("FFmpeg verison: %s\n\n", av_version_info());
 
-  /* Configure video for vertical format */
   VideoConfig config = {
     .width = 1080,
     .height = 1920,
     .fps = 30,
-    .output_filename = "test_video.mp4"
+    .output_filename = "test_text.mp4"
   };
 
-  /* Initialize encoder */
-  if (video_init(&config) < 0){
-    fprintf(stderr, "Failed to initialize video encoder\n");
+  TextContext text_ctx;
+  if(text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", 72) < 0){
+    fprintf(stderr, "Failed to initialize text renderer\n");
+    video_close();
+    return 1;
+  }
+
+  size_t buffer_size = config.width * config.height * 3;
+  uint8_t *rgb_buffer = malloc(buffer_size);
+  if(!rgb_buffer){
+    fprintf(stderr, "Failed to allocate RGB buffer\n");
+    text_close(&text_ctx);
+    video_close();
     return -1;
   }
 
-  /* Generate 3 sec video */
   int total_frames = 3 * config.fps;
+  printf("Generating %d frames with text...\n", total_frames);
 
-  printf("Generating %d frames...\n", total_frames);
+  for(int i = 0, i < total_frames; i++){
+    video_fill_rgb(rgb_buffer, config.width, config.height, 30, 60, 120);
+    text_render(&text_ctx, rgb_buffer, config.width, config.height,
+                "Hello QuizVid ! 12:3.", 300, 960,
+                255, 255, 255);
 
-  for (int i = 0; i < total_frames; i++){
-    if(video_write_frame(255,0,0) < 0){
+    if(video_write_frame_rgb(rgb_buffer) < 0){
       fprintf(stderr, "Failed to write frame %d\n", i);
-      video_close();
-      return -1;
+      break;
     }
 
-    if((i+1) % 30 == 0){
+    if((i + 1) % 30 == 0){
       printf("Progress: %d/%d frames\n", i+1, total_frames);
     }
   }
 
+  free(rgb_buffer);
+  text_close(&text_ctx);
   video_close();
 
-  printf("\nVideo created successfully: %s \n", config.output_filename);
+  printf("\nVideo created successfully: %s\n", config.output_filename);
 
   return 0;
 }
