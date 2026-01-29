@@ -89,3 +89,29 @@ int text_render(TextContext *ctx, uint8_t *rgb_buffer, int buffer_width, int buf
   }
   return 0;
 }
+
+int text_measure_width(TextContext *ctx, const char *text) {
+    FT_Error error;
+    FT_GlyphSlot slot = ctx->face->glyph;
+    int width = 0;
+
+    for (size_t i = 0; i < strlen(text); i++) {
+        error = FT_Load_Char(ctx->face, text[i], FT_LOAD_DEFAULT);
+        if (error) continue;
+
+        width += slot->advance.x >> 6;
+    }
+
+    return width;
+}
+
+int text_render_centered(TextContext *ctx, uint8_t *rgb_buffer,
+                         int buffer_width, int buffer_height,
+                         const char *text, int y,
+                         uint8_t r, uint8_t g, uint8_t b) {
+    int text_width = text_measure_width(ctx, text);
+    int x = (buffer_width - text_width) / 2;
+
+    return text_render(ctx, rgb_buffer, buffer_width, buffer_height,
+                       text, x, y, r, g, b);
+}
