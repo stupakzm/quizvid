@@ -2,12 +2,17 @@
 #include "video.h"
 #include "text.h"
 #include "quiz.h"
+#include "colors.h"
 
 int main(int argc, char *argv[]) {
     (void)argc;
     (void)argv;
 
     printf("QuizVid - Generating Quiz Video\n\n");
+
+    colors_init(&COLOR_SCHEME_COLORBLIND);
+    //colors_init(&COLOR_SCHEME_GRAYSCALE);
+    //colors_init(&COLOR_SCHEME_DEFAULT);
 
     /* Load quiz data */
     QuizData quiz = {0};
@@ -21,7 +26,7 @@ int main(int argc, char *argv[]) {
         .width = 1080,
         .height = 1920,
         .fps = 30,
-        .output_filename = "quiz_video.mp4"
+        .output_filename = "quiz_video_gray.mp4"
     };
 
     /* Initialize video encoder */

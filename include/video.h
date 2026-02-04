@@ -5,6 +5,7 @@
 #include <libavformat/avformat.h>
 #include <libavutil/opt.h>
 #include <libswscale/swscale.h>
+#include "colors.h"
 
 /* Video configuration structure */
 typedef struct{
@@ -22,6 +23,9 @@ int video_write_frame(uint8_t r, uint8_t g, uint8_t b);
 
 /* Write a frame from RGB buffer */
 int video_write_frame_rgb(uint8_t *rgb_buffer);
+
+/* FIll RGB buffer with color */
+void video_fill_rgb_color(uint8_t *rgb_buffer, int width, int height, Color color);
 
 /* Fill RGB buffer with solid color */
 void video_fill_rgb(uint8_t *rgb_buffer, int width, int height,

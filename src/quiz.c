@@ -5,6 +5,7 @@
 #include "quiz.h"
 #include "video.h"
 #include "text.h"
+#include "colors.h"
 
 int quiz_load(QuizData *quiz, const char *json_file) {
     /* Read JSON file */
@@ -106,7 +107,7 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     int reveal = (time_in_question >= quiz->question_duration);
 
     /* Fill background with dark blue */
-    video_fill_rgb(rgb_buffer, width, height, 20, 30, 60);
+    video_fill_rgb_color(rgb_buffer, width, height, active_colors.background);
 
     /* Draw timer bar at top */
     video_draw_timer_bar(rgb_buffer, width, height, progress);
@@ -118,9 +119,10 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     }
 
     /* Render question centered */
+    Color q_color = active_colors.question_text;
     text_render_centered(&text_ctx, rgb_buffer, width, height,
                         q->question, 400,
-                        255, 255, 255);
+                        q_color.r, q_color.g, q_color.b);
 
     /* Render answers */
     text_close(&text_ctx);
@@ -137,14 +139,13 @@ int quiz_render_frame(QuizData *quiz, int question_index,
         snprintf(answer_text, sizeof(answer_text), "%c) %s", letter, q->answers[i]);
 
         /* Highlight correct answer in green if revealed */
-        uint8_t r = 255, g = 255, b = 255;
-        if (reveal && i == q->correct_answer) {
-            r = 0; g = 255; b = 0;  /* Green */
-        }
+        Color ans_color = reveal && i == q->correct_answer
+            ? active_colors.answer_correct
+            : active_colors.answer_text;
 
         text_render(&text_ctx, rgb_buffer, width, height,
                    answer_text, 200, answer_y + (i * answer_spacing),
-                   r, g, b);
+                   ans_color.r, ans_color.g, ans_color.b);
     }
 
     text_close(&text_ctx);

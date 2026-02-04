@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "video.h"
+#include "colors.h"
 
 // Global state for video encoding
 static AVFormatContext *format_ctx = NULL;
@@ -304,13 +305,21 @@ int video_write_frame_rgb(uint8_t *rgb_buffer){
   return 0;
 }
 
-void video_fill_rgb(uint8_t *rgb_buffer, int width, int height, uint8_t r, uint8_t g, uint8_t b){
-  int total_pixels = width * height;
-  for(int i = 0; i < total_pixels; i++){
-    rgb_buffer[i*3+0] = r;
-    rgb_buffer[i*3+1] = g;
-    rgb_buffer[i*3+2] = b;
-  }
+/* Fill RGB buffer with solid color */
+void video_fill_rgb_color(uint8_t *rgb_buffer, int width, int height, Color color) {
+    int total_pixels = width * height;
+    for (int i = 0; i < total_pixels; i++) {
+        rgb_buffer[i * 3 + 0] = color.r;
+        rgb_buffer[i * 3 + 1] = color.g;
+        rgb_buffer[i * 3 + 2] = color.b;
+    }
+}
+
+/* Keep old function for backward compatibility */
+void video_fill_rgb(uint8_t *rgb_buffer, int width, int height,
+                    uint8_t r, uint8_t g, uint8_t b) {
+    Color c = {r, g, b};
+    video_fill_rgb_color(rgb_buffer, width, height, c);
 }
 
 void video_draw_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
@@ -339,18 +348,17 @@ void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_heig
 
     int fill_width = (int)(buffer_width * progress);
 
-    /* Draw background (dark gray) */
+    /* Draw background using color scheme */
+    Color bg = active_colors.timer_background;
     video_draw_rect(rgb_buffer, buffer_width, buffer_height,
                     0, bar_y, buffer_width, bar_height,
-                    40, 40, 40);
+                    bg.r, bg.g, bg.b);
 
-    /* Draw filled portion (green) */
+    /* Draw filled portion using color scheme */
     if (fill_width > 0) {
+        Color fill = active_colors.timer_fill;
         video_draw_rect(rgb_buffer, buffer_width, buffer_height,
                         0, bar_y, fill_width, bar_height,
-                        0, 255, 0);
+                        fill.r, fill.g, fill.b);
     }
-
-    /* Draw percentage text */
-    /* We'll add this later with text rendering */
 }
