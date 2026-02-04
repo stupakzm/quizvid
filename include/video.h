@@ -30,6 +30,15 @@ void video_fill_rgb(uint8_t *rgb_buffer, int width, int height,
 /* Get total frames written */
 int video_get_frame_count(void);
 
+/* Draw filled rectangle on RGB buffer */
+void video_draw_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                     int x, int y, int width, int height,
+                     uint8_t r, uint8_t g, uint8_t b);
+
+/* Draw timer bar (progress indicator) */
+void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                          float progress);
+
 /*Close video encoder and write file*/
 void video_close(void);
 #endif // VIDEO_H

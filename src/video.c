@@ -312,3 +312,45 @@ void video_fill_rgb(uint8_t *rgb_buffer, int width, int height, uint8_t r, uint8
     rgb_buffer[i*3+2] = b;
   }
 }
+
+void video_draw_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                     int x, int y, int width, int height,
+                     uint8_t r, uint8_t g, uint8_t b) {
+    for (int row = y; row < y + height && row < buffer_height; row++) {
+        for (int col = x; col < x + width && col < buffer_width; col++) {
+            if (row >= 0 && col >= 0) {
+                int index = (row * buffer_width + col) * 3;
+                rgb_buffer[index + 0] = r;
+                rgb_buffer[index + 1] = g;
+                rgb_buffer[index + 2] = b;
+            }
+        }
+    }
+}
+
+void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                          float progress) {
+    const int bar_height = 80;
+    const int bar_y = 0;
+
+    /* Clamp progress to 0.0-1.0 */
+    if (progress < 0.0f) progress = 0.0f;
+    if (progress > 1.0f) progress = 1.0f;
+
+    int fill_width = (int)(buffer_width * progress);
+
+    /* Draw background (dark gray) */
+    video_draw_rect(rgb_buffer, buffer_width, buffer_height,
+                    0, bar_y, buffer_width, bar_height,
+                    40, 40, 40);
+
+    /* Draw filled portion (green) */
+    if (fill_width > 0) {
+        video_draw_rect(rgb_buffer, buffer_width, buffer_height,
+                        0, bar_y, fill_width, bar_height,
+                        0, 255, 0);
+    }
+
+    /* Draw percentage text */
+    /* We'll add this later with text rendering */
+}

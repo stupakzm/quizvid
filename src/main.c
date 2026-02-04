@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     (void)argc;
     (void)argv;
 
-    printf("QuizVid - Quiz JSON Parser Test\n\n");
+    printf("QuizVid - Generating Quiz Video\n\n");
 
     /* Load quiz data */
     QuizData quiz = {0};
@@ -16,28 +16,77 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
-    /* Print loaded data */
-    printf("Quiz Configuration:\n");
-    printf("  Question duration: %d seconds\n", quiz.question_duration);
-    printf("  Reveal duration: %d seconds\n", quiz.reveal_duration);
-    printf("  Number of questions: %d\n\n", quiz.num_questions);
+    /* Configure video */
+    VideoConfig config = {
+        .width = 1080,
+        .height = 1920,
+        .fps = 30,
+        .output_filename = "quiz_video.mp4"
+    };
 
-    /* Print each question */
-    for (int i = 0; i < quiz.num_questions; i++) {
-        QuizQuestion *q = &quiz.questions[i];
-        printf("Question %d: %s\n", i + 1, q->question);
+    /* Initialize video encoder */
+    if (video_init(&config) < 0) {
+        fprintf(stderr, "Failed to initialize video encoder\n");
+        quiz_free(&quiz);
+        return 1;
+    }
 
-        for (int j = 0; j < q->num_answers; j++) {
-            char letter = 'A' + j;
-            const char *marker = (j == q->correct_answer) ? " ✓" : "";
-            printf("  %c) %s%s\n", letter, q->answers[j], marker);
+    /* Allocate RGB buffer */
+    size_t buffer_size = config.width * config.height * 3;
+    uint8_t *rgb_buffer = malloc(buffer_size);
+    if (!rgb_buffer) {
+        fprintf(stderr, "Failed to allocate RGB buffer\n");
+        video_close();
+        quiz_free(&quiz);
+        return 1;
+    }
+
+    /* Generate video for each question */
+    int total_duration = quiz.question_duration + quiz.reveal_duration;
+    int frames_per_question = total_duration * config.fps;
+    int total_frames = frames_per_question * quiz.num_questions;
+
+    printf("Generating %d questions (%d frames total)...\n",
+           quiz.num_questions, total_frames);
+
+    int frame = 0;
+    for (int q = 0; q < quiz.num_questions; q++) {
+        printf("Question %d/%d: %s\n", q + 1, quiz.num_questions,
+               quiz.questions[q].question);
+
+        for (int f = 0; f < frames_per_question; f++) {
+            float time = (float)f / config.fps;
+
+            /* Render quiz frame */
+            if (quiz_render_frame(&quiz, q, time, rgb_buffer,
+                                 config.width, config.height) < 0) {
+                fprintf(stderr, "Failed to render frame\n");
+                break;
+            }
+
+            /* Write frame to video */
+            if (video_write_frame_rgb(rgb_buffer) < 0) {
+                fprintf(stderr, "Failed to write frame %d\n", frame);
+                break;
+            }
+
+            frame++;
+
+            /* Progress every second */
+            if ((frame % config.fps) == 0) {
+                printf("  Progress: %d/%d frames (%.1f seconds)\n",
+                       frame, total_frames, (float)frame / config.fps);
+            }
         }
-        printf("\n");
     }
 
     /* Cleanup */
+    free(rgb_buffer);
+    video_close();
     quiz_free(&quiz);
-    printf("Quiz data freed successfully.\n");
+
+    printf("\nQuiz video created successfully: %s\n", config.output_filename);
+    printf("Total duration: %d seconds\n", total_frames / config.fps);
 
     return 0;
 }

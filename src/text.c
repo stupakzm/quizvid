@@ -30,7 +30,6 @@ int text_init(TextContext *ctx, const char *font_path, int font_size) {
   }
 
   ctx->font_size = font_size;
-  printf("Text renderer initialized: %s @ %dpx\n", font_path, font_size);
 
   return 0;
 }
