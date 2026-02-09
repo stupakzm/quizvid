@@ -26,6 +26,11 @@ typedef struct {
     Color answer_correct;
     Color answer_incorrect;  /* For future use */
 
+    /* Answer button background */
+    Color answer_button_normal;
+    Color answer_button_correct;
+    Color answer_button_incorrect;
+
     /* UI colors */
     Color accent;  /* For future decorative elements */
 } ColorScheme;

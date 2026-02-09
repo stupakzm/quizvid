@@ -43,6 +43,11 @@ void video_draw_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
 void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
                           float progress);
 
+/* Draw filled rectangle with rounded corners */
+void video_draw_rounded_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                              int x, int y, int width, int height, int radius,
+                              Color color);
+
 /*Close video encoder and write file*/
 void video_close(void);
 #endif // VIDEO_H

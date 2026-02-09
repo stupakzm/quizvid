@@ -31,7 +31,21 @@ $(BIN_DIR):
 clean:
 	rm -rf $(BUILD_DIR) $(BIN_DIR)
 
-.PHONY: all clean
+run: $(TARGET)
+	./$(TARGET)
+
+
+test: $(TARGET)
+	@echo "Running QuizVid..."
+	./$(TARGET)
+	@echo ""
+	@echo "Playing video..."
+	ffplay -autoexit quiz_video.mp4
+
+
+quick: clean all run
+
+.PHONY: all clean run test quick
 
 compile_commands.json:
 	bear -- make

@@ -13,6 +13,9 @@ const ColorScheme COLOR_SCHEME_GRAYSCALE = {
     .answer_text = {200, 200, 200},       /* Light gray */
     .answer_correct = {255, 255, 255},    /* White (bold highlight) */
     .answer_incorrect = {100, 100, 100},  /* Medium gray */
+    .answer_button_normal = {60, 60, 60},
+    .answer_button_correct = {180, 180, 180},
+    .answer_button_incorrect = {40, 40, 40},
     .accent = {180, 180, 180}             /* Light gray */
 };
 
@@ -26,6 +29,9 @@ const ColorScheme COLOR_SCHEME_COLORBLIND = {
     .answer_text = {220, 220, 255},       /* Light purple-white */
     .answer_correct = {255, 215, 0},      /* Bright gold */
     .answer_incorrect = {150, 130, 180},  /* Muted purple */
+    .answer_button_normal = {80, 60, 25},
+    .answer_button_correct = {255, 215, 0},
+    .answer_button_incorrect = {60, 50, 70},
     .accent = {180, 120, 255}             /* Purple accent */
 };
 
@@ -39,6 +45,9 @@ const ColorScheme COLOR_SCHEME_DEFAULT = {
     .answer_text = {255, 255, 255},       /* White */
     .answer_correct = {0, 255, 0},        /* Green */
     .answer_incorrect = {255, 50, 50},    /* Red */
+    .answer_button_normal = {40, 60, 100},
+    .answer_button_correct = {0, 200, 0},
+    .answer_button_incorrect = {100, 40, 40},
     .accent = {0, 150, 255}               /* Blue */
 };
 

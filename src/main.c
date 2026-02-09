@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
         .width = 1080,
         .height = 1920,
         .fps = 30,
-        .output_filename = "quiz_video_gray.mp4"
+        .output_filename = "quiz_video.mp4"
     };
 
     /* Initialize video encoder */

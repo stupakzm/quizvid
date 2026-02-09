@@ -130,22 +130,45 @@ int quiz_render_frame(QuizData *quiz, int question_index,
         return -1;
     }
 
-    char answer_text[MAX_ANSWER_LEN + 4];  /* "A) " + answer + '\0' */
-    int answer_y = 700;
+    char answer_text[MAX_ANSWER_LEN + 4];
+    int answer_y_start = 700;
     int answer_spacing = 150;
+    int button_margin = 100;  /* Margin from screen edges */
+    int button_width = width - (2 * button_margin);
+    int button_height = 120;  /* Height of each button */
+    int button_radius = 20;   /* Rounded corner radius */
+    int text_padding_x = 40;  /* Text padding inside button */
+    int text_baseline_offset = 16;
 
     for (int i = 0; i < q->num_answers; i++) {
         char letter = 'A' + i;
         snprintf(answer_text, sizeof(answer_text), "%c) %s", letter, q->answers[i]);
 
-        /* Highlight correct answer in green if revealed */
-        Color ans_color = reveal && i == q->correct_answer
-            ? active_colors.answer_correct
-            : active_colors.answer_text;
+        int button_y = answer_y_start + (i * answer_spacing);
+
+        /* Determine button background color */
+        Color button_bg;
+        if (reveal && i == q->correct_answer) {
+            button_bg = active_colors.answer_button_correct;
+        } else if (reveal && i != q->correct_answer) {
+            button_bg = active_colors.answer_button_incorrect;
+        } else {
+            button_bg = active_colors.answer_button_normal;
+        }
+
+        /* Draw button background */
+        video_draw_rounded_rect(rgb_buffer, width, height,
+                               button_margin, button_y,
+                               button_width, button_height,
+                               button_radius, button_bg);
+
+        /* Render text on top of button (centered vertically in button) */
+        Color text_color = active_colors.answer_text;
+        int text_y = button_y + (button_height / 2) + text_baseline_offset;  /* Adjust for vertical centering */
 
         text_render(&text_ctx, rgb_buffer, width, height,
-                   answer_text, 200, answer_y + (i * answer_spacing),
-                   ans_color.r, ans_color.g, ans_color.b);
+                   answer_text, button_margin + text_padding_x, text_y,
+                   text_color.r, text_color.g, text_color.b);
     }
 
     text_close(&text_ctx);

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/types.h>
 #include "video.h"
 #include "colors.h"
 
@@ -14,7 +15,8 @@ static int frame_count = 0;
 
 static void cleanup_on_error(void);
 static int rgb_to_yuv_frame(uint8_t *rgb_buffer, int width, int height);
-
+static void draw_circle_filled(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                               int cx, int cy, int radius, Color color);
 int video_init(VideoConfig *config){
   int ret;
   const AVCodec *codec;
@@ -361,4 +363,58 @@ void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_heig
                         0, bar_y, fill_width, bar_height,
                         fill.r, fill.g, fill.b);
     }
+}
+
+/* Helper: Draw filled circle (for rounded corners) */
+static void draw_circle_filled(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                                int cx, int cy, int radius, Color color) {
+    for (int y = -radius; y <= radius; y++) {
+        for (int x = -radius; x <= radius; x++) {
+            if (x * x + y * y <= radius * radius) {
+                int px = cx + x;
+                int py = cy + y;
+                if (px >= 0 && px < buffer_width && py >= 0 && py < buffer_height) {
+                    int index = (py * buffer_width + px) * 3;
+                    rgb_buffer[index + 0] = color.r;
+                    rgb_buffer[index + 1] = color.g;
+                    rgb_buffer[index + 2] = color.b;
+                }
+            }
+        }
+    }
+}
+
+/* Draw rounded rectangle */
+void video_draw_rounded_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                              int x, int y, int width, int height, int radius,
+                              Color color) {
+    /* Clamp radius to not exceed half of width or height */
+    if (radius > width / 2) radius = width / 2;
+    if (radius > height / 2) radius = height / 2;
+
+    /* Draw main rectangles (no corners) */
+    /* Top rectangle */
+    video_draw_rect(rgb_buffer, buffer_width, buffer_height,
+                    x + radius, y, width - 2 * radius, radius,
+                    color.r, color.g, color.b);
+
+    /* Middle rectangle (full width) */
+    video_draw_rect(rgb_buffer, buffer_width, buffer_height,
+                    x, y + radius, width, height - 2 * radius,
+                    color.r, color.g, color.b);
+
+    /* Bottom rectangle */
+    video_draw_rect(rgb_buffer, buffer_width, buffer_height,
+                    x + radius, y + height - radius, width - 2 * radius, radius,
+                    color.r, color.g, color.b);
+
+    /* Draw four corner circles */
+    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
+                      x + radius, y + radius, radius, color);  /* Top-left */
+    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
+                      x + width - radius, y + radius, radius, color);  /* Top-right */
+    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
+                      x + radius, y + height - radius, radius, color);  /* Bottom-left */
+    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
+                      x + width - radius, y + height - radius, radius, color);  /* Bottom-right */
 }
