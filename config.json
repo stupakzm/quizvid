@@ -1,0 +1,29 @@
+{
+  "video": {
+    "width": 1080,
+    "height": 1920,
+    "fps": 30
+  },
+  "layout": {
+    "question_font_size": 64,
+    "question_y_position": 400,
+    "answer_font_size": 48,
+    "answer_y_start": 700,
+    "answer_spacing": 150,
+    "button_margin": 100,
+    "button_height": 120,
+    "button_radius": 20,
+    "button_text_padding": 40,
+    "timer_bar_height": 80
+  },
+  "appearance": {
+    "color_scheme": "colorblind",
+    "font_path": "assets/fonts/Roboto-Bold.ttf"
+  },
+  "input": {
+    "quiz_file": "examples/sample_quiz.json"
+  },
+  "output": {
+    "file": "quiz_video.mp4"
+  }
+}

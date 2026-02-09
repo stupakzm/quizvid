@@ -41,7 +41,7 @@ void video_draw_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
 
 /* Draw timer bar (progress indicator) */
 void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
-                          float progress);
+                          float progress, int bar_height);
 
 /* Draw filled rectangle with rounded corners */
 void video_draw_rounded_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,

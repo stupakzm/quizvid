@@ -2,7 +2,7 @@
 #define QUIZ_H
 
 #include <stdint.h>
-
+#include "config.h"
 /* Maximum lengths */
 #define MAX_QUESTION_LEN 256
 #define MAX_ANSWER_LEN 128
@@ -33,6 +33,7 @@ void quiz_free(QuizData *quiz);
 /* Render quiz frame at specific time */
 int quiz_render_frame(QuizData *quiz, int question_index,
                       float time_in_question,
-                      uint8_t *rgb_buffer, int width, int height);
+                      uint8_t *rgb_buffer, int width, int height,
+                      const LayoutConfig *layout);
 
 #endif // QUIZ_H

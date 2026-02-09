@@ -340,8 +340,7 @@ void video_draw_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
 }
 
 void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
-                          float progress) {
-    const int bar_height = 80;
+                          float progress, int bar_height) {
     const int bar_y = 0;
 
     /* Clamp progress to 0.0-1.0 */

@@ -91,7 +91,8 @@ void quiz_free(QuizData *quiz) {
 
 int quiz_render_frame(QuizData *quiz, int question_index,
                       float time_in_question,
-                      uint8_t *rgb_buffer, int width, int height) {
+                      uint8_t *rgb_buffer, int width, int height,
+                      const LayoutConfig *layout) {
     /* Validate inputs */
     if (question_index < 0 || question_index >= quiz->num_questions) {
         return -1;
@@ -110,33 +111,28 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     video_fill_rgb_color(rgb_buffer, width, height, active_colors.background);
 
     /* Draw timer bar at top */
-    video_draw_timer_bar(rgb_buffer, width, height, progress);
+    video_draw_timer_bar(rgb_buffer, width, height, progress, layout->timer_bar_height);
 
     /* Initialize text context */
     TextContext text_ctx;
-    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", 64) < 0) {
+    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->question_font_size) < 0) {
         return -1;
     }
 
     /* Render question centered */
     Color q_color = active_colors.question_text;
     text_render_centered(&text_ctx, rgb_buffer, width, height,
-                        q->question, 400,
+                        q->question, layout->question_y_position,
                         q_color.r, q_color.g, q_color.b);
 
     /* Render answers */
     text_close(&text_ctx);
-    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", 48) < 0) {
+    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->answer_font_size) < 0) {
         return -1;
     }
 
     char answer_text[MAX_ANSWER_LEN + 4];
-    int answer_y_start = 700;
-    int answer_spacing = 150;
-    int button_margin = 100;  /* Margin from screen edges */
-    int button_width = width - (2 * button_margin);
-    int button_height = 120;  /* Height of each button */
-    int button_radius = 20;   /* Rounded corner radius */
+    int button_width = width - (2 * layout->button_margin);
     int text_padding_x = 40;  /* Text padding inside button */
     int text_baseline_offset = 16;
 
@@ -144,7 +140,7 @@ int quiz_render_frame(QuizData *quiz, int question_index,
         char letter = 'A' + i;
         snprintf(answer_text, sizeof(answer_text), "%c) %s", letter, q->answers[i]);
 
-        int button_y = answer_y_start + (i * answer_spacing);
+        int button_y = layout->answer_y_start + (i * layout->answer_spacing);
 
         /* Determine button background color */
         Color button_bg;
@@ -158,16 +154,16 @@ int quiz_render_frame(QuizData *quiz, int question_index,
 
         /* Draw button background */
         video_draw_rounded_rect(rgb_buffer, width, height,
-                               button_margin, button_y,
-                               button_width, button_height,
-                               button_radius, button_bg);
+                               layout->button_margin, button_y,
+                               button_width, layout->button_height,
+                               layout->button_radius, button_bg);
 
         /* Render text on top of button (centered vertically in button) */
         Color text_color = active_colors.answer_text;
-        int text_y = button_y + (button_height / 2) + text_baseline_offset;  /* Adjust for vertical centering */
+        int text_y = button_y + (layout->button_height / 2) + text_baseline_offset;  /* Adjust for vertical centering */
 
         text_render(&text_ctx, rgb_buffer, width, height,
-                   answer_text, button_margin + text_padding_x, text_y,
+                   answer_text, layout->button_margin + text_padding_x, text_y,
                    text_color.r, text_color.g, text_color.b);
     }
 

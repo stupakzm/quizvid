@@ -11,8 +11,8 @@ BUILD_DIR = build
 BIN_DIR = bin
 
 TARGET = $(BIN_DIR)/quizvid
-SOURCES = $(SRC_DIR)/main.c $(SRC_DIR)/video.c $(SRC_DIR)/text.c $(SRC_DIR)/quiz.c $(SRC_DIR)/colors.c
-OBJECTS = $(BUILD_DIR)/main.o $(BUILD_DIR)/video.o $(BUILD_DIR)/text.o $(BUILD_DIR)/quiz.o $(BUILD_DIR)/colors.o
+SOURCES = $(SRC_DIR)/main.c $(SRC_DIR)/video.c $(SRC_DIR)/text.c $(SRC_DIR)/quiz.c $(SRC_DIR)/colors.c $(SRC_DIR)/config.c
+OBJECTS = $(BUILD_DIR)/main.o $(BUILD_DIR)/video.o $(BUILD_DIR)/text.o $(BUILD_DIR)/quiz.o $(BUILD_DIR)/colors.o $(BUILD_DIR)/config.o
 
 all: $(TARGET)
 

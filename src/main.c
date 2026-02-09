@@ -3,52 +3,63 @@
 #include "text.h"
 #include "quiz.h"
 #include "colors.h"
+#include "config.h"
 
 int main(int argc, char *argv[]) {
-    (void)argc;
-    (void)argv;
+    const char *config_file = "config.json";
+
+    /* Allow config file as command line argument */
+    if (argc > 1) {
+        config_file = argv[1];
+    }
 
     printf("QuizVid - Generating Quiz Video\n\n");
 
-    colors_init(&COLOR_SCHEME_COLORBLIND);
-    //colors_init(&COLOR_SCHEME_GRAYSCALE);
-    //colors_init(&COLOR_SCHEME_DEFAULT);
+    /* Load configuration */
+    AppConfig config;
+    config_load(&config, config_file);
+
+    /* Apply configuration (sets colors) */
+    config_apply(&config);
 
     /* Load quiz data */
     QuizData quiz = {0};
-    if (quiz_load(&quiz, "examples/sample_quiz.json") < 0) {
+    if (quiz_load(&quiz, config.quiz_file) < 0) {
         fprintf(stderr, "Failed to load quiz\n");
+        config_free(&config);
         return 1;
     }
 
-    /* Configure video */
-    VideoConfig config = {
-        .width = 1080,
-        .height = 1920,
-        .fps = 30,
-        .output_filename = "quiz_video.mp4"
+    /* Configure video using config */
+    VideoConfig video_config = {
+        .width = config.video.width,
+        .height = config.video.height,
+        .fps = config.video.fps,
+        .output_filename = config.output_file
     };
 
     /* Initialize video encoder */
-    if (video_init(&config) < 0) {
+    if (video_init(&video_config) < 0) {
         fprintf(stderr, "Failed to initialize video encoder\n");
         quiz_free(&quiz);
+        config_free(&config);
         return 1;
     }
 
     /* Allocate RGB buffer */
-    size_t buffer_size = config.width * config.height * 3;
+    size_t buffer_size = config.video.width * config.video.height * 3;
     uint8_t *rgb_buffer = malloc(buffer_size);
     if (!rgb_buffer) {
         fprintf(stderr, "Failed to allocate RGB buffer\n");
         video_close();
         quiz_free(&quiz);
+        config_free(&config);
         return 1;
     }
 
     /* Generate video for each question */
     int total_duration = quiz.question_duration + quiz.reveal_duration;
-    int frames_per_question = total_duration * config.fps;
+    int frames_per_question = total_duration * config.video.fps;
     int total_frames = frames_per_question * quiz.num_questions;
 
     printf("Generating %d questions (%d frames total)...\n",
@@ -60,11 +71,12 @@ int main(int argc, char *argv[]) {
                quiz.questions[q].question);
 
         for (int f = 0; f < frames_per_question; f++) {
-            float time = (float)f / config.fps;
+            float time = (float)f / config.video.fps;
 
-            /* Render quiz frame */
+            /* Render quiz frame with layout config */
             if (quiz_render_frame(&quiz, q, time, rgb_buffer,
-                                 config.width, config.height) < 0) {
+                                 config.video.width, config.video.height,
+                                 &config.layout) < 0) {
                 fprintf(stderr, "Failed to render frame\n");
                 break;
             }
@@ -78,9 +90,9 @@ int main(int argc, char *argv[]) {
             frame++;
 
             /* Progress every second */
-            if ((frame % config.fps) == 0) {
+            if ((frame % config.video.fps) == 0) {
                 printf("  Progress: %d/%d frames (%.1f seconds)\n",
-                       frame, total_frames, (float)frame / config.fps);
+                       frame, total_frames, (float)frame / config.video.fps);
             }
         }
     }
@@ -89,9 +101,10 @@ int main(int argc, char *argv[]) {
     free(rgb_buffer);
     video_close();
     quiz_free(&quiz);
+    config_free(&config);
 
-    printf("\nQuiz video created successfully: %s\n", config.output_filename);
-    printf("Total duration: %d seconds\n", total_frames / config.fps);
+    printf("\nQuiz video created successfully!\n");
+    printf("Total duration: %d seconds\n", total_frames / config.video.fps);
 
     return 0;
 }
