@@ -20,6 +20,12 @@
     "color_scheme": "colorblind",
     "font_path": "assets/fonts/Roboto-Bold.ttf"
   },
+  "animation": {
+    "question_fade_duration": 0.5,
+    "answer_fade_duration": 0.3,
+    "answer_delay_between": 0.3,
+    "question_delay": 0.0
+  },
   "input": {
     "quiz_file": "examples/sample_quiz.json"
   },

@@ -34,6 +34,7 @@ void quiz_free(QuizData *quiz);
 int quiz_render_frame(QuizData *quiz, int question_index,
                       float time_in_question,
                       uint8_t *rgb_buffer, int width, int height,
-                      const LayoutConfig *layout);
+                      const LayoutConfig *layout,
+                      const AnimationConfig *animation);
 
 #endif // QUIZ_H

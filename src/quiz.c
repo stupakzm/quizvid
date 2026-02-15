@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <json-c/json.h>
+#include "config.h"
 #include "quiz.h"
 #include "video.h"
 #include "text.h"
@@ -92,7 +93,8 @@ void quiz_free(QuizData *quiz) {
 int quiz_render_frame(QuizData *quiz, int question_index,
                       float time_in_question,
                       uint8_t *rgb_buffer, int width, int height,
-                      const LayoutConfig *layout) {
+                      const LayoutConfig *layout,
+                      const AnimationConfig *animation) {
     /* Validate inputs */
     if (question_index < 0 || question_index >= quiz->num_questions) {
         return -1;
@@ -113,30 +115,55 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     /* Draw timer bar at top */
     video_draw_timer_bar(rgb_buffer, width, height, progress, layout->timer_bar_height);
 
-    /* Initialize text context */
-    TextContext text_ctx;
-    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->question_font_size) < 0) {
-        return -1;
+  /* Calculate question alpha (fade in) */
+    float question_start = animation->question_delay;
+    float question_end = question_start + animation->question_fade_duration;
+    float question_alpha = 0.0f;
+
+    if (time_in_question >= question_end) {
+        question_alpha = 1.0f;
+    } else if (time_in_question > question_start) {
+        question_alpha = (time_in_question - question_start) / animation->question_fade_duration;
     }
 
-    /* Render question centered */
-    Color q_color = active_colors.question_text;
-    text_render_centered(&text_ctx, rgb_buffer, width, height,
-                        q->question, layout->question_y_position,
-                        q_color.r, q_color.g, q_color.b);
+    /* Render question with fade */
+    if (question_alpha > 0.0f) {
+        TextContext text_ctx;
+        if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->question_font_size) < 0) {
+            return -1;
+        }
 
-    /* Render answers */
-    text_close(&text_ctx);
+        Color q_color = active_colors.question_text;
+        text_render_centered_alpha(&text_ctx, rgb_buffer, width, height,
+                                   q->question, layout->question_y_position,
+                                   q_color.r, q_color.g, q_color.b, question_alpha);
+        text_close(&text_ctx);
+    }
+
+    /* Initialize text context */
+    TextContext text_ctx;
     if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->answer_font_size) < 0) {
         return -1;
     }
 
     char answer_text[MAX_ANSWER_LEN + 4];
     int button_width = width - (2 * layout->button_margin);
-    int text_padding_x = 40;  /* Text padding inside button */
-    int text_baseline_offset = 16;
 
     for (int i = 0; i < q->num_answers; i++) {
+     /* Calculate fade timing for this answer */
+        float answer_start = question_end + (i * animation->answer_delay_between);
+        float answer_end = answer_start + animation->answer_fade_duration;
+        float answer_alpha = 0.0f;
+
+        if (time_in_question >= answer_end) {
+            answer_alpha = 1.0f;
+        } else if (time_in_question > answer_start) {
+            answer_alpha = (time_in_question - answer_start) / animation->answer_fade_duration;
+        }
+
+        /* Skip if not visible yet */
+        if (answer_alpha <= 0.0f) continue;
+
         char letter = 'A' + i;
         snprintf(answer_text, sizeof(answer_text), "%c) %s", letter, q->answers[i]);
 
@@ -153,18 +180,18 @@ int quiz_render_frame(QuizData *quiz, int question_index,
         }
 
         /* Draw button background */
-        video_draw_rounded_rect(rgb_buffer, width, height,
+        video_draw_rounded_rect_alpha(rgb_buffer, width, height,
                                layout->button_margin, button_y,
                                button_width, layout->button_height,
-                               layout->button_radius, button_bg);
+                               layout->button_radius, button_bg, answer_alpha);
 
         /* Render text on top of button (centered vertically in button) */
         Color text_color = active_colors.answer_text;
-        int text_y = button_y + (layout->button_height / 2) + text_baseline_offset;  /* Adjust for vertical centering */
+        int text_y = button_y + (layout->button_height / 2) + 8;  /* Adjust for vertical centering */
 
-        text_render(&text_ctx, rgb_buffer, width, height,
-                   answer_text, layout->button_margin + text_padding_x, text_y,
-                   text_color.r, text_color.g, text_color.b);
+        text_render_alpha(&text_ctx, rgb_buffer, width, height,
+                   answer_text, layout->button_margin + layout->button_text_padding, text_y,
+                   text_color.r, text_color.g, text_color.b, answer_alpha);
     }
 
     text_close(&text_ctx);

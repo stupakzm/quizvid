@@ -49,6 +49,12 @@ AppConfig config_get_default(void) {
             .button_text_padding = 40,
             .timer_bar_height = 80
         },
+        .animation = {
+          .question_fade_duration = 0.5f,
+          .answer_fade_duration = 0.3f,
+          .answer_delay_between = 0.3f,
+          .question_delay = 0.0f
+        },
         .color_scheme = "colorblind",
         .font_path = "assets/fonts/Roboto-Bold.ttf",
         .quiz_file = "examples/sample_quiz.json",
@@ -122,6 +128,25 @@ int config_load(AppConfig *config, const char *config_file) {
         config->output_file = strdup_safe(file);
     } else {
         config->output_file = strdup_safe("quiz_video.mp4");
+    }
+
+    /* Parse animation settings */
+    struct json_object *animation;
+    if (json_object_object_get_ex(root, "animation", &animation)) {
+        struct json_object *val;
+
+        if (json_object_object_get_ex(animation, "question_fade_duration", &val)) {
+            config->animation.question_fade_duration = (float)json_object_get_double(val);
+        }
+        if (json_object_object_get_ex(animation, "answer_fade_duration", &val)) {
+            config->animation.answer_fade_duration = (float)json_object_get_double(val);
+        }
+        if (json_object_object_get_ex(animation, "answer_delay_between", &val)) {
+            config->animation.answer_delay_between = (float)json_object_get_double(val);
+        }
+        if (json_object_object_get_ex(animation, "question_delay", &val)) {
+            config->animation.question_delay = (float)json_object_get_double(val);
+        }
     }
 
     json_object_put(root);

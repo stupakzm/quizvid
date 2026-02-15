@@ -43,9 +43,12 @@ void text_close(TextContext *ctx){
   }
 }
 
-int text_render(TextContext *ctx, uint8_t *rgb_buffer, int buffer_width, int buffer_height,
-                const char *text, int x, int y, uint8_t r, uint8_t g, uint8_t b){
-  FT_Error error;
+int text_render_alpha(TextContext *ctx, uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                const char *text, int x, int y, uint8_t r, uint8_t g, uint8_t b, float alpha){
+    if (alpha < 0.0f) alpha = 0.0f;
+    if (alpha > 1.0f) alpha = 1.0f;
+
+    FT_Error error;
   FT_GlyphSlot slot = ctx->face->glyph;
   int pen_x = x;
   int pen_y = y;
@@ -74,14 +77,13 @@ int text_render(TextContext *ctx, uint8_t *rgb_buffer, int buffer_width, int buf
           continue;
         }
 
-        uint8_t alpha = bitmap->buffer[row*bitmap->pitch + col];
-
+        uint8_t glyph_alpha = bitmap->buffer[row*bitmap->pitch + col];
+        float combined_alpha = (glyph_alpha / 255.0f) * alpha;
         int buffer_index = (pixel_y * buffer_width + pixel_x) * 3;
 
-        float alpha_f = alpha / 255.0f;
-        rgb_buffer[buffer_index + 0] = (uint8_t)(r * alpha_f + rgb_buffer[buffer_index + 0] * (1.0f - alpha_f));
-        rgb_buffer[buffer_index + 1] = (uint8_t)(g * alpha_f + rgb_buffer[buffer_index + 1] * (1.0f - alpha_f));
-        rgb_buffer[buffer_index + 2] = (uint8_t)(b * alpha_f + rgb_buffer[buffer_index + 2] * (1.0f - alpha_f));
+        rgb_buffer[buffer_index + 0] = (uint8_t)(r * combined_alpha + rgb_buffer[buffer_index + 0] * (1.0f - combined_alpha));
+        rgb_buffer[buffer_index + 1] = (uint8_t)(g * combined_alpha + rgb_buffer[buffer_index + 1] * (1.0f - combined_alpha));
+        rgb_buffer[buffer_index + 2] = (uint8_t)(b * combined_alpha + rgb_buffer[buffer_index + 2] * (1.0f - combined_alpha));
       }
     }
     pen_x += slot->advance.x >> 6;
@@ -104,13 +106,13 @@ int text_measure_width(TextContext *ctx, const char *text) {
     return width;
 }
 
-int text_render_centered(TextContext *ctx, uint8_t *rgb_buffer,
+int text_render_centered_alpha(TextContext *ctx, uint8_t *rgb_buffer,
                          int buffer_width, int buffer_height,
                          const char *text, int y,
-                         uint8_t r, uint8_t g, uint8_t b) {
+                         uint8_t r, uint8_t g, uint8_t b, float alpha) {
     int text_width = text_measure_width(ctx, text);
     int x = (buffer_width - text_width) / 2;
 
-    return text_render(ctx, rgb_buffer, buffer_width, buffer_height,
-                       text, x, y, r, g, b);
+    return text_render_alpha(ctx, rgb_buffer, buffer_width, buffer_height,
+                       text, x, y, r, g, b, alpha);
 }

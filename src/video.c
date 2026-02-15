@@ -15,8 +15,8 @@ static int frame_count = 0;
 
 static void cleanup_on_error(void);
 static int rgb_to_yuv_frame(uint8_t *rgb_buffer, int width, int height);
-static void draw_circle_filled(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
-                               int cx, int cy, int radius, Color color);
+static void draw_circle_filled_alpha(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                               int cx, int cy, int radius, Color color, float alpha);
 int video_init(VideoConfig *config){
   int ret;
   const AVCodec *codec;
@@ -364,9 +364,24 @@ void video_draw_timer_bar(uint8_t *rgb_buffer, int buffer_width, int buffer_heig
     }
 }
 
+/* Helper: Blend color with alpha onto buffer */
+static inline void blend_pixel(uint8_t *buffer, int index, Color color, float alpha) {
+    if (alpha <= 0.0f) return;
+    if (alpha >= 1.0f) {
+        buffer[index + 0] = color.r;
+        buffer[index + 1] = color.g;
+        buffer[index + 2] = color.b;
+        return;
+    }
+
+    buffer[index + 0] = (uint8_t)(color.r * alpha + buffer[index + 0] * (1.0f - alpha));
+    buffer[index + 1] = (uint8_t)(color.g * alpha + buffer[index + 1] * (1.0f - alpha));
+    buffer[index + 2] = (uint8_t)(color.b * alpha + buffer[index + 2] * (1.0f - alpha));
+}
+
 /* Helper: Draw filled circle (for rounded corners) */
-static void draw_circle_filled(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
-                                int cx, int cy, int radius, Color color) {
+static void draw_circle_filled_alpha(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+                                int cx, int cy, int radius, Color color, float alpha) {
     for (int y = -radius; y <= radius; y++) {
         for (int x = -radius; x <= radius; x++) {
             if (x * x + y * y <= radius * radius) {
@@ -374,9 +389,7 @@ static void draw_circle_filled(uint8_t *rgb_buffer, int buffer_width, int buffer
                 int py = cy + y;
                 if (px >= 0 && px < buffer_width && py >= 0 && py < buffer_height) {
                     int index = (py * buffer_width + px) * 3;
-                    rgb_buffer[index + 0] = color.r;
-                    rgb_buffer[index + 1] = color.g;
-                    rgb_buffer[index + 2] = color.b;
+                    blend_pixel(rgb_buffer, index, color, alpha);
                 }
             }
         }
@@ -384,12 +397,40 @@ static void draw_circle_filled(uint8_t *rgb_buffer, int buffer_width, int buffer
 }
 
 /* Draw rounded rectangle */
-void video_draw_rounded_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
+void video_draw_rounded_rect_alpha(uint8_t *rgb_buffer, int buffer_width, int buffer_height,
                               int x, int y, int width, int height, int radius,
-                              Color color) {
+                              Color color, float alpha) {
     /* Clamp radius to not exceed half of width or height */
     if (radius > width / 2) radius = width / 2;
     if (radius > height / 2) radius = height / 2;
+
+    /* Draw rectangles with alpha blending */
+    for (int row = y; row < y + radius && row < buffer_height; row++) {
+        for (int col = x + radius; col < x + width - radius && col < buffer_width; col++) {
+            if (row >= 0 && col >= 0) {
+                int index = (row * buffer_width + col) * 3;
+                blend_pixel(rgb_buffer, index, color, alpha);
+            }
+        }
+    }
+
+    for (int row = y + radius; row < y + height - radius && row < buffer_height; row++) {
+        for (int col = x; col < x + width && col < buffer_width; col++) {
+            if (row >= 0 && col >= 0) {
+                int index = (row * buffer_width + col) * 3;
+                blend_pixel(rgb_buffer, index, color, alpha);
+            }
+        }
+    }
+
+    for (int row = y + height - radius; row < y + height && row < buffer_height; row++) {
+        for (int col = x + radius; col < x + width - radius && col < buffer_width; col++) {
+            if (row >= 0 && col >= 0) {
+                int index = (row * buffer_width + col) * 3;
+                blend_pixel(rgb_buffer, index, color, alpha);
+            }
+        }
+    }
 
     /* Draw main rectangles (no corners) */
     /* Top rectangle */
@@ -408,12 +449,12 @@ void video_draw_rounded_rect(uint8_t *rgb_buffer, int buffer_width, int buffer_h
                     color.r, color.g, color.b);
 
     /* Draw four corner circles */
-    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
-                      x + radius, y + radius, radius, color);  /* Top-left */
-    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
-                      x + width - radius, y + radius, radius, color);  /* Top-right */
-    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
-                      x + radius, y + height - radius, radius, color);  /* Bottom-left */
-    draw_circle_filled(rgb_buffer, buffer_width, buffer_height,
-                      x + width - radius, y + height - radius, radius, color);  /* Bottom-right */
+    draw_circle_filled_alpha(rgb_buffer, buffer_width, buffer_height,
+                      x + radius, y + radius, radius, color, alpha);  /* Top-left */
+    draw_circle_filled_alpha(rgb_buffer, buffer_width, buffer_height,
+                      x + width - radius, y + radius, radius, color, alpha);  /* Top-right */
+    draw_circle_filled_alpha(rgb_buffer, buffer_width, buffer_height,
+                      x + radius, y + height - radius, radius, color, alpha);  /* Bottom-left */
+    draw_circle_filled_alpha(rgb_buffer, buffer_width, buffer_height,
+                      x + width - radius, y + height - radius, radius, color, alpha);  /* Bottom-right */
 }

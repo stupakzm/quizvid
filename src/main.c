@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
             /* Render quiz frame with layout config */
             if (quiz_render_frame(&quiz, q, time, rgb_buffer,
                                  config.video.width, config.video.height,
-                                 &config.layout) < 0) {
+                                 &config.layout, &config.animation) < 0) {
                 fprintf(stderr, "Failed to render frame\n");
                 break;
             }

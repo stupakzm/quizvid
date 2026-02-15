@@ -29,10 +29,19 @@ typedef struct {
     int fps;
 } VideoSettings;
 
+/* Animation configuration */
+typedef struct {
+    float question_fade_duration;  /* Seconds for question fade-in */
+    float answer_fade_duration;    /* Seconds for each answer fade-in */
+    float answer_delay_between;    /* Delay between each answer */
+    float question_delay;          /* Delay before question starts */
+} AnimationConfig;
+
 /* Complete application configuration */
 typedef struct {
     VideoSettings video;
     LayoutConfig layout;
+    AnimationConfig animation;
     const char *color_scheme;  /* "grayscale", "colorblind", "default" */
     const char *font_path;
     const char *quiz_file;
