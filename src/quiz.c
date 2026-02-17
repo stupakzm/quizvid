@@ -49,6 +49,21 @@ int quiz_load(QuizData *quiz, const char *json_file) {
         struct json_object *q_obj = json_object_array_get_idx(questions_array, i);
         QuizQuestion *q = &quiz->questions[i];
 
+        /* Get question type */
+        struct json_object *type_obj;
+        if (json_object_object_get_ex(q_obj, "type", &type_obj)) {
+            const char *type_str = json_object_get_string(type_obj);
+            if (strcmp(type_str, "truefalse") == 0) {
+                q->type = QUIZ_TYPE_TRUEFALSE;
+            } else if (strcmp(type_str, "multi") == 0) {
+                q->type = QUIZ_TYPE_MULTI;
+            } else {
+                q->type = QUIZ_TYPE_STANDARD;
+            }
+        } else {
+            q->type = QUIZ_TYPE_STANDARD;
+        }
+
         /* Get question text */
         struct json_object *text;
         if (json_object_object_get_ex(q_obj, "question", &text)) {
@@ -56,23 +71,36 @@ int quiz_load(QuizData *quiz, const char *json_file) {
             q->question[MAX_QUESTION_LEN - 1] = '\0';
         }
 
-        /* Get answers */
-        struct json_object *answers_array;
-        if (json_object_object_get_ex(q_obj, "answers", &answers_array)) {
-            q->num_answers = json_object_array_length(answers_array);
-            if (q->num_answers > MAX_ANSWERS) q->num_answers = MAX_ANSWERS;
+        /* For true/false, force answers */
+        if (q->type == QUIZ_TYPE_TRUEFALSE) {
+            q->num_answers = 2;
+            strncpy(q->answers[0], "True", MAX_ANSWER_LEN - 1);
+            strncpy(q->answers[1], "False", MAX_ANSWER_LEN - 1);
+        } else {
+            /* Get answers array */
+            struct json_object *answers_array;
+            if (json_object_object_get_ex(q_obj, "answers", &answers_array)) {
+                q->num_answers = json_object_array_length(answers_array);
+                if (q->num_answers > MAX_ANSWERS) q->num_answers = MAX_ANSWERS;
 
-            for (int j = 0; j < q->num_answers; j++) {
-                struct json_object *ans = json_object_array_get_idx(answers_array, j);
-                strncpy(q->answers[j], json_object_get_string(ans), MAX_ANSWER_LEN - 1);
-                q->answers[j][MAX_ANSWER_LEN - 1] = '\0';
+                for (int j = 0; j < q->num_answers; j++) {
+                    struct json_object *ans = json_object_array_get_idx(answers_array, j);
+                    strncpy(q->answers[j], json_object_get_string(ans), MAX_ANSWER_LEN - 1);
+                    q->answers[j][MAX_ANSWER_LEN - 1] = '\0';
+                }
             }
         }
 
-        /* Get correct answer */
-        struct json_object *correct;
-        if (json_object_object_get_ex(q_obj, "correct", &correct)) {
-            q->correct_answer = json_object_get_int(correct);
+        /* Get correct answers array */
+        struct json_object *correct_array;
+        if (json_object_object_get_ex(q_obj, "correct", &correct_array)) {
+            q->num_correct = json_object_array_length(correct_array);
+            if (q->num_correct > MAX_ANSWERS) q->num_correct = MAX_ANSWERS;
+
+            for (int j = 0; j < q->num_correct; j++) {
+                struct json_object *c = json_object_array_get_idx(correct_array, j);
+                q->correct_answers[j] = json_object_get_int(c);
+            }
         }
     }
 
@@ -90,59 +118,117 @@ void quiz_free(QuizData *quiz) {
     quiz->num_questions = 0;
 }
 
+/* Check if answer index is in correct list */
+static int is_correct_answer(QuizQuestion *q, int answer_index) {
+    for (int i = 0; i < q->num_correct; i++) {
+        if (q->correct_answers[i] == answer_index) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+/* Calculate dynamic button dimensions based on answer count */
+static void calc_button_dims(int num_answers, int screen_height,
+                             const LayoutConfig *layout,
+                             int *out_height, int *out_spacing,
+                             int *out_y_start) {
+    /* Base values from layout config */
+    int base_height = layout->button_height;
+    int base_spacing = layout->answer_spacing;
+    int base_y = layout->answer_y_start;
+
+    /* Available vertical space for buttons */
+    int available = screen_height - base_y - 100;  /* 100px bottom margin */
+    int total_needed = num_answers * base_spacing;
+
+    if (total_needed <= available) {
+        /* Enough space - use defaults */
+        *out_height = base_height;
+        *out_spacing = base_spacing;
+        *out_y_start = base_y;
+    } else {
+        /* Scale down proportionally */
+        float scale = (float)available / (float)total_needed;
+        *out_height = (int)(base_height * scale);
+        *out_spacing = (int)(base_spacing * scale);
+
+        /* Recenter vertically */
+        int total_used = num_answers * (*out_spacing);
+        *out_y_start = base_y + (available - total_used) / 2;
+    }
+}
+
 int quiz_render_frame(QuizData *quiz, int question_index,
                       float time_in_question,
                       uint8_t *rgb_buffer, int width, int height,
                       const LayoutConfig *layout,
                       const AnimationConfig *animation) {
-    /* Validate inputs */
     if (question_index < 0 || question_index >= quiz->num_questions) {
         return -1;
     }
 
     QuizQuestion *q = &quiz->questions[question_index];
 
-    /* Calculate timer progress (0.0 to 1.0) */
     float progress = time_in_question / (float)quiz->question_duration;
     if (progress > 1.0f) progress = 1.0f;
 
-    /* Determine if answer should be revealed */
     int reveal = (time_in_question >= quiz->question_duration);
 
-    /* Fill background with dark blue */
+    /* Fill background */
     video_fill_rgb_color(rgb_buffer, width, height, active_colors.background);
 
-    /* Draw timer bar at top */
-    video_draw_timer_bar(rgb_buffer, width, height, progress, layout->timer_bar_height);
+    /* Draw timer bar */
+    video_draw_timer_bar(rgb_buffer, width, height, progress,
+                         layout->timer_bar_height);
 
-  /* Calculate question alpha (fade in) */
-    float question_start = animation->question_delay;
-    float question_end = question_start + animation->question_fade_duration;
+    /* Calculate dynamic button dimensions */
+    int btn_height, btn_spacing, btn_y_start;
+    calc_button_dims(q->num_answers, height, layout,
+                    &btn_height, &btn_spacing, &btn_y_start);
+
+    /* Calculate question alpha */
+    float question_end = animation->question_delay + animation->question_fade_duration;
     float question_alpha = 0.0f;
-
     if (time_in_question >= question_end) {
         question_alpha = 1.0f;
-    } else if (time_in_question > question_start) {
-        question_alpha = (time_in_question - question_start) / animation->question_fade_duration;
+    } else if (time_in_question > animation->question_delay) {
+        question_alpha = (time_in_question - animation->question_delay) /
+                         animation->question_fade_duration;
     }
 
-    /* Render question with fade */
+    /* Render type indicator for multi-answer */
+    if (q->type == QUIZ_TYPE_MULTI && question_alpha > 0.0f) {
+        TextContext hint_ctx;
+        if (text_init(&hint_ctx, "assets/fonts/Roboto-Bold.ttf", 32) == 0) {
+            Color hint_color = active_colors.accent;
+            int hint_y = layout->timer_bar_height + 60;
+            text_render_centered_alpha(&hint_ctx, rgb_buffer, width, height,
+                                      "Multiple correct",
+                                      hint_y, hint_color.r, hint_color.g,
+                                      hint_color.b, question_alpha);
+            text_close(&hint_ctx);
+        }
+    }
+
+    /* Render question */
     if (question_alpha > 0.0f) {
         TextContext text_ctx;
-        if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->question_font_size) < 0) {
+        if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf",
+                      layout->question_font_size) < 0) {
             return -1;
         }
-
         Color q_color = active_colors.question_text;
         text_render_centered_alpha(&text_ctx, rgb_buffer, width, height,
-                                   q->question, layout->question_y_position,
-                                   q_color.r, q_color.g, q_color.b, question_alpha);
+                                  q->question, layout->question_y_position,
+                                  q_color.r, q_color.g, q_color.b, question_alpha);
         text_close(&text_ctx);
     }
 
-    /* Initialize text context */
+    /* Render answers */
     TextContext text_ctx;
-    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf", layout->answer_font_size) < 0) {
+    if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf",
+                  layout->answer_font_size) < 0) {
         return -1;
     }
 
@@ -150,51 +236,51 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     int button_width = width - (2 * layout->button_margin);
 
     for (int i = 0; i < q->num_answers; i++) {
-     /* Calculate fade timing for this answer */
-        float answer_start = question_end + (i * animation->answer_delay_between);
-        float answer_end = answer_start + animation->answer_fade_duration;
-        float answer_alpha = 0.0f;
+        /* Staggered fade timing */
+        float ans_start = question_end + (i * animation->answer_delay_between);
+        float ans_end = ans_start + animation->answer_fade_duration;
+        float ans_alpha = 0.0f;
 
-        if (time_in_question >= answer_end) {
-            answer_alpha = 1.0f;
-        } else if (time_in_question > answer_start) {
-            answer_alpha = (time_in_question - answer_start) / animation->answer_fade_duration;
+        if (time_in_question >= ans_end) {
+            ans_alpha = 1.0f;
+        } else if (time_in_question > ans_start) {
+            ans_alpha = (time_in_question - ans_start) / animation->answer_fade_duration;
         }
 
-        /* Skip if not visible yet */
-        if (answer_alpha <= 0.0f) continue;
+        if (ans_alpha <= 0.0f) continue;
 
         char letter = 'A' + i;
         snprintf(answer_text, sizeof(answer_text), "%c) %s", letter, q->answers[i]);
 
-        int button_y = layout->answer_y_start + (i * layout->answer_spacing);
+        int button_y = btn_y_start + (i * btn_spacing);
+        int correct = is_correct_answer(q, i);
 
-        /* Determine button background color */
+        /* Determine button color based on type and reveal state */
         Color button_bg;
-        if (reveal && i == q->correct_answer) {
+        if (reveal && correct) {
             button_bg = active_colors.answer_button_correct;
-        } else if (reveal && i != q->correct_answer) {
+        } else if (reveal && !correct) {
             button_bg = active_colors.answer_button_incorrect;
         } else {
             button_bg = active_colors.answer_button_normal;
         }
 
-        /* Draw button background */
+        /* Draw button */
         video_draw_rounded_rect_alpha(rgb_buffer, width, height,
-                               layout->button_margin, button_y,
-                               button_width, layout->button_height,
-                               layout->button_radius, button_bg, answer_alpha);
+                                     layout->button_margin, button_y,
+                                     button_width, btn_height,
+                                     layout->button_radius, button_bg, ans_alpha);
 
-        /* Render text on top of button (centered vertically in button) */
+        /* Render text */
         Color text_color = active_colors.answer_text;
-        int text_y = button_y + (layout->button_height / 2) + 8;  /* Adjust for vertical centering */
+        int text_y = button_y + (btn_height / 2) + 8;
 
         text_render_alpha(&text_ctx, rgb_buffer, width, height,
-                   answer_text, layout->button_margin + layout->button_text_padding, text_y,
-                   text_color.r, text_color.g, text_color.b, answer_alpha);
+                         answer_text,
+                         layout->button_margin + layout->button_text_padding,
+                         text_y, text_color.r, text_color.g, text_color.b, ans_alpha);
     }
 
     text_close(&text_ctx);
-
     return 0;
 }

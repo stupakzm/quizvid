@@ -5,19 +5,34 @@
   },
   "questions": [
     {
+        "type": "standard",
       "question": "What is 2 + 2?",
       "answers": ["3", "4", "5", "6"],
-      "correct": 1
+        "correct": [1]
     },
     {
-      "question": "What color is the sky?",
-      "answers": ["Red", "Blue", "Green"],
-      "correct": 1
+      "type": "truefalse",
+      "question": "The Earth is flat.",
+      "answers": ["True", "False"],
+      "correct": [1]
     },
     {
-      "question": "How many continents are there?",
-      "answers": ["5", "6", "7", "8"],
-      "correct": 2
+      "type": "standard",
+      "question": "Which planet is closest to the Sun?",
+      "answers": ["Venus", "Earth", "Mercury", "Mars", "Jupiter"],
+      "correct": [2]
+    },
+    {
+      "type": "multi",
+      "question": "Which are programming languages?",
+      "answers": ["Python", "HTML", "C", "Photoshop", "Rust", "Excel"],
+      "correct": [0, 2, 4]
+    },
+    {
+      "type": "multi",
+      "question": "Which are primary colors?",
+      "answers": ["Red", "Green", "Blue", "Purple"],
+      "correct": [0, 1, 2]
     }
   ]
 }

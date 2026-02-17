@@ -6,22 +6,30 @@
 /* Maximum lengths */
 #define MAX_QUESTION_LEN 256
 #define MAX_ANSWER_LEN 128
-#define MAX_ANSWERS 4
+#define MAX_ANSWERS 6
+
+typedef enum {
+    QUIZ_TYPE_STANDARD,
+    QUIZ_TYPE_TRUEFALSE,
+    QUIZ_TYPE_MULTI
+} QuizType;
 
 /* Single quiz question */
 typedef struct {
+    QuizType type;
     char question[MAX_QUESTION_LEN];
     char answers[MAX_ANSWERS][MAX_ANSWER_LEN];
-    int correct_answer;  /* 0-3 (A-D) */
-    int num_answers;     /* How many answers (2-4) */
+    int correct_answers[MAX_ANSWERS];
+    int num_correct;
+    int num_answers;
 } QuizQuestion;
 
 /* Quiz configuration */
 typedef struct {
     QuizQuestion *questions;
     int num_questions;
-    int question_duration;  /* seconds per question */
-    int reveal_duration;    /* seconds to show answer */
+    int question_duration;
+    int reveal_duration;
 } QuizData;
 
 /* Load quiz from JSON file */
