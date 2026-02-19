@@ -43,7 +43,7 @@ test: $(TARGET)
 	ffplay -autoexit quiz_video.mp4
 
 
-quick: clean all run
+quick: clean all test
 
 .PHONY: all clean run test quick
 

@@ -179,7 +179,7 @@ int config_apply(const AppConfig *config) {
     if (strcmp(config->color_scheme, "grayscale") == 0) {
         colors_init(&COLOR_SCHEME_GRAYSCALE);
     } else if (strcmp(config->color_scheme, "colorblind") == 0) {
-        colors_init(&COLOR_SCHEME_COLORBLIND);
+        colors_init(&COLOR_SCHEME_COLORBLIND_ALTERNATIVE);
     } else if (strcmp(config->color_scheme, "default") == 0) {
         colors_init(&COLOR_SCHEME_DEFAULT);
     } else {

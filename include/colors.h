@@ -38,6 +38,7 @@ typedef struct {
 /* Predefined color schemes */
 extern const ColorScheme COLOR_SCHEME_GRAYSCALE;
 extern const ColorScheme COLOR_SCHEME_COLORBLIND;
+extern const ColorScheme COLOR_SCHEME_COLORBLIND_ALTERNATIVE;
 extern const ColorScheme COLOR_SCHEME_DEFAULT;
 
 /* Active color scheme (can be changed at runtime) */

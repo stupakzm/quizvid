@@ -35,6 +35,22 @@ const ColorScheme COLOR_SCHEME_COLORBLIND = {
     .accent = {180, 120, 255}             /* Purple accent */
 };
 
+const ColorScheme COLOR_SCHEME_COLORBLIND_ALTERNATIVE = {
+    .background = {17, 17, 23},
+    .timer_background = {8, 8, 11},
+    .timer_fill = {252, 239, 176},
+    .timer_text = {255, 255, 255},
+    .question_text = {255, 255, 255},
+    .answer_text = {220, 220, 255},
+    .answer_correct = {255, 215, 0},
+    .answer_incorrect = {150, 130, 180},
+    .answer_button_normal = {50, 47, 35},
+    .answer_button_correct = {151, 143, 105},
+    .answer_button_incorrect = {47, 44, 32},
+    .accent = {50, 50, 50}
+};
+
+
 /* Default scheme (original blue theme) */
 const ColorScheme COLOR_SCHEME_DEFAULT = {
     .background = {20, 30, 60},           /* Dark blue */
@@ -56,6 +72,6 @@ void colors_init(const ColorScheme *scheme) {
         active_colors = *scheme;
     } else {
         /* Default to colorblind-friendly if none specified */
-        active_colors = COLOR_SCHEME_COLORBLIND;
+        active_colors = COLOR_SCHEME_COLORBLIND_ALTERNATIVE;
     }
 }
