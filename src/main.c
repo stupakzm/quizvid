@@ -30,6 +30,16 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    /* Generate audio for all questions */
+    if (quiz_generate_audio(&quiz, config.audio.enabled,
+                           config.timing.reveal_duration) < 0) {
+        fprintf(stderr, "Failed to generate audio\n");
+        quiz_free(&quiz);
+        config_free(&config);
+        audio_cleanup();
+        return 1;
+    }
+
     /* Configure video using config */
     VideoConfig video_config = {
         .width = config.video.width,
@@ -67,8 +77,13 @@ int main(int argc, char *argv[]) {
 
     int frame = 0;
     for (int q = 0; q < quiz.num_questions; q++) {
+        QuizQuestion *question = &quiz.questions[q];
+        int frames_for_question = (int)(question->total_duration * config.video.fps);
+
         printf("Question %d/%d: %s\n", q + 1, quiz.num_questions,
                quiz.questions[q].question);
+        printf("  Duration: %.2fs (%d frames)\n",
+               question->total_duration, frames_for_question);
 
         for (int f = 0; f < frames_per_question; f++) {
             float time = (float)f / config.video.fps;
@@ -101,6 +116,7 @@ int main(int argc, char *argv[]) {
     free(rgb_buffer);
     video_close();
     quiz_free(&quiz);
+    audio_cleanup();
     config_free(&config);
 
     printf("\nQuiz video created successfully!\n");

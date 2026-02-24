@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <json-c/json.h>
+#include "audio.h"
 #include "config.h"
 #include "colors.h"
 
@@ -54,6 +55,17 @@ AppConfig config_get_default(void) {
           .answer_fade_duration = 0.3f,
           .answer_delay_between = 0.3f,
           .question_delay = 0.0f
+        },
+        .audio = {
+         .enabled = 1,
+         .engine = AUDIO_SOURCE_TTS_PIPER,
+         .voice_model = strdup_safe("assets/voices/en_US-lessac-medium.onnx"),
+         .speed = 1.0f,
+         .sample_rate = 22050
+        },
+        .timing = {
+         .reveal_duration = 2.0f,
+         .transition_duration = 0.3f
         },
         .color_scheme = "colorblind",
         .font_path = "assets/fonts/Roboto-Bold.ttf",
@@ -149,6 +161,54 @@ int config_load(AppConfig *config, const char *config_file) {
         }
     }
 
+    /* Parse audio settings */
+    struct json_object *audio;
+    if (json_object_object_get_ex(root, "audio", &audio)) {
+        struct json_object *val;
+
+        if (json_object_object_get_ex(audio, "enabled", &val)) {
+            config->audio.enabled = json_object_get_boolean(val);
+        }
+
+        if (json_object_object_get_ex(audio, "engine", &val)) {
+            const char *engine_str = json_object_get_string(val);
+            if (strcmp(engine_str, "piper") == 0) {
+                config->audio.engine = AUDIO_SOURCE_TTS_PIPER;
+            } else if (strcmp(engine_str, "espeak") == 0) {
+                config->audio.engine = AUDIO_SOURCE_TTS_ESPEAK;
+            } else if (strcmp(engine_str, "file") == 0) {
+                config->audio.engine = AUDIO_SOURCE_FILE;
+            }
+        }
+
+        if (json_object_object_get_ex(audio, "voice_model", &val)) {
+            const char *model = json_object_get_string(val);
+            config->audio.voice_model = strdup_safe(model);
+        }
+
+        if (json_object_object_get_ex(audio, "speed", &val)) {
+            config->audio.speed = (float)json_object_get_double(val);
+        }
+
+        if (json_object_object_get_ex(audio, "sample_rate", &val)) {
+            config->audio.sample_rate = json_object_get_int(val);
+        }
+    }
+
+    /* Parse timing settings */
+    struct json_object *timing;
+    if (json_object_object_get_ex(root, "timing", &timing)) {
+        struct json_object *val;
+
+        if (json_object_object_get_ex(timing, "reveal_duration", &val)) {
+            config->timing.reveal_duration = (float)json_object_get_double(val);
+        }
+
+        if (json_object_object_get_ex(timing, "transition_duration", &val)) {
+            config->timing.transition_duration = (float)json_object_get_double(val);
+        }
+    }
+
     json_object_put(root);
     printf("Configuration loaded from %s\n", config_file);
 
@@ -172,6 +232,10 @@ void config_free(AppConfig *config) {
         free((void *)config->output_file);
         config->output_file = NULL;
     }
+    if (config->audio.voice_model) {
+        free(config->audio.voice_model);
+        config->audio.voice_model = NULL;
+    }
 }
 
 int config_apply(const AppConfig *config) {
@@ -188,10 +252,33 @@ int config_apply(const AppConfig *config) {
         return -1;
     }
 
+    /* Initialize audio system if enabled */
+    if (config->audio.enabled) {
+        AudioConfig audio_cfg = {
+            .type = config->audio.engine,
+            .voice_model = config->audio.voice_model,
+            .speed = config->audio.speed,
+            .sample_rate = config->audio.sample_rate
+        };
+
+        if (audio_init(&audio_cfg) < 0) {
+            fprintf(stderr, "Failed to initialize audio system\n");
+            return -1;
+        }
+    }
+
     printf("Applied configuration:\n");
     printf("  Video: %dx%d @ %d fps\n", config->video.width, config->video.height, config->video.fps);
     printf("  Color scheme: %s\n", config->color_scheme);
     printf("  Font: %s\n", config->font_path);
+    printf("  Audio: %s\n", config->audio.enabled ? "Enabled" : "Disabled");
+    if (config->audio.enabled) {
+        printf("    Engine: %s\n", config->audio.engine == AUDIO_SOURCE_TTS_PIPER ? "Piper" : "Other");
+        printf("    Voice: %s\n", config->audio.voice_model);
+        printf("    Speed: %.1fx\n", config->audio.speed);
+    }
+    printf("  Timing: %.1fs reveal, %.1fs transition\n",
+           config->timing.reveal_duration, config->timing.transition_duration);
     printf("  Quiz: %s\n", config->quiz_file);
     printf("  Output: %s\n\n", config->output_file);
 

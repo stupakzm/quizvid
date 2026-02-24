@@ -20,6 +20,17 @@
     "color_scheme": "colorblind",
     "font_path": "assets/fonts/Roboto-Bold.ttf"
   },
+  "audio": {
+    "enabled": true,
+    "engine": "piper",
+    "voice_model": "assets/voices/en_US-lessac-medium.onnx",
+    "speed": 1.0,
+    "sample_rate": 22050
+  },
+  "timing": {
+    "reveal_duration": 2.0,
+    "transition_duration": 0.3
+  },
   "animation": {
     "question_fade_duration": 0.5,
     "answer_fade_duration": 0.3,

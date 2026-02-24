@@ -3,6 +3,8 @@
 
 #include <stdint.h>
 #include "config.h"
+#include "audio.h"
+
 /* Maximum lengths */
 #define MAX_QUESTION_LEN 256
 #define MAX_ANSWER_LEN 128
@@ -22,6 +24,11 @@ typedef struct {
     int correct_answers[MAX_ANSWERS];
     int num_correct;
     int num_answers;
+
+    AudioSource *audio;
+    float question_duration;
+    float reveal_duration;
+    float total_duration;
 } QuizQuestion;
 
 /* Quiz configuration */
@@ -44,5 +51,8 @@ int quiz_render_frame(QuizData *quiz, int question_index,
                       uint8_t *rgb_buffer, int width, int height,
                       const LayoutConfig *layout,
                       const AnimationConfig *animation);
+
+/* Generate audio for all questions */
+int quiz_generate_audio(QuizData *quiz, int audio_enabled, float reveal_duration);
 
 #endif // QUIZ_H

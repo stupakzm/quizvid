@@ -112,6 +112,13 @@ int quiz_load(QuizData *quiz, const char *json_file) {
 
 void quiz_free(QuizData *quiz) {
     if (quiz->questions) {
+        /* Free audio for each question */
+        for (int i = 0; i < quiz->num_questions; i++) {
+            if (quiz->questions[i].audio) {
+                audio_free(quiz->questions[i].audio);
+                quiz->questions[i].audio = NULL;
+            }
+        }
         free(quiz->questions);
         quiz->questions = NULL;
     }
@@ -282,5 +289,52 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     }
 
     text_close(&text_ctx);
+    return 0;
+}
+
+int quiz_generate_audio(QuizData *quiz, int audio_enabled, float reveal_duration) {
+    if (!audio_enabled) {
+        printf("Audio disabled, using fixed timing\n");
+        for (int i = 0; i < quiz->num_questions; i++) {
+            quiz->questions[i].audio = NULL;
+            quiz->questions[i].question_duration = (float)quiz->question_duration;
+            quiz->questions[i].reveal_duration = reveal_duration;
+            quiz->questions[i].total_duration = quiz->questions[i].question_duration +
+                                               quiz->questions[i].reveal_duration;
+        }
+        return 0;
+    }
+
+    printf("Generating audio for %d questions...\n", quiz->num_questions);
+
+    for (int i = 0; i < quiz->num_questions; i++) {
+        QuizQuestion *q = &quiz->questions[i];
+
+        printf("  Q%d/%d: %s\n", i + 1, quiz->num_questions, q->question);
+
+        /* Generate audio from question text */
+        q->audio = audio_generate_tts(q->question);
+        if (!q->audio) {
+            fprintf(stderr, "ERROR: Failed to generate audio for question %d\n", i + 1);
+            fprintf(stderr, "Question: %s\n", q->question);
+
+            /* Cleanup previously generated audio */
+            for (int j = 0; j < i; j++) {
+                audio_free(quiz->questions[j].audio);
+                quiz->questions[j].audio = NULL;
+            }
+            return -1;
+        }
+
+        /* Calculate timing based on audio length */
+        q->question_duration = q->audio->duration;
+        q->reveal_duration = reveal_duration;
+        q->total_duration = q->question_duration + q->reveal_duration;
+
+        printf("    Audio: %.2fs, Total: %.2fs\n",
+               q->question_duration, q->total_duration);
+    }
+
+    printf("Audio generation complete!\n\n");
     return 0;
 }

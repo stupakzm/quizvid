@@ -2,6 +2,7 @@
 #define CONFIG_H
 
 #include "colors.h"
+#include "audio.h"
 
 /* Layout configuration */
 typedef struct {
@@ -29,6 +30,21 @@ typedef struct {
     int fps;
 } VideoSettings;
 
+/* Audio configuration settings */
+typedef struct {
+    int enabled;
+    AudioSourceType engine;
+    char *voice_model;
+    float speed;
+    int sample_rate;
+} AudioConfigSettings;
+
+/* Timing configuration */
+typedef struct {
+    float reveal_duration;
+    float transition_duration;
+} TimingConfig;
+
 /* Animation configuration */
 typedef struct {
     float question_fade_duration;  /* Seconds for question fade-in */
@@ -42,6 +58,8 @@ typedef struct {
     VideoSettings video;
     LayoutConfig layout;
     AnimationConfig animation;
+    AudioConfigSettings audio;
+    TimingConfig timing;
     const char *color_scheme;  /* "grayscale", "colorblind", "default" */
     const char *font_path;
     const char *quiz_file;
