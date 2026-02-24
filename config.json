@@ -29,7 +29,8 @@
   },
   "timing": {
     "reveal_duration": 2.0,
-    "transition_duration": 0.3
+    "transition_duration": 0.3,
+    "think_duration": 2.0
   },
   "animation": {
     "question_fade_duration": 0.5,

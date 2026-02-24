@@ -43,6 +43,7 @@ typedef struct {
 typedef struct {
     float reveal_duration;
     float transition_duration;
+    float think_duration;
 } TimingConfig;
 
 /* Animation configuration */
@@ -60,10 +61,10 @@ typedef struct {
     AnimationConfig animation;
     AudioConfigSettings audio;
     TimingConfig timing;
-    const char *color_scheme;  /* "grayscale", "colorblind", "default" */
-    const char *font_path;
-    const char *quiz_file;
-    const char *output_file;
+    char *color_scheme;  /* "grayscale", "colorblind", "default" */
+    char *font_path;
+    char *quiz_file;
+    char *output_file;
 } AppConfig;
 
 /* Load configuration from JSON file */

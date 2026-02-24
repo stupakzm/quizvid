@@ -5,6 +5,7 @@
 #include <libavformat/avformat.h>
 #include <libavcodec/avcodec.h>
 #include <libswresample/swresample.h>
+#include <libavutil/opt.h>
 #include "audio.h"
 
 /* Global audio configuration */

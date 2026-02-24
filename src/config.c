@@ -65,12 +65,13 @@ AppConfig config_get_default(void) {
         },
         .timing = {
          .reveal_duration = 2.0f,
-         .transition_duration = 0.3f
+         .transition_duration = 0.3f,
+         .think_duration = 2.0f
         },
-        .color_scheme = "colorblind",
-        .font_path = "assets/fonts/Roboto-Bold.ttf",
-        .quiz_file = "examples/sample_quiz.json",
-        .output_file = "quiz_video.mp4"
+        .color_scheme = strdup_safe("colorblind"),
+        .font_path = strdup_safe("assets/fonts/Roboto-Bold.ttf"),
+        .quiz_file = strdup_safe("examples/sample_quiz.json"),
+        .output_file = strdup_safe("quiz_video.mp4")
     };
     return config;
 }
@@ -207,6 +208,10 @@ int config_load(AppConfig *config, const char *config_file) {
         if (json_object_object_get_ex(timing, "transition_duration", &val)) {
             config->timing.transition_duration = (float)json_object_get_double(val);
         }
+
+        if (json_object_object_get_ex(timing, "think_duration", &val)) {
+            config->timing.think_duration = (float)json_object_get_double(val);
+        }
     }
 
     json_object_put(root);
@@ -277,7 +282,8 @@ int config_apply(const AppConfig *config) {
         printf("    Voice: %s\n", config->audio.voice_model);
         printf("    Speed: %.1fx\n", config->audio.speed);
     }
-    printf("  Timing: %.1fs reveal, %.1fs transition\n",
+    printf("  Timing: %.1fs think, %.1fs reveal, %.1fs transition\n",
+           config->timing.think_duration,
            config->timing.reveal_duration, config->timing.transition_duration);
     printf("  Quiz: %s\n", config->quiz_file);
     printf("  Output: %s\n\n", config->output_file);

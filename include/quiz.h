@@ -53,6 +53,8 @@ int quiz_render_frame(QuizData *quiz, int question_index,
                       const AnimationConfig *animation);
 
 /* Generate audio for all questions */
-int quiz_generate_audio(QuizData *quiz, int audio_enabled, float reveal_duration);
+int quiz_generate_audio(QuizData *quiz, int audio_enabled,
+                        const TimingConfig *timing,
+                        const AnimationConfig *animation);
 
 #endif // QUIZ_H

@@ -177,10 +177,10 @@ int quiz_render_frame(QuizData *quiz, int question_index,
 
     QuizQuestion *q = &quiz->questions[question_index];
 
-    float progress = time_in_question / (float)quiz->question_duration;
+    float progress = time_in_question / q->question_duration;
     if (progress > 1.0f) progress = 1.0f;
 
-    int reveal = (time_in_question >= quiz->question_duration);
+    int reveal = (time_in_question >= q->question_duration);
 
     /* Fill background */
     video_fill_rgb_color(rgb_buffer, width, height, active_colors.background);
@@ -292,15 +292,30 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     return 0;
 }
 
-int quiz_generate_audio(QuizData *quiz, int audio_enabled, float reveal_duration) {
+/* Calculate time needed for all animations to complete */
+static float calc_animation_duration(QuizQuestion *q, const AnimationConfig *anim) {
+    float question_complete = anim->question_delay + anim->question_fade_duration;
+
+    /* Last answer appears at: question_end + (n-1) * delay_between + answer_fade */
+    float last_answer_start = question_complete + (q->num_answers - 1) * anim->answer_delay_between;
+    float last_answer_complete = last_answer_start + anim->answer_fade_duration;
+
+    return last_answer_complete;
+}
+
+int quiz_generate_audio(QuizData *quiz, int audio_enabled,
+                        const TimingConfig *timing,
+                        const AnimationConfig *animation) {
     if (!audio_enabled) {
-        printf("Audio disabled, using fixed timing\n");
+        printf("Audio disabled, using animation-based timing\n");
         for (int i = 0; i < quiz->num_questions; i++) {
-            quiz->questions[i].audio = NULL;
-            quiz->questions[i].question_duration = (float)quiz->question_duration;
-            quiz->questions[i].reveal_duration = reveal_duration;
-            quiz->questions[i].total_duration = quiz->questions[i].question_duration +
-                                               quiz->questions[i].reveal_duration;
+            QuizQuestion *q = &quiz->questions[i];
+            q->audio = NULL;
+
+            float animation_time = calc_animation_duration(q, animation);
+            q->question_duration = animation_time + timing->think_duration;
+            q->reveal_duration = timing->reveal_duration;
+            q->total_duration = q->question_duration + q->reveal_duration;
         }
         return 0;
     }
@@ -326,13 +341,21 @@ int quiz_generate_audio(QuizData *quiz, int audio_enabled, float reveal_duration
             return -1;
         }
 
-        /* Calculate timing based on audio length */
-        q->question_duration = q->audio->duration;
-        q->reveal_duration = reveal_duration;
+        /* Calculate timing: MAX(audio, animation) + think_time */
+        float animation_time = calc_animation_duration(q, animation);
+        float content_time = q->audio->duration > animation_time ?
+                            q->audio->duration : animation_time;
+
+        q->question_duration = content_time + timing->think_duration;
+        q->reveal_duration = timing->reveal_duration;
         q->total_duration = q->question_duration + q->reveal_duration;
 
-        printf("    Audio: %.2fs, Total: %.2fs\n",
-               q->question_duration, q->total_duration);
+          printf("    Audio: %.2fs, Animation: %.2fs, Think: %.2fs, Question: %.2fs, Total: %.2fs\n",
+               q->audio->duration,
+               animation_time,
+               timing->think_duration,
+               q->question_duration,
+               q->total_duration);
     }
 
     printf("Audio generation complete!\n\n");
