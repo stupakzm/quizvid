@@ -23,9 +23,15 @@
   "audio": {
     "enabled": true,
     "engine": "piper",
-    "voice_model": "assets/voices/en_US-lessac-medium.onnx",
+    "voice_model": "assets/voices/en_US-libritts_r-medium.onnx",
     "speed": 1.0,
-    "sample_rate": 22050
+    "sample_rate": 22050,
+    "background": {
+      "enabled": true,
+      "file": "assets/audio/ticking_converted.wav",
+      "volume_with_voice": 0.15,
+      "volume_without_voice": 0.35
+    }
   },
   "timing": {
     "reveal_duration": 2.0,

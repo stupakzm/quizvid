@@ -260,6 +260,83 @@ float audio_get_duration(const char *text_or_file) {
     return seconds;
 }
 
+AudioSource *audio_adjust_duration(AudioSource *source, float target_duration,
+                                   int sample_rate) {
+    if (!source) return NULL;
+
+    int target_samples = (int)(target_duration * sample_rate);
+    AudioSource *adjusted = calloc(1, sizeof(AudioSource));
+    if (!adjusted) return NULL;
+
+    adjusted->sample_rate = sample_rate;
+    adjusted->channels = source->channels;
+    adjusted->duration = target_duration;
+    adjusted->num_samples = target_samples;
+    adjusted->samples = calloc(target_samples * adjusted->channels, sizeof(float));
+
+    if (!adjusted->samples) {
+        free(adjusted);
+        return NULL;
+    }
+
+    /* Loop or trim source to target duration */
+    for (int i = 0; i < target_samples; i++) {
+        int src_index = (i % source->num_samples);
+        for (int ch = 0; ch < source->channels; ch++) {
+            adjusted->samples[i * adjusted->channels + ch] =
+                source->samples[src_index * source->channels + ch];
+        }
+    }
+
+    return adjusted;
+}
+
+AudioSource *audio_mix(AudioSource *source1, float volume1,
+                       AudioSource *source2, float volume2) {
+    if (!source1 || !source2) return NULL;
+
+    /* Use longer duration */
+    float duration = source1->duration > source2->duration ?
+                     source1->duration : source2->duration;
+    int num_samples = source1->num_samples > source2->num_samples ?
+                      source1->num_samples : source2->num_samples;
+
+    AudioSource *mixed = calloc(1, sizeof(AudioSource));
+    if (!mixed) return NULL;
+
+    mixed->sample_rate = source1->sample_rate;
+    mixed->channels = 1; /* Assume mono */
+    mixed->duration = duration;
+    mixed->num_samples = num_samples;
+    mixed->samples = calloc(num_samples, sizeof(float));
+
+    if (!mixed->samples) {
+        free(mixed);
+        return NULL;
+    }
+
+    /* Mix samples */
+    for (int i = 0; i < num_samples; i++) {
+        float sample = 0.0f;
+
+        if (i < source1->num_samples) {
+            sample += source1->samples[i] * volume1;
+        }
+
+        if (i < source2->num_samples) {
+            sample += source2->samples[i] * volume2;
+        }
+
+        /* Clamp to -1.0 to 1.0 */
+        if (sample > 1.0f) sample = 1.0f;
+        if (sample < -1.0f) sample = -1.0f;
+
+        mixed->samples[i] = sample;
+    }
+
+    return mixed;
+}
+
 void audio_free(AudioSource *audio) {
     if (!audio) return;
 

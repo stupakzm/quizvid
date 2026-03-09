@@ -31,6 +31,18 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    /* Load background audio if enabled */
+    AudioSource *background_loop = NULL;
+    if (config.audio.background.enabled && config.audio.background.file) {
+        printf("Loading background audio: %s\n", config.audio.background.file);
+        background_loop = audio_load_wav(config.audio.background.file);
+        if (!background_loop) {
+            fprintf(stderr, "Warning: Failed to load background audio\n");
+        } else {
+            printf("  Background loaded: %.2fs\n", background_loop->duration);
+        }
+    }
+
     /* Generate audio for all questions */
     if (quiz_generate_audio(&quiz, config.audio.enabled,
                            &config.timing,
@@ -94,41 +106,100 @@ int main(int argc, char *argv[]) {
         printf("  Audio: %.2fs, Total: %.2fs (%d frames)\n",
                question->question_duration, question->total_duration, frames_for_question);
 
-        /* Calculate when audio should start (after animations complete) */
-        float animation_complete_time = config.animation.question_delay +
-                                       config.animation.question_fade_duration +
-                                       (question->num_answers - 1) * config.animation.answer_delay_between +
-                                       config.animation.answer_fade_duration;
+        /* Calculate timing phases */
         float audio_start_time = config.animation.question_delay +
-                                       config.animation.question_fade_duration;
+                                config.animation.question_fade_duration;
 
-        /* Write silence until animations complete */
-        int silence_before_audio = (int)(audio_start_time * config.audio.sample_rate);
-        if (silence_before_audio > 0) {
-            float *silence_start = calloc(silence_before_audio, sizeof(float));
-            if (silence_start) {
-                muxer_write_audio_samples(muxer, silence_start, silence_before_audio);
-                free(silence_start);
+        /* Build complete audio track for this question */
+        AudioSource *question_audio_track = NULL;
+
+        if (background_loop) {
+            /* Create background for full question duration */
+            AudioSource *bg_full = audio_adjust_duration(background_loop,
+                                                        question->question_duration,
+                                                        config.audio.sample_rate);
+
+            if (question->audio && bg_full) {
+                /* Create silence before voiceover */
+                int silence_before = (int)(audio_start_time * config.audio.sample_rate);
+                float *silence_start = calloc(silence_before, sizeof(float));
+
+                /* Combine: silence + voiceover */
+                int voice_total_samples = silence_before + question->audio->num_samples;
+                float *voice_track = calloc(voice_total_samples, sizeof(float));
+                if (voice_track && silence_start) {
+                    memcpy(voice_track + silence_before, question->audio->samples,
+                           question->audio->num_samples * sizeof(float));
+                    free(silence_start);
+                }
+
+                /* Create temporary AudioSource for voice with silence */
+                AudioSource voice_with_silence = {
+                    .samples = voice_track,
+                    .num_samples = voice_total_samples,
+                    .sample_rate = config.audio.sample_rate,
+                    .channels = 1,
+                    .duration = (float)voice_total_samples / config.audio.sample_rate
+                };
+
+                /* Apply volume ducking to background */
+                float voice_end_time = audio_start_time + question->audio->duration;
+                for (int i = 0; i < bg_full->num_samples; i++) {
+                    float time = (float)i / config.audio.sample_rate;
+                    float bg_volume = (time >= audio_start_time && time < voice_end_time) ?
+                                     config.audio.background.volume_with_voice :
+                                     config.audio.background.volume_without_voice;
+                    bg_full->samples[i] *= bg_volume;
+                }
+
+                /* Mix voice and background */
+                question_audio_track = audio_mix(&voice_with_silence, 1.0f, bg_full, 1.0f);
+
+                free(voice_track);
+                audio_free(bg_full);
+
+                if (question_audio_track) {
+                    int reveal_samples = (int)(question->reveal_duration * config.audio.sample_rate);
+                    int new_total = question_audio_track->num_samples + reveal_samples;
+                    float *extended = calloc(new_total, sizeof(float));
+                    if (extended) {
+                        memcpy(extended, question_audio_track->samples,
+                               question_audio_track->num_samples * sizeof(float));
+                        free(question_audio_track->samples);
+                        question_audio_track->samples = extended;
+                        question_audio_track->num_samples = new_total;
+                        question_audio_track->duration = question->total_duration;
+                    }
+                }
+            } else if (bg_full) {
+                /* No voice, just background */
+                for (int i = 0; i < bg_full->num_samples; i++) {
+                    bg_full->samples[i] *= config.audio.background.volume_without_voice;
+                }
+                question_audio_track = bg_full;
             }
+        } else if (question->audio) {
+            /* No background, just add silence before voice */
+            int silence_before = (int)(audio_start_time * config.audio.sample_rate);
+            int total_samples = (int)(question->total_duration * config.audio.sample_rate);
+
+            question_audio_track = calloc(1, sizeof(AudioSource));
+            question_audio_track->samples = calloc(total_samples, sizeof(float));
+            question_audio_track->num_samples = total_samples;
+            question_audio_track->sample_rate = config.audio.sample_rate;
+            question_audio_track->channels = 1;
+            question_audio_track->duration = question->total_duration;
+
+            memcpy(question_audio_track->samples + silence_before,
+                   question->audio->samples,
+                   question->audio->num_samples * sizeof(float));
         }
 
-        /* Write actual audio */
-        if (question->audio) {
-            muxer_write_audio_samples(muxer, question->audio->samples,
-                                     question->audio->num_samples);
-        }
-
-        /* Calculate silence for remainder of question phase + reveal phase */
-        float audio_end_time = audio_start_time + (question->audio ? question->audio->duration : 0.0f);
-        float silence_duration = question->total_duration - audio_end_time;
-
-        if (silence_duration > 0) {
-            int silence_samples_end = (int)(silence_duration * config.audio.sample_rate);
-            float *silence_end = calloc(silence_samples_end, sizeof(float));
-            if (silence_end) {
-                muxer_write_audio_samples(muxer, silence_end, silence_samples_end);
-                free(silence_end);
-            }
+        /* Write mixed audio */
+        if (question_audio_track) {
+            muxer_write_audio_samples(muxer, question_audio_track->samples,
+                                     question_audio_track->num_samples);
+            audio_free(question_audio_track);
         }
 
         /* Generate frames for this question */
@@ -170,6 +241,7 @@ int main(int argc, char *argv[]) {
     free(rgb_buffer);
     muxer_free(muxer);
     quiz_free(&quiz);
+    if (background_loop) audio_free(background_loop);
     audio_cleanup();
     config_free(&config);
 

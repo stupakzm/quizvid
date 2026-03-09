@@ -46,4 +46,12 @@ void audio_free(AudioSource *audio);
 /* Cleanup audio system */
 void audio_cleanup(void);
 
+/* Mix two audio sources with volume control */
+AudioSource *audio_mix(AudioSource *source1, float volume1,
+                       AudioSource *source2, float volume2);
+
+/* Loop/trim audio to specific duration */
+AudioSource *audio_adjust_duration(AudioSource *source, float target_duration,
+                                   int sample_rate);
+
 #endif /* AUDIO_H */

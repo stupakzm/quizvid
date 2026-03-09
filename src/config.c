@@ -59,9 +59,15 @@ AppConfig config_get_default(void) {
         .audio = {
          .enabled = 1,
          .engine = AUDIO_SOURCE_TTS_PIPER,
-         .voice_model = strdup_safe("assets/voices/en_US-lessac-medium.onnx"),
+         .voice_model = strdup_safe("assets/voices/en_US-libritts_r-medium.onnx"),
          .speed = 1.0f,
-         .sample_rate = 22050
+         .sample_rate = 22050,
+         .background = {
+                .enabled = 0,
+                .file = NULL,
+                .volume_with_voice = 0.15f,
+                .volume_without_voice = 0.35f
+            }
         },
         .timing = {
          .reveal_duration = 2.0f,
@@ -194,6 +200,33 @@ int config_load(AppConfig *config, const char *config_file) {
         if (json_object_object_get_ex(audio, "sample_rate", &val)) {
             config->audio.sample_rate = json_object_get_int(val);
         }
+
+        if (json_object_object_get_ex(audio, "sample_rate", &val)) {
+            config->audio.sample_rate = json_object_get_int(val);
+        }
+
+        /* Parse background audio settings */
+        struct json_object *bg;
+        if (json_object_object_get_ex(audio, "background", &bg)) {
+            struct json_object *bg_val;
+
+            if (json_object_object_get_ex(bg, "enabled", &bg_val)) {
+                config->audio.background.enabled = json_object_get_boolean(bg_val);
+            }
+
+            if (json_object_object_get_ex(bg, "file", &bg_val)) {
+                const char *file = json_object_get_string(bg_val);
+                config->audio.background.file = strdup_safe(file);
+            }
+
+            if (json_object_object_get_ex(bg, "volume_with_voice", &bg_val)) {
+                config->audio.background.volume_with_voice = (float)json_object_get_double(bg_val);
+            }
+
+            if (json_object_object_get_ex(bg, "volume_without_voice", &bg_val)) {
+                config->audio.background.volume_without_voice = (float)json_object_get_double(bg_val);
+            }
+        }
     }
 
     /* Parse timing settings */
@@ -240,6 +273,10 @@ void config_free(AppConfig *config) {
     if (config->audio.voice_model) {
         free(config->audio.voice_model);
         config->audio.voice_model = NULL;
+    }
+    if (config->audio.background.file) {
+        free(config->audio.background.file);
+        config->audio.background.file = NULL;
     }
 }
 

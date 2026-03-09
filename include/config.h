@@ -30,6 +30,14 @@ typedef struct {
     int fps;
 } VideoSettings;
 
+/* Background audio settings */
+typedef struct {
+    int enabled;
+    char *file;
+    float volume_with_voice;
+    float volume_without_voice;
+} BackgroundAudioSettings;
+
 /* Audio configuration settings */
 typedef struct {
     int enabled;
@@ -37,6 +45,7 @@ typedef struct {
     char *voice_model;
     float speed;
     int sample_rate;
+    BackgroundAudioSettings background;
 } AudioConfigSettings;
 
 /* Timing configuration */
