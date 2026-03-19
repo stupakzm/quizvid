@@ -54,15 +54,15 @@ def test_parse_rejects_invalid_truefalse_answers():
         gemini_client._parse_and_validate(json.dumps(bad))
 
 
-def test_parse_rejects_multi_with_too_few_correct():
+def test_parse_downgrades_multi_with_one_correct_to_standard():
     bad_questions = list(VALID_QUIZ["questions"])
     bad_questions[4] = {
         "type": "multi", "question": "Q?",
         "answers": ["A", "B", "C", "D"], "correct": [0]  # only 1 correct
     }
     bad = {**VALID_QUIZ, "questions": bad_questions}
-    with pytest.raises(Exception):
-        gemini_client._parse_and_validate(json.dumps(bad))
+    result = gemini_client._parse_and_validate(json.dumps(bad))
+    assert result["questions"][4]["type"] == "standard"
 
 
 def test_parse_rejects_standard_with_no_answers():

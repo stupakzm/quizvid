@@ -36,7 +36,8 @@ def generate_quiz(category):
         "- standard: 3-5 answers, exactly 1 correct index\n"
         '- truefalse: answers must be exactly ["True", "False"], '
         "correct is [0] or [1]\n"
-        "- multi: 4-6 answers, 2-3 correct indices\n"
+        "- multi: 4-6 answers, EXACTLY 2 or 3 correct indices (never 1, never 4+)\n"
+        "  Example multi correct: [0, 2] or [1, 2, 3] — must be multiple answers\n"
     )
 
     response = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
@@ -93,7 +94,10 @@ def _parse_and_validate(text):
                 raise ValueError(
                     f"Question {i}: multi must have 4-6 answers"
                 )
-            if not (2 <= len(q["correct"]) <= 3):
+            if len(q["correct"]) == 1:
+                # Gemini sometimes generates multi with 1 correct — downgrade to standard
+                q["type"] = "standard"
+            elif not (2 <= len(q["correct"]) <= 3):
                 raise ValueError(
                     f"Question {i}: multi must have 2-3 correct"
                 )
