@@ -1,0 +1,86 @@
+# .github/workflows/daily.yml
+#
+# Runs daily at 14:00 UTC for all current categories.
+#
+# NOTE: If you add a category with a different hour_utc in categories.py,
+# add a second cron trigger here for that hour.
+
+name: Daily Quiz Post
+
+on:
+  schedule:
+    - cron: '0 14 * * *'
+  workflow_dispatch:  # allow manual trigger for testing
+
+permissions:
+  contents: write
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Cache apt packages
+        uses: actions/cache@v4
+        with:
+          path: /var/cache/apt/archives
+          key: apt-ffmpeg-ft-jsonc-${{ runner.os }}
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y \
+            libavformat-dev libavcodec-dev libavutil-dev \
+            libswscale-dev libswresample-dev \
+            libfreetype6-dev libjson-c-dev
+
+      - name: Cache Piper TTS binary
+        id: cache-piper
+        uses: actions/cache@v4
+        with:
+          path: /usr/local/bin/piper
+          key: piper-2023.11.14-2-x86_64
+
+      - name: Download Piper TTS
+        if: steps.cache-piper.outputs.cache-hit != 'true'
+        run: |
+          curl -L https://github.com/rhasspy/piper/releases/download/2023.11.14-2/piper_linux_x86_64.tar.gz \
+            | tar -xz -C /tmp
+          sudo mv /tmp/piper/piper /usr/local/bin/piper
+          sudo chmod +x /usr/local/bin/piper
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Python dependencies
+        run: pip install -r requirements.txt
+
+      - name: Compile quizvid
+        run: make
+
+      - name: Configure git identity
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+
+      - name: Run automation
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+          INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python automate.py
+
+      - name: Commit updated counters
+        run: |
+          git diff --quiet counters.json || (
+            git add counters.json &&
+            git commit -m "chore: update post counters" &&
+            git push
+          )
