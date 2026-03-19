@@ -74,7 +74,8 @@ def post_reel(video_url, caption):
             "access_token": access_token,
         },
     )
-    r.raise_for_status()
+    if not r.ok:
+        raise RuntimeError(f"Instagram container creation failed {r.status_code}: {r.text}")
     container_id = r.json()["id"]
 
     # Poll until FINISHED

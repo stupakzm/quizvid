@@ -87,7 +87,9 @@ def _parse_and_validate(text):
                 raise ValueError(
                     f"Question {i}: standard must have at least 3 answers"
                 )
-            if len(q["correct"]) != 1:
+            if len(q["correct"]) > 1:
+                q["correct"] = [q["correct"][0]]  # keep only first correct
+            elif len(q["correct"]) == 0:
                 raise ValueError(f"Question {i}: standard must have 1 correct")
         elif q["type"] == "multi":
             if not (4 <= len(q["answers"]) <= 6):
