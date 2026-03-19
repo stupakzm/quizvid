@@ -1,6 +1,7 @@
 # automate.py
 import json
 import sys
+import time
 from datetime import datetime
 
 from categories import SCHEDULE
@@ -37,6 +38,9 @@ def main():
             break
         except Exception as e:
             print(f"Attempt {attempt + 1} failed: {e}")
+            if attempt == 0:
+                print("Waiting 15s before retry...")
+                time.sleep(15)
     if quiz_data is None:
         print("Failed to generate valid quiz JSON after 2 attempts.")
         sys.exit(1)
