@@ -81,10 +81,10 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
         run: python automate.py
 
-      - name: Commit updated counters
+      - name: Commit updated files
         run: |
-          git diff --quiet counters.json || (
-            git add counters.json &&
-            git commit -m "chore: update post counters" &&
+          git add counters.json examples/daily_quiz.json
+          git diff --cached --quiet || (
+            git commit -m "chore: update counters and daily quiz" &&
             git push
           )
