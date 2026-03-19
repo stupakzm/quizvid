@@ -18,8 +18,17 @@ QUIZ_SCHEMA_EXAMPLE = """{
 }"""
 
 
-def generate_quiz(category):
+FALLBACK_MODELS = [
+    "gemini-2.5-flash-lite",
+    "gemini-2.5-flash",
+    "gemini-3.1-flash-lite",
+]
+
+
+def generate_quiz(category, model=None):
     """Call Gemini API and return a validated quiz dict for the given category."""
+    if model is None:
+        model = FALLBACK_MODELS[0]
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     prompt = (
@@ -40,7 +49,7 @@ def generate_quiz(category):
         "  Example multi correct: [0, 2] or [1, 2, 3] — must be multiple answers\n"
     )
 
-    response = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
+    response = client.models.generate_content(model=model, contents=prompt)
     return _parse_and_validate(response.text)
 
 

@@ -6,7 +6,7 @@ from datetime import datetime
 
 from categories import SCHEDULE
 from counters import get_post_number, increment
-from gemini_client import generate_quiz
+from gemini_client import generate_quiz, FALLBACK_MODELS
 from caption import build_caption
 from video_renderer import compile_quizvid, render_video
 from instagram_client import upload_video_to_github, post_reel
@@ -29,20 +29,21 @@ def main():
 
     print(f"Category: {category['name']}")
 
-    # 1. Generate quiz (retry once on failure)
+    # 1. Generate quiz (try primary model twice, then fallbacks once each)
     print("Generating quiz questions...")
     quiz_data = None
-    for attempt in range(2):
+    attempts = [FALLBACK_MODELS[0], FALLBACK_MODELS[0]] + FALLBACK_MODELS[1:]
+    for i, model in enumerate(attempts):
         try:
-            quiz_data = generate_quiz(category)
+            quiz_data = generate_quiz(category, model=model)
             break
         except Exception as e:
-            print(f"Attempt {attempt + 1} failed: {e}")
-            if attempt == 0:
+            print(f"Attempt {i + 1} ({model}) failed: {e}")
+            if i < len(attempts) - 1:
                 print("Waiting 15s before retry...")
                 time.sleep(15)
     if quiz_data is None:
-        print("Failed to generate valid quiz JSON after 2 attempts.")
+        print(f"Failed to generate valid quiz JSON after {len(attempts)} attempts.")
         sys.exit(1)
 
     # 2. Write quiz file
