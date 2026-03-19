@@ -22,3 +22,6 @@ bin/
 compile_commands.json
 .cache
 assets/
+
+# worktrees
+.worktrees/
