@@ -45,7 +45,7 @@
     "question_delay": 0.0
   },
   "input": {
-    "quiz_file": "examples/sample_quiz.json"
+    "quiz_file": "examples/daily_quiz.json"
   },
   "output": {
     "file": "quiz_video.mp4"
