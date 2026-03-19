@@ -21,7 +21,7 @@ bin/
 .dir-locals.el
 compile_commands.json
 .cache
-assets/
+assets/voices/*.onnx
 
 # worktrees
 .worktrees/

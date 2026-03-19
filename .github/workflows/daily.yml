@@ -37,6 +37,19 @@ jobs:
             libswscale-dev libswresample-dev \
             libfreetype6-dev libjson-c-dev
 
+      - name: Cache voice model
+        id: cache-voice
+        uses: actions/cache@v4
+        with:
+          path: assets/voices/en_US-libritts_r-medium.onnx
+          key: piper-voice-libritts-r-medium
+
+      - name: Download voice model
+        if: steps.cache-voice.outputs.cache-hit != 'true'
+        run: |
+          curl -L -o assets/voices/en_US-libritts_r-medium.onnx \
+            https://huggingface.co/rhasspy/piper-voices/resolve/main/en/en_US/libritts_r/medium/en_US-libritts_r-medium.onnx
+
       - name: Cache Piper TTS binary
         id: cache-piper
         uses: actions/cache@v4
