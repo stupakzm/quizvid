@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   post:
+    if: false  # TEMP: disabled due to issue
     runs-on: ubuntu-latest
 
     steps:
