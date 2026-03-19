@@ -37,20 +37,24 @@ jobs:
             libswscale-dev libswresample-dev \
             libfreetype6-dev libjson-c-dev
 
-      - name: Cache Piper TTS binary
+      - name: Cache Piper TTS
         id: cache-piper
         uses: actions/cache@v4
         with:
-          path: /usr/local/bin/piper
+          path: /opt/piper
           key: piper-2023.11.14-2-x86_64
 
       - name: Download Piper TTS
         if: steps.cache-piper.outputs.cache-hit != 'true'
         run: |
           curl -L https://github.com/rhasspy/piper/releases/download/2023.11.14-2/piper_linux_x86_64.tar.gz \
-            | tar -xz -C /tmp
-          sudo mv /tmp/piper/piper /usr/local/bin/piper
-          sudo chmod +x /usr/local/bin/piper
+            | tar -xz -C /opt
+
+      - name: Setup Piper
+        run: |
+          sudo ln -sf /opt/piper/piper /usr/local/bin/piper
+          echo "/opt/piper" | sudo tee /etc/ld.so.conf.d/piper.conf
+          sudo ldconfig
 
       - name: Set up Python
         uses: actions/setup-python@v5
