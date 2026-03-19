@@ -39,7 +39,7 @@ def generate_quiz(category):
         "- multi: 4-6 answers, 2-3 correct indices\n"
     )
 
-    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
+    response = client.models.generate_content(model="gemini-2.5-flash-lite", contents=prompt)
     return _parse_and_validate(response.text)
 
 
