@@ -2,7 +2,7 @@
 import json
 import os
 
-import google.generativeai as genai
+from google import genai
 
 
 QUIZ_SCHEMA_EXAMPLE = """{
@@ -20,8 +20,7 @@ QUIZ_SCHEMA_EXAMPLE = """{
 
 def generate_quiz(category):
     """Call Gemini API and return a validated quiz dict for the given category."""
-    genai.configure(api_key=os.environ["GEMINI_API_KEY"])
-    model = genai.GenerativeModel("gemini-2.0-flash")
+    client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     prompt = (
         f"Generate a quiz JSON for the category: {category['name']}.\n\n"
@@ -40,7 +39,7 @@ def generate_quiz(category):
         "- multi: 4-6 answers, 2-3 correct indices\n"
     )
 
-    response = model.generate_content(prompt)
+    response = client.models.generate_content(model="gemini-2.0-flash", contents=prompt)
     return _parse_and_validate(response.text)
 
 

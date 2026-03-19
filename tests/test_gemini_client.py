@@ -81,15 +81,15 @@ def test_generate_quiz_calls_gemini_and_returns_data():
         "name": "Science",
         "description": "General science topics.",
     }
-    mock_model = MagicMock()
-    mock_model.generate_content.return_value = _make_mock_response(json.dumps(VALID_QUIZ))
 
     with patch.dict("os.environ", {"GEMINI_API_KEY": "fake-key"}):
         with patch("gemini_client.genai") as mock_genai:
-            mock_genai.GenerativeModel.return_value = mock_model
+            mock_client = MagicMock()
+            mock_genai.Client.return_value = mock_client
+            mock_client.models.generate_content.return_value = _make_mock_response(json.dumps(VALID_QUIZ))
             result = gemini_client.generate_quiz(category)
 
     assert result["questions"][0]["type"] == "standard"
-    prompt_arg = mock_model.generate_content.call_args[0][0]
+    prompt_arg = mock_client.models.generate_content.call_args[1]["contents"]
     assert "Science" in prompt_arg
     assert "General science topics" in prompt_arg
