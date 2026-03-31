@@ -55,7 +55,7 @@ def test_full_run_increments_counter():
 def test_gemini_retries_on_failure():
     call_count = {"n": 0}
 
-    def flaky_generate(cat):
+    def flaky_generate(cat, model=None):
         call_count["n"] += 1
         if call_count["n"] == 1:
             raise ValueError("bad json")
@@ -71,6 +71,7 @@ def test_gemini_retries_on_failure():
          patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
          patch("automate.post_reel", return_value="post_id"), \
          patch("automate.increment"), \
+         patch("automate.time.sleep"), \
          patch("builtins.open", MagicMock()):
         automate.main()
     assert call_count["n"] == 2
@@ -79,7 +80,8 @@ def test_gemini_retries_on_failure():
 def test_gemini_two_failures_exits_with_error():
     with patch("automate.SCHEDULE", {0: SCIENCE_CATEGORY}), \
          patch("automate.datetime_utcnow", return_value=MagicMock(weekday=lambda: 0)), \
-         patch("automate.generate_quiz", side_effect=ValueError("bad")):
+         patch("automate.generate_quiz", side_effect=ValueError("bad")), \
+         patch("automate.time.sleep"):
         with pytest.raises(SystemExit) as exc:
             automate.main()
     assert exc.value.code == 1

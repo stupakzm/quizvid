@@ -135,25 +135,23 @@ static int is_correct_answer(QuizQuestion *q, int answer_index) {
     return 0;
 }
 
-/* Calculate dynamic button dimensions based on answer count */
-static void calc_button_dims(int num_answers, int screen_height,
+/* Calculate dynamic button dimensions given explicit y_start */
+static void calc_button_dims(int num_answers, int screen_height, int y_start,
                              const LayoutConfig *layout,
                              int *out_height, int *out_spacing,
                              int *out_y_start) {
-    /* Base values from layout config */
     int base_height = layout->button_height;
     int base_spacing = layout->answer_spacing;
-    int base_y = layout->answer_y_start;
 
     /* Available vertical space for buttons */
-    int available = screen_height - base_y - 100;  /* 100px bottom margin */
+    int available = screen_height - y_start - 100;  /* 100px bottom margin */
     int total_needed = num_answers * base_spacing;
 
     if (total_needed <= available) {
         /* Enough space - use defaults */
         *out_height = base_height;
         *out_spacing = base_spacing;
-        *out_y_start = base_y;
+        *out_y_start = y_start;
     } else {
         /* Scale down proportionally */
         float scale = (float)available / (float)total_needed;
@@ -162,7 +160,7 @@ static void calc_button_dims(int num_answers, int screen_height,
 
         /* Recenter vertically */
         int total_used = num_answers * (*out_spacing);
-        *out_y_start = base_y + (available - total_used) / 2;
+        *out_y_start = y_start + (available - total_used) / 2;
     }
 }
 
@@ -189,9 +187,27 @@ int quiz_render_frame(QuizData *quiz, int question_index,
     video_draw_timer_bar(rgb_buffer, width, height, progress,
                          layout->timer_bar_height);
 
-    /* Calculate dynamic button dimensions */
+    /* Question wrap parameters */
+    int q_line_height = layout->question_font_size * 13 / 10;
+    int q_max_width = width - 2 * layout->button_margin;
+
+    /* Measure question height to avoid overlapping answer buttons */
+    int q_num_lines = 1;
+    {
+        TextContext measure_ctx;
+        if (text_init(&measure_ctx, "assets/fonts/Roboto-Bold.ttf",
+                      layout->question_font_size) == 0) {
+            q_num_lines = text_measure_wrapped(&measure_ctx, q->question, q_max_width);
+            text_close(&measure_ctx);
+        }
+    }
+    int q_bottom = layout->question_y_position + q_num_lines * q_line_height + 30;
+    int safe_answer_y = layout->answer_y_start > q_bottom
+                        ? layout->answer_y_start : q_bottom;
+
+    /* Calculate dynamic button dimensions using safe y_start */
     int btn_height, btn_spacing, btn_y_start;
-    calc_button_dims(q->num_answers, height, layout,
+    calc_button_dims(q->num_answers, height, safe_answer_y, layout,
                     &btn_height, &btn_spacing, &btn_y_start);
 
     /* Calculate question alpha */
@@ -218,7 +234,7 @@ int quiz_render_frame(QuizData *quiz, int question_index,
         }
     }
 
-    /* Render question */
+    /* Render question with word wrap */
     if (question_alpha > 0.0f) {
         TextContext text_ctx;
         if (text_init(&text_ctx, "assets/fonts/Roboto-Bold.ttf",
@@ -226,9 +242,10 @@ int quiz_render_frame(QuizData *quiz, int question_index,
             return -1;
         }
         Color q_color = active_colors.question_text;
-        text_render_centered_alpha(&text_ctx, rgb_buffer, width, height,
-                                  q->question, layout->question_y_position,
-                                  q_color.r, q_color.g, q_color.b, question_alpha);
+        text_render_wrapped_centered(&text_ctx, rgb_buffer, width, height,
+                                     q->question, layout->question_y_position,
+                                     q_max_width, q_line_height,
+                                     q_color.r, q_color.g, q_color.b, question_alpha);
         text_close(&text_ctx);
     }
 

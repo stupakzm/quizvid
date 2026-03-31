@@ -24,7 +24,7 @@
     "enabled": true,
     "engine": "piper",
     "voice_model": "assets/voices/en_US-libritts_r-medium.onnx",
-    "speed": 1.0,
+    "speed": 0.7,
     "sample_rate": 22050,
     "background": {
       "enabled": true,

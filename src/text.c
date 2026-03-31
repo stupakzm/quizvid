@@ -116,3 +116,55 @@ int text_render_centered_alpha(TextContext *ctx, uint8_t *rgb_buffer,
     return text_render_alpha(ctx, rgb_buffer, buffer_width, buffer_height,
                        text, x, y, r, g, b, alpha);
 }
+
+/* Build wrapped lines from text. Returns number of lines. */
+static int wrap_into_lines(TextContext *ctx, const char *text, int max_width,
+                           char lines[][512], int max_lines) {
+    char buf[512];
+    strncpy(buf, text, sizeof(buf) - 1);
+    buf[sizeof(buf) - 1] = '\0';
+
+    int num_lines = 0;
+    lines[0][0] = '\0';
+
+    char *word = strtok(buf, " ");
+    while (word && num_lines < max_lines - 1) {
+        char test[512];
+        if (lines[num_lines][0] == '\0') {
+            snprintf(test, sizeof(test), "%s", word);
+        } else {
+            snprintf(test, sizeof(test), "%s %s", lines[num_lines], word);
+        }
+
+        if (text_measure_width(ctx, test) > max_width && lines[num_lines][0] != '\0') {
+            num_lines++;
+            lines[num_lines][0] = '\0';
+            snprintf(lines[num_lines], 512, "%s", word);
+        } else {
+            snprintf(lines[num_lines], 512, "%s", test);
+        }
+        word = strtok(NULL, " ");
+    }
+    return num_lines + 1;
+}
+
+int text_measure_wrapped(TextContext *ctx, const char *text, int max_width) {
+    char lines[16][512];
+    return wrap_into_lines(ctx, text, max_width, lines, 16);
+}
+
+int text_render_wrapped_centered(TextContext *ctx, uint8_t *rgb_buffer,
+                         int buffer_width, int buffer_height,
+                         const char *text, int y,
+                         int max_width, int line_height,
+                         uint8_t r, uint8_t g, uint8_t b, float alpha) {
+    char lines[16][512];
+    int num_lines = wrap_into_lines(ctx, text, max_width, lines, 16);
+
+    for (int i = 0; i < num_lines; i++) {
+        int line_y = y + (i * line_height);
+        text_render_centered_alpha(ctx, rgb_buffer, buffer_width, buffer_height,
+                                   lines[i], line_y, r, g, b, alpha);
+    }
+    return num_lines * line_height;
+}

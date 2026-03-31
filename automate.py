@@ -1,8 +1,26 @@
 # automate.py
 import json
+import os
+import shutil
 import sys
 import time
 from datetime import datetime
+
+
+def _load_env_local(path=".env.local"):
+    """Load key=value pairs from .env.local into os.environ (local dev only)."""
+    if not os.path.exists(path):
+        return
+    with open(path) as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith("#") or "=" not in line:
+                continue
+            key, _, value = line.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
+
+
+_load_env_local()
 
 from categories import SCHEDULE
 from counters import get_post_number, increment
@@ -12,6 +30,7 @@ from video_renderer import compile_quizvid, render_video
 from instagram_client import upload_video_to_github, post_reel
 
 QUIZ_FILE = "examples/daily_quiz.json"
+OUTPUTS_DIR = "outputs"
 
 
 def datetime_utcnow():
@@ -19,7 +38,23 @@ def datetime_utcnow():
     return datetime.utcnow()
 
 
+def save_outputs(video_path, quiz_data):
+    """Save a timestamped copy of the video and quiz JSON to outputs/."""
+    os.makedirs(OUTPUTS_DIR, exist_ok=True)
+    ts = datetime_utcnow().strftime("%Y-%m-%d_%H-%M-%S")
+    out_video = os.path.join(OUTPUTS_DIR, f"{ts}.mp4")
+    out_json = os.path.join(OUTPUTS_DIR, f"{ts}.json")
+    shutil.copy2(video_path, out_video)
+    with open(out_json, "w") as f:
+        json.dump(quiz_data, f, indent=2)
+    print(f"Saved video:  {out_video}")
+    print(f"Saved quiz:   {out_json}")
+    return out_video, out_json
+
+
 def main():
+    dry_run = "--dry-run" in sys.argv
+
     today = datetime_utcnow().weekday()  # 0=Mon, 6=Sun
     category = SCHEDULE.get(today)
 
@@ -28,6 +63,8 @@ def main():
         sys.exit(0)
 
     print(f"Category: {category['name']}")
+    if dry_run:
+        print("[DRY RUN] Instagram upload/post will be skipped.")
 
     # 1. Generate quiz (try primary model twice, then fallbacks once each)
     print("Generating quiz questions...")
@@ -60,17 +97,25 @@ def main():
     video_path = render_video()
     print(f"Video rendered: {video_path}")
 
-    # 5. Build caption
+    # 5. Save outputs (always — useful for local review)
+    save_outputs(video_path, quiz_data)
+
+    # 6. Build caption
     post_number = get_post_number(category["name"]) + 1
     caption = build_caption(category, post_number)
     print(f"Caption:\n{caption}\n")
 
-    # 6. Upload video
+    if dry_run:
+        print("[DRY RUN] Skipping GitHub upload and Instagram post.")
+        print("Done. Review the video in outputs/")
+        return
+
+    # 7. Upload video
     print("Uploading video to GitHub Releases...")
     video_url = upload_video_to_github(video_path)
     print(f"Video URL: {video_url}")
 
-    # 7. Post to Instagram
+    # 8. Post to Instagram
     print("Posting to Instagram...")
     try:
         post_id = post_reel(video_url, caption)
@@ -79,7 +124,7 @@ def main():
         sys.exit(1)
     print(f"Posted! Media ID: {post_id}")
 
-    # 8. Update counter (only after successful post)
+    # 9. Update counter (only after successful post)
     increment(category["name"])
     print("Counter updated.")
 
