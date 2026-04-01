@@ -7,7 +7,7 @@
 
 ### CI
 
-- [ ] **CI-01**: Pipeline uses Node.js 24-compatible GitHub Actions versions (no deprecation warnings)
+- [x] **CI-01**: Pipeline uses Node.js 24-compatible GitHub Actions versions (no deprecation warnings)
 
 ### Deduplication
 
@@ -35,7 +35,7 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CI-01 | Phase 1 | Pending |
+| CI-01 | Phase 1 | Complete |
 | DEDUP-01 | Phase 2 | Pending |
 | DEDUP-02 | Phase 2 | Pending |
 | PREVIEW-01 | Phase 3 | Pending |

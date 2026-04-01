@@ -12,7 +12,7 @@ Harden the daily automation pipeline across three areas: fix CI compatibility (N
 
 Decimal phases appear between their surrounding integers in numeric order.
 
-- [ ] **Phase 1: CI Compatibility** - Update GitHub Actions to Node.js 24-compatible versions
+- [x] **Phase 1: CI Compatibility** - Update GitHub Actions to Node.js 24-compatible versions (completed 2026-04-01)
 - [ ] **Phase 2: Quiz Deduplication** - Track posted quizzes and regenerate on duplicates
 - [ ] **Phase 3: Category Preview Frame** - Add opening scene with category name and post counter
 
@@ -28,7 +28,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Upgrade all GitHub Actions to Node.js 24-compatible versions
+- [x] 01-01-PLAN.md — Upgrade all GitHub Actions to Node.js 24-compatible versions
 
 ### Phase 2: Quiz Deduplication
 **Goal**: Pipeline never posts the same quiz twice
@@ -63,6 +63,6 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. CI Compatibility | 0/1 | Not started | - |
+| 1. CI Compatibility | 1/1 | Complete   | 2026-04-01 |
 | 2. Quiz Deduplication | 0/? | Not started | - |
 | 3. Category Preview Frame | 0/? | Not started | - |

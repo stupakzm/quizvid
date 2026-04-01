@@ -1,25 +1,38 @@
 {
   "config": {
-    "question_duration": 15,
-    "reveal_duration": 5
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What is the capital of Canada?",
+      "question": "Which ancient civilization built the pyramids of Giza?",
       "answers": [
-        "Toronto",
-        "Vancouver",
-        "Ottawa",
-        "Montreal"
+        "Roman",
+        "Greek",
+        "Egyptian",
+        "Mesopotamian"
       ],
       "correct": [
         2
       ]
     },
     {
+      "type": "standard",
+      "question": "Who was the first Roman Emperor?",
+      "answers": [
+        "Julius Caesar",
+        "Augustus",
+        "Nero",
+        "Constantine"
+      ],
+      "correct": [
+        1
+      ]
+    },
+    {
       "type": "truefalse",
-      "question": "Mount Everest is the tallest mountain in Africa.",
+      "question": "The Magna Carta was signed in 1066.",
       "answers": [
         "True",
         "False"
@@ -29,45 +42,32 @@
       ]
     },
     {
-      "type": "standard",
-      "question": "Which is the longest river in South America?",
-      "answers": [
-        "Paran\u00e1",
-        "Orinoco",
-        "Amazon",
-        "S\u00e3o Francisco"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
       "type": "multi",
-      "question": "Which of these countries are landlocked?",
+      "question": "Which of these were major Silk Road trading cities?",
       "answers": [
-        "Switzerland",
-        "Austria",
-        "France",
-        "Spain",
-        "Germany"
+        "Samarkand",
+        "Cairo",
+        "Xi'an",
+        "Rome",
+        "Constantinople"
       ],
       "correct": [
         0,
-        1,
+        2,
         4
       ]
     },
     {
       "type": "standard",
-      "question": "What is the largest ocean on Earth?",
+      "question": "When did World War II end?",
       "answers": [
-        "Atlantic",
-        "Indian",
-        "Arctic",
-        "Pacific"
+        "1918",
+        "1939",
+        "1945",
+        "1950"
       ],
       "correct": [
-        3
+        2
       ]
     }
   ]
