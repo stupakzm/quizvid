@@ -1,43 +1,17 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 15,
+    "reveal_duration": 5
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What is the capital of Australia?",
+      "question": "What is the capital of Canada?",
       "answers": [
-        "Sydney",
-        "Melbourne",
-        "Canberra",
-        "Brisbane"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which continent is Mount Everest on?",
-      "answers": [
-        "Africa",
-        "Asia",
-        "Europe",
-        "South America"
-      ],
-      "correct": [
-        1
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "The Amazon River is primarily in which country?",
-      "answers": [
-        "Peru",
-        "Colombia",
-        "Brazil",
-        "Venezuela"
+        "Toronto",
+        "Vancouver",
+        "Ottawa",
+        "Montreal"
       ],
       "correct": [
         2
@@ -45,7 +19,7 @@
     },
     {
       "type": "truefalse",
-      "question": "The Sahara Desert is the largest desert in the world.",
+      "question": "Mount Everest is the tallest mountain in Africa.",
       "answers": [
         "True",
         "False"
@@ -55,19 +29,45 @@
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these are ocean countries?",
+      "type": "standard",
+      "question": "Which is the longest river in South America?",
       "answers": [
-        "Japan",
+        "Paran\u00e1",
+        "Orinoco",
+        "Amazon",
+        "S\u00e3o Francisco"
+      ],
+      "correct": [
+        2
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these countries are landlocked?",
+      "answers": [
         "Switzerland",
-        "Maldives",
-        "Mongolia",
-        "Indonesia"
+        "Austria",
+        "France",
+        "Spain",
+        "Germany"
       ],
       "correct": [
         0,
-        2,
+        1,
         4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the largest ocean on Earth?",
+      "answers": [
+        "Atlantic",
+        "Indian",
+        "Arctic",
+        "Pacific"
+      ],
+      "correct": [
+        3
       ]
     }
   ]
