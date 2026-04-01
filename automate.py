@@ -24,6 +24,7 @@ _load_env_local()
 
 from categories import SCHEDULE
 from counters import get_post_number, increment
+from dedup import is_duplicate, record_quiz, get_question_texts
 from gemini_client import generate_quiz, FALLBACK_MODELS
 from caption import build_caption
 from video_renderer import compile_quizvid, render_video
@@ -83,6 +84,19 @@ def main():
         print(f"Failed to generate valid quiz JSON after {len(attempts)} attempts.")
         sys.exit(1)
 
+    # 1b. Dedup check — regenerate if duplicate (per D-04, D-05, D-06)
+    MAX_DEDUP_RETRIES = 3
+    for retry in range(MAX_DEDUP_RETRIES):
+        if not is_duplicate(quiz_data):
+            break
+        print(f"Duplicate detected (retry {retry + 1}/{MAX_DEDUP_RETRIES}), regenerating...")
+        avoid = get_question_texts(quiz_data)
+        quiz_data = generate_quiz(category, model=FALLBACK_MODELS[0], avoid_questions=avoid)
+    else:
+        if is_duplicate(quiz_data):
+            print("All dedup retries exhausted — quiz is still a duplicate. Aborting.")
+            sys.exit(1)
+
     # 2. Write quiz file
     with open(QUIZ_FILE, "w") as f:
         json.dump(quiz_data, f, indent=2)
@@ -127,6 +141,10 @@ def main():
     # 9. Update counter (only after successful post)
     increment(category["name"])
     print("Counter updated.")
+
+    # 10. Record quiz for dedup tracking (only after successful post)
+    record_quiz(quiz_data, category["name"])
+    print("Quiz recorded for dedup tracking.")
 
 
 if __name__ == "__main__":

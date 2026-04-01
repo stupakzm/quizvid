@@ -25,7 +25,7 @@ FALLBACK_MODELS = [
 ]
 
 
-def generate_quiz(category, model=None):
+def generate_quiz(category, model=None, avoid_questions=None):
     """Call Gemini API and return a validated quiz dict for the given category."""
     if model is None:
         model = FALLBACK_MODELS[0]
@@ -48,6 +48,13 @@ def generate_quiz(category, model=None):
         "- multi: 4-6 answers, EXACTLY 2 or 3 correct indices (never 1, never 4+)\n"
         "  Example multi correct: [0, 2] or [1, 2, 3] — must be multiple answers\n"
     )
+
+    if avoid_questions:
+        prompt += (
+            "\n\nIMPORTANT: Do NOT reuse any of these questions — "
+            "generate completely different ones:\n"
+            + "\n".join(f"- {q}" for q in avoid_questions)
+        )
 
     response = client.models.generate_content(model=model, contents=prompt)
     return _parse_and_validate(response.text)

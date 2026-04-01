@@ -83,7 +83,7 @@ jobs:
 
       - name: Commit updated files
         run: |
-          git add counters.json examples/daily_quiz.json
+          git add counters.json posted_quizzes.json examples/daily_quiz.json
           git diff --cached --quiet || (
             git commit -m "chore: update counters and daily quiz" &&
             git push
