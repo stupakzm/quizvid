@@ -83,14 +83,16 @@ def post_reel(video_url, caption):
         time.sleep(POLL_INTERVAL_SECONDS)
         r = requests.get(
             f"{GRAPH_BASE}/{container_id}",
-            params={"fields": "status_code", "access_token": access_token},
+            params={"fields": "status_code,status", "access_token": access_token},
         )
         r.raise_for_status()
-        status = r.json().get("status_code")
+        data = r.json()
+        status = data.get("status_code")
         if status == "FINISHED":
             break
         if status == "ERROR":
-            raise RuntimeError("Instagram container failed with status: ERROR")
+            detail = data.get("status", "no detail")
+            raise RuntimeError(f"Instagram container failed with status: ERROR — {detail}")
     else:
         raise TimeoutError(
             f"Instagram container did not finish within "
