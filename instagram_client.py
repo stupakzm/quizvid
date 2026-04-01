@@ -53,7 +53,11 @@ def upload_video_to_github(video_path):
             data=f,
         )
     r.raise_for_status()
-    return r.json()["browser_download_url"]
+    download_url = r.json()["browser_download_url"]
+
+    # Resolve any redirects — Instagram's media ingestion does not follow them
+    resolved = requests.head(download_url, allow_redirects=True, timeout=10)
+    return resolved.url
 
 
 def post_reel(video_url, caption):
