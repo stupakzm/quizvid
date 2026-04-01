@@ -25,10 +25,10 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Success Criteria** (what must be TRUE):
   1. GitHub Actions workflow completes without any Node.js deprecation warnings in the log
   2. All action versions (checkout, cache, setup-python) reference Node.js 24-compatible releases
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Upgrade all GitHub Actions to Node.js 24-compatible versions
 
 ### Phase 2: Quiz Deduplication
 **Goal**: Pipeline never posts the same quiz twice
@@ -63,6 +63,6 @@ Phases execute in numeric order: 1 -> 2 -> 3
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. CI Compatibility | 0/? | Not started | - |
+| 1. CI Compatibility | 0/1 | Not started | - |
 | 2. Quiz Deduplication | 0/? | Not started | - |
 | 3. Category Preview Frame | 0/? | Not started | - |
