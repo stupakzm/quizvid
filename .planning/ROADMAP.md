@@ -13,7 +13,7 @@ Harden the daily automation pipeline across three areas: fix CI compatibility (N
 Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: CI Compatibility** - Update GitHub Actions to Node.js 24-compatible versions (completed 2026-04-01)
-- [ ] **Phase 2: Quiz Deduplication** - Track posted quizzes and regenerate on duplicates
+- [x] **Phase 2: Quiz Deduplication** - Track posted quizzes and regenerate on duplicates (completed 2026-04-01)
 - [ ] **Phase 3: Category Preview Frame** - Add opening scene with category name and post counter
 
 ## Phase Details
@@ -41,7 +41,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 02-01-PLAN.md — Add dedup module, integrate into pipeline with retry logic, update workflow commit step
+- [x] 02-01-PLAN.md — Add dedup module, integrate into pipeline with retry logic, update workflow commit step
 
 ### Phase 3: Category Preview Frame
 **Goal**: Every video opens with a branded category scene before the quiz begins
@@ -64,5 +64,5 @@ Phases execute in numeric order: 1 -> 2 -> 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. CI Compatibility | 1/1 | Complete   | 2026-04-01 |
-| 2. Quiz Deduplication | 0/1 | Not started | - |
+| 2. Quiz Deduplication | 1/1 | Complete   | 2026-04-01 |
 | 3. Category Preview Frame | 0/? | Not started | - |

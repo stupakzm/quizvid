@@ -11,8 +11,8 @@
 
 ### Deduplication
 
-- [ ] **DEDUP-01**: System records each successfully posted quiz to a persistent tracking file
-- [ ] **DEDUP-02**: Pipeline detects a previously posted quiz and regenerates a new one before posting
+- [x] **DEDUP-01**: System records each successfully posted quiz to a persistent tracking file
+- [x] **DEDUP-02**: Pipeline detects a previously posted quiz and regenerates a new one before posting
 
 ### Preview Frame
 
@@ -36,8 +36,8 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | CI-01 | Phase 1 | Complete |
-| DEDUP-01 | Phase 2 | Pending |
-| DEDUP-02 | Phase 2 | Pending |
+| DEDUP-01 | Phase 2 | Complete |
+| DEDUP-02 | Phase 2 | Complete |
 | PREVIEW-01 | Phase 3 | Pending |
 
 **Coverage:**

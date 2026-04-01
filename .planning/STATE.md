@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: verifying
-stopped_at: Completed 01-ci-compatibility/01-01-PLAN.md
-last_updated: "2026-04-01T18:02:24.609Z"
+stopped_at: Completed 02-quiz-deduplication/02-01-PLAN.md
+last_updated: "2026-04-01T21:19:14.570Z"
 last_activity: 2026-04-01
 progress:
   total_phases: 3
-  completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  completed_phases: 2
+  total_plans: 2
+  completed_plans: 2
   percent: 0
 ---
 
@@ -21,12 +21,12 @@ progress:
 See: .planning/PROJECT.md (updated 2026-04-01)
 
 **Core value:** Every day, a new quiz Reel is published to Instagram with zero manual intervention.
-**Current focus:** Phase 01 — ci-compatibility
+**Current focus:** Phase 02 — quiz-deduplication
 
 ## Current Position
 
-Phase: 2
-Plan: Not started
+Phase: 02 (quiz-deduplication) — EXECUTING
+Plan: 1 of 1
 Status: Phase complete — ready for verification
 Last activity: 2026-04-01
 
@@ -53,6 +53,7 @@ Progress: [░░░░░░░░░░] 0%
 
 *Updated after each plan completion*
 | Phase 01-ci-compatibility P01 | 123min | 2 tasks | 1 files |
+| Phase 02-quiz-deduplication P01 | 35 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -66,6 +67,9 @@ Recent decisions affecting current work:
 - [Phase 01-ci-compatibility]: Upgraded to checkout@v6 (not v5) — v6 is the latest and fully Node.js 24 compatible
 - [Phase 01-ci-compatibility]: Both actions/cache references updated together to avoid partial deprecation warnings
 - [Phase 01-ci-compatibility]: Workflow verified green with Node.js 24-compatible actions; non-fatal cache/tar exit code 2 warning is unrelated to Node.js version
+- [Phase 02-quiz-deduplication]: Hash only questions array for dedup — config/metadata excluded so same questions = same hash regardless of quiz config changes
+- [Phase 02-quiz-deduplication]: MAX_DEDUP_RETRIES=3 with avoid_questions passed to Gemini; fail pipeline if all retries duplicate
+- [Phase 02-quiz-deduplication]: Record quiz only after successful Instagram post alongside counter increment; posted_quizzes.json committed per run
 
 ### Prior Context
 
@@ -85,6 +89,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-04-01T17:48:15.707Z
-Stopped at: Completed 01-ci-compatibility/01-01-PLAN.md
+Last session: 2026-04-01T21:19:14.567Z
+Stopped at: Completed 02-quiz-deduplication/02-01-PLAN.md
 Resume file: None
