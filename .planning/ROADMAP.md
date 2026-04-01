@@ -38,10 +38,10 @@ Plans:
   1. After a successful post, the quiz is recorded in a persistent tracking file (posted_quizzes.json)
   2. If the generated quiz matches a previously posted quiz, the pipeline regenerates a new one automatically
   3. The tracking file persists across pipeline runs (committed to repo or stored as artifact)
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 02-01: TBD
+- [ ] 02-01-PLAN.md — Add dedup module, integrate into pipeline with retry logic, update workflow commit step
 
 ### Phase 3: Category Preview Frame
 **Goal**: Every video opens with a branded category scene before the quiz begins
@@ -64,5 +64,5 @@ Phases execute in numeric order: 1 -> 2 -> 3
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. CI Compatibility | 1/1 | Complete   | 2026-04-01 |
-| 2. Quiz Deduplication | 0/? | Not started | - |
+| 2. Quiz Deduplication | 0/1 | Not started | - |
 | 3. Category Preview Frame | 0/? | Not started | - |
