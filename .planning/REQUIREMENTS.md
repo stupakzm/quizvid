@@ -20,7 +20,7 @@
 
 ## Future Requirements
 
-*(None identified — scope is intentionally narrow for this milestone)*
+*(None identified -- scope is intentionally narrow for this milestone)*
 
 ## Out of Scope
 
@@ -35,16 +35,16 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| CI-01 | — | Pending |
-| DEDUP-01 | — | Pending |
-| DEDUP-02 | — | Pending |
-| PREVIEW-01 | — | Pending |
+| CI-01 | Phase 1 | Pending |
+| DEDUP-01 | Phase 2 | Pending |
+| DEDUP-02 | Phase 2 | Pending |
+| PREVIEW-01 | Phase 3 | Pending |
 
 **Coverage:**
 - v1.0 requirements: 4 total
-- Mapped to phases: 0 (roadmap pending)
-- Unmapped: 4 ⚠️
+- Mapped to phases: 4
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-01*
-*Last updated: 2026-04-01 after initial definition*
+*Last updated: 2026-04-01 after roadmap creation*
