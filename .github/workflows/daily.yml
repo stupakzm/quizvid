@@ -21,10 +21,10 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Cache apt packages
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /var/cache/apt/archives
           key: apt-ffmpeg-ft-jsonc-${{ runner.os }}
@@ -39,7 +39,7 @@ jobs:
 
       - name: Cache Piper TTS
         id: cache-piper
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: /opt/piper
           key: piper-2023.11.14-2-x86_64
@@ -57,7 +57,7 @@ jobs:
           sudo ldconfig
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
