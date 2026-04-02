@@ -34,7 +34,7 @@ Every day, a new quiz Reel is published to Instagram with zero manual interventi
 - [ ] CI-01: GitHub Actions uses Node.js 24-compatible action versions
 - ✓ DEDUP-01: System records each successfully posted quiz to avoid repeats — Validated in Phase 02: quiz-deduplication
 - ✓ DEDUP-02: Pipeline skips (or regenerates) if today's quiz was already posted — Validated in Phase 02: quiz-deduplication
-- [ ] PREVIEW-01: Video opens with a 1-frame scene showing category name and counter
+- ✓ PREVIEW-01: Video opens with a 1-frame scene showing category name and counter — Validated in Phase 03: category-preview-frame
 
 ### Out of Scope
 
@@ -86,4 +86,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-01 — Phase 02 complete: quiz deduplication live*
+*Last updated: 2026-04-02 — Phase 03 complete: category preview frame live*
