@@ -2,9 +2,20 @@
 import json
 import sys
 import pytest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, mock_open
 
 import automate
+
+
+def _mock_open_json(data="{}"):
+    """Return a mock for builtins.open that yields valid JSON on read.
+
+    The preview injection step calls json.load(f) on config.json, which
+    calls f.read() internally. Existing tests use MagicMock() for open
+    which returns another MagicMock — not a string — causing json.loads
+    to raise TypeError. This helper provides a properly configured mock.
+    """
+    return mock_open(read_data=data)
 
 
 SCIENCE_CATEGORY = {
@@ -50,7 +61,7 @@ def test_full_run_increments_counter():
          patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
          patch("automate.post_reel", return_value="post_id"), \
          patch("automate.increment", mock_increment), \
-         patch("builtins.open", MagicMock()):
+         patch("builtins.open", _mock_open_json()):
         automate.main()
     mock_increment.assert_called_once_with("Science")
 
@@ -78,7 +89,7 @@ def test_gemini_retries_on_failure():
          patch("automate.post_reel", return_value="post_id"), \
          patch("automate.increment"), \
          patch("automate.time.sleep"), \
-         patch("builtins.open", MagicMock()):
+         patch("builtins.open", _mock_open_json()):
         automate.main()
     assert call_count["n"] == 2
 
@@ -108,7 +119,7 @@ def test_counter_not_incremented_if_post_fails():
          patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
          patch("automate.post_reel", side_effect=RuntimeError("API error")), \
          patch("automate.increment", mock_increment), \
-         patch("builtins.open", MagicMock()):
+         patch("builtins.open", _mock_open_json()):
         with pytest.raises(SystemExit):
             automate.main()
     mock_increment.assert_not_called()
@@ -137,7 +148,7 @@ def test_duplicate_quiz_triggers_regeneration():
          patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
          patch("automate.post_reel", return_value="post_id"), \
          patch("automate.increment"), \
-         patch("builtins.open", MagicMock()):
+         patch("builtins.open", _mock_open_json()):
         automate.main()
     # Called once for initial generation + once for dedup retry
     assert mock_generate.call_count == 2
@@ -175,7 +186,7 @@ def test_record_quiz_called_after_successful_post():
          patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
          patch("automate.post_reel", return_value="post_id"), \
          patch("automate.increment"), \
-         patch("builtins.open", MagicMock()):
+         patch("builtins.open", _mock_open_json()):
         automate.main()
     mock_record.assert_called_once_with(VALID_QUIZ, "Science")
 
@@ -196,7 +207,46 @@ def test_record_quiz_not_called_if_post_fails():
          patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
          patch("automate.post_reel", side_effect=RuntimeError("API error")), \
          patch("automate.increment"), \
-         patch("builtins.open", MagicMock()):
+         patch("builtins.open", _mock_open_json()):
         with pytest.raises(SystemExit):
             automate.main()
     mock_record.assert_not_called()
+
+
+def test_preview_injected_into_config(tmp_path):
+    """Preview section is written to config.json before rendering."""
+    config_file = tmp_path / "config.json"
+    # Write a minimal config.json that automate.py will read and augment
+    config_file.write_text(json.dumps({"video": {"width": 1080}}))
+
+    import builtins
+
+    original_open = builtins.open
+
+    def tracking_open(path, *args, **kwargs):
+        # For config.json reads/writes, use the tmp_path version
+        if str(path) == "config.json":
+            path = str(config_file)
+        return original_open(path, *args, **kwargs)
+
+    with patch("automate.SCHEDULE", {0: SCIENCE_CATEGORY}), \
+         patch("automate.datetime_utcnow", return_value=MagicMock(weekday=lambda: 0)), \
+         patch("automate.generate_quiz", return_value=VALID_QUIZ), \
+         patch("automate.is_duplicate", return_value=False), \
+         patch("automate.record_quiz"), \
+         patch("automate.compile_quizvid"), \
+         patch("automate.render_video", return_value="quiz_video.mp4"), \
+         patch("automate.shutil.copy2"), \
+         patch("automate.get_post_number", return_value=4), \
+         patch("automate.build_caption", return_value="caption"), \
+         patch("automate.upload_video_to_github", return_value="https://example.com/v.mp4"), \
+         patch("automate.post_reel", return_value="post_id"), \
+         patch("automate.increment"), \
+         patch("builtins.open", side_effect=tracking_open):
+        automate.main()
+
+    # Read back config.json from tmp_path to verify preview was injected
+    final_config = json.loads(config_file.read_text())
+    assert "preview" in final_config
+    assert final_config["preview"]["category"] == "Science"
+    assert final_config["preview"]["counter"] == 5  # get_post_number returns 4, +1 = 5
