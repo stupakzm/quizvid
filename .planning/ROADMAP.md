@@ -14,7 +14,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 
 - [x] **Phase 1: CI Compatibility** - Update GitHub Actions to Node.js 24-compatible versions (completed 2026-04-01)
 - [x] **Phase 2: Quiz Deduplication** - Track posted quizzes and regenerate on duplicates (completed 2026-04-01)
-- [ ] **Phase 3: Category Preview Frame** - Add opening scene with category name and post counter
+- [x] **Phase 3: Category Preview Frame** - Add opening scene with category name and post counter (completed 2026-04-02)
 
 ## Phase Details
 
@@ -54,7 +54,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 03-01-PLAN.md — Add preview frame rendering to C binary and preview injection to Python pipeline
+- [x] 03-01-PLAN.md — Add preview frame rendering to C binary and preview injection to Python pipeline
 
 ## Progress
 
@@ -65,4 +65,4 @@ Phases execute in numeric order: 1 -> 2 -> 3
 |-------|----------------|--------|-----------|
 | 1. CI Compatibility | 1/1 | Complete   | 2026-04-01 |
 | 2. Quiz Deduplication | 1/1 | Complete   | 2026-04-01 |
-| 3. Category Preview Frame | 0/1 | Not started | - |
+| 3. Category Preview Frame | 1/1 | Complete    | 2026-04-02 |
