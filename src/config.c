@@ -77,7 +77,9 @@ AppConfig config_get_default(void) {
         .color_scheme = strdup_safe("colorblind"),
         .font_path = strdup_safe("assets/fonts/Roboto-Bold.ttf"),
         .quiz_file = strdup_safe("examples/sample_quiz.json"),
-        .output_file = strdup_safe("quiz_video.mp4")
+        .output_file = strdup_safe("quiz_video.mp4"),
+        .preview_category = NULL,
+        .preview_counter = 0
     };
     return config;
 }
@@ -247,6 +249,17 @@ int config_load(AppConfig *config, const char *config_file) {
         }
     }
 
+    /* Parse preview settings */
+    struct json_object *preview;
+    if (json_object_object_get_ex(root, "preview", &preview)) {
+        const char *cat = get_json_string(preview, "category", NULL);
+        if (cat) {
+            free(config->preview_category);
+            config->preview_category = strdup_safe(cat);
+        }
+        config->preview_counter = get_json_int(preview, "counter", 0);
+    }
+
     json_object_put(root);
     printf("Configuration loaded from %s\n", config_file);
 
@@ -277,6 +290,10 @@ void config_free(AppConfig *config) {
     if (config->audio.background.file) {
         free(config->audio.background.file);
         config->audio.background.file = NULL;
+    }
+    if (config->preview_category) {
+        free(config->preview_category);
+        config->preview_category = NULL;
     }
 }
 

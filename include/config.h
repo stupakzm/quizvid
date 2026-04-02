@@ -74,6 +74,8 @@ typedef struct {
     char *font_path;
     char *quiz_file;
     char *output_file;
+    char *preview_category;   /* Category name for opening frame, NULL if no preview */
+    int preview_counter;       /* Per-category post counter (e.g., 12) */
 } AppConfig;
 
 /* Load configuration from JSON file */

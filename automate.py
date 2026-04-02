@@ -102,6 +102,18 @@ def main():
         json.dump(quiz_data, f, indent=2)
     print(f"Quiz written to {QUIZ_FILE}")
 
+    # 2b. Inject preview into config.json (per D-02)
+    post_number = get_post_number(category["name"]) + 1
+    with open("config.json") as f:
+        render_config = json.load(f)
+    render_config["preview"] = {
+        "category": category["name"],
+        "counter": post_number,
+    }
+    with open("config.json", "w") as f:
+        json.dump(render_config, f, indent=2)
+    print(f"Preview injected: {category['name']} #{post_number}")
+
     # 3. Compile quizvid
     print("Compiling quizvid...")
     compile_quizvid()
@@ -115,7 +127,6 @@ def main():
     save_outputs(video_path, quiz_data)
 
     # 6. Build caption
-    post_number = get_post_number(category["name"]) + 1
     caption = build_caption(category, post_number)
     print(f"Caption:\n{caption}\n")
 

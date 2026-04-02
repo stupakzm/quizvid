@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <ctype.h>
 #include "video.h"
 #include "text.h"
 #include "quiz.h"
@@ -97,6 +98,54 @@ int main(int argc, char *argv[]) {
 
     /* Generate video with audio for each question */
     int global_frame = 0;
+
+    /* Render preview frame if configured */
+    if (config.preview_category != NULL) {
+        /* Fill background */
+        video_fill_rgb_color(rgb_buffer, config.video.width, config.video.height, active_colors.background);
+
+        /* Build uppercase category string */
+        char upper_category[256];
+        int i;
+        for (i = 0; config.preview_category[i] && i < (int)(sizeof(upper_category) - 1); i++) {
+            upper_category[i] = (char)toupper((unsigned char)config.preview_category[i]);
+        }
+        upper_category[i] = '\0';
+
+        /* Render category name at font size 130, centered at y=900 */
+        TextContext cat_ctx;
+        text_init(&cat_ctx, config.font_path, 130);
+        text_render_centered_alpha(&cat_ctx, rgb_buffer, config.video.width, config.video.height,
+                                   upper_category, 900,
+                                   active_colors.question_text.r,
+                                   active_colors.question_text.g,
+                                   active_colors.question_text.b, 1.0f);
+        text_close(&cat_ctx);
+
+        /* Render counter string at font size 80, centered at y=1020 */
+        TextContext ctr_ctx;
+        text_init(&ctr_ctx, config.font_path, 80);
+        char counter_str[32];
+        snprintf(counter_str, sizeof(counter_str), "#%d", config.preview_counter);
+        text_render_centered_alpha(&ctr_ctx, rgb_buffer, config.video.width, config.video.height,
+                                   counter_str, 1020,
+                                   active_colors.question_text.r,
+                                   active_colors.question_text.g,
+                                   active_colors.question_text.b, 1.0f);
+        text_close(&ctr_ctx);
+
+        /* Write preview video frame */
+        muxer_write_video_frame(muxer, rgb_buffer);
+
+        /* Write 1 frame of silence to keep A/V in sync */
+        int silence_samples = config.audio.sample_rate / config.video.fps;
+        float *silence = calloc(silence_samples, sizeof(float));
+        muxer_write_audio_samples(muxer, silence, silence_samples);
+        free(silence);
+
+        global_frame++;
+        printf("Preview frame rendered: %s #%d\n", config.preview_category, config.preview_counter);
+    }
 
       for (int q = 0; q < quiz.num_questions; q++) {
         QuizQuestion *question = &quiz.questions[q];
