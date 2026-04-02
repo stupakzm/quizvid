@@ -51,10 +51,10 @@ Plans:
   1. The rendered video starts with a frame displaying the current category name
   2. The opening frame also displays the per-category post counter (e.g., "Science #12")
   3. The rest of the quiz video plays unchanged after the opening frame
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 03-01: TBD
+- [ ] 03-01-PLAN.md — Add preview frame rendering to C binary and preview injection to Python pipeline
 
 ## Progress
 
@@ -65,4 +65,4 @@ Phases execute in numeric order: 1 -> 2 -> 3
 |-------|----------------|--------|-----------|
 | 1. CI Compatibility | 1/1 | Complete   | 2026-04-01 |
 | 2. Quiz Deduplication | 1/1 | Complete   | 2026-04-01 |
-| 3. Category Preview Frame | 0/? | Not started | - |
+| 3. Category Preview Frame | 0/1 | Not started | - |
