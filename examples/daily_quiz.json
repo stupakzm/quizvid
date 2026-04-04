@@ -6,64 +6,64 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the capital of Japan?",
+      "question": "Which AI model released a major update in late 2023, significantly improving its capabilities?",
       "answers": [
-        "Kyoto",
-        "Osaka",
-        "Tokyo",
-        "Hiroshima"
+        "GPT-3",
+        "LaMDA",
+        "Claude 2",
+        "Gemini"
       ],
       "correct": [
-        2
+        3
       ]
     },
     {
-      "type": "standard",
-      "question": "Which continent is Egypt part of?",
+      "type": "truefalse",
+      "question": "The movie 'Oppenheimer' swept the major acting categories at the 2024 Oscars.",
       "answers": [
-        "Asia",
-        "Africa",
-        "Europe",
-        "Australia"
+        "True",
+        "False"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "truefalse",
-      "question": "The Amazon River is the longest river in the world.",
+      "type": "standard",
+      "question": "Which social media platform saw a surge in popularity for short-form video content with its Reels feature?",
       "answers": [
-        "True",
-        "False"
+        "TikTok",
+        "YouTube",
+        "Instagram",
+        "X (Twitter)"
       ],
       "correct": [
-        0
+        2
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are oceans?",
+      "question": "Which of these were trending TV shows or limited series in early 2024?",
       "answers": [
-        "Pacific",
-        "Atlantic",
-        "Mediterranean",
-        "Indian"
+        "The Bear",
+        "Squid Game",
+        "Fallout",
+        "The Last of Us"
       ],
       "correct": [
         0,
-        1,
+        2,
         3
       ]
     },
     {
       "type": "standard",
-      "question": "What is the highest mountain in the world?",
+      "question": "What popular viral challenge involved people acting like characters from a specific video game?",
       "answers": [
-        "K2",
-        "Kangchenjunga",
-        "Mount Everest",
-        "Lhotse"
+        "Ice Bucket",
+        "Harlem Shake",
+        "Among Us",
+        "Planking"
       ],
       "correct": [
         2
