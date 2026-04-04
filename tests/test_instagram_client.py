@@ -25,51 +25,57 @@ def _mock_response(status=200, json_data=None, raise_for_status=None):
     return mock
 
 
-def test_upload_video_no_existing_release(tmp_path):
+def _make_upload_mocks(branch_exists=False):
+    """Return (mock_get, mock_post, mock_patch) side_effects for upload_video_to_github."""
+    blob_resp = _mock_response(json_data={"sha": "blobsha123"})
+    tree_resp = _mock_response(json_data={"sha": "treesha456"})
+    commit_resp = _mock_response(json_data={"sha": "commitsha789"})
+    post_side_effects = [blob_resp, tree_resp, commit_resp]
+
+    # GET /git/ref/heads/video-release — exists or not
+    get_resp = _mock_response(status=200 if branch_exists else 404)
+
+    if branch_exists:
+        patch_resp = _mock_response(json_data={"ref": "refs/heads/video-release"})
+        return get_resp, post_side_effects, patch_resp
+    else:
+        create_ref_resp = _mock_response(json_data={"ref": "refs/heads/video-release"})
+        post_side_effects.append(create_ref_resp)
+        return get_resp, post_side_effects, None
+
+
+def test_upload_video_no_existing_branch(tmp_path):
     video = tmp_path / "quiz_video.mp4"
     video.write_bytes(b"video")
 
-    with patch.dict("os.environ", ENV):
-        with patch("instagram_client.requests.get") as mock_get, \
-             patch("instagram_client.requests.post") as mock_post, \
-             patch("instagram_client.requests.delete") as mock_delete:
+    get_resp, post_side_effects, _ = _make_upload_mocks(branch_exists=False)
 
-            # No existing release (404)
-            mock_get.return_value = _mock_response(status=404)
-            # Create release response, then asset upload response
-            mock_post.side_effect = [
-                _mock_response(
-                    json_data={
-                        "upload_url": "https://uploads.github.com/repos/user/quizvid/releases/1/assets{?name,label}",
-                        "id": 1,
-                    }
-                ),
-                _mock_response(json_data={"browser_download_url": "https://example.com/video.mp4"}),
-            ]
+    with patch.dict("os.environ", ENV):
+        with patch("instagram_client.requests.get", return_value=get_resp), \
+             patch("instagram_client.requests.post", side_effect=post_side_effects), \
+             patch("instagram_client.requests.patch") as mock_patch:
 
             url = instagram_client.upload_video_to_github(str(video))
 
-    assert url == "https://example.com/video.mp4"
-    mock_delete.assert_not_called()
+    assert url == "https://raw.githubusercontent.com/user/quizvid/commitsha789/quiz_video.mp4"
+    mock_patch.assert_not_called()
 
 
-def test_upload_video_deletes_existing_release(tmp_path):
+def test_upload_video_force_updates_existing_branch(tmp_path):
     video = tmp_path / "quiz_video.mp4"
     video.write_bytes(b"video")
 
-    with patch.dict("os.environ", ENV):
-        with patch("instagram_client.requests.get") as mock_get, \
-             patch("instagram_client.requests.post") as mock_post, \
-             patch("instagram_client.requests.delete"):
+    get_resp, post_side_effects, patch_resp = _make_upload_mocks(branch_exists=True)
 
-            mock_get.return_value = _mock_response(json_data={"id": 42})
-            mock_post.side_effect = [
-                _mock_response(json_data={
-                    "upload_url": "https://uploads.github.com/repos/user/quizvid/releases/2/assets{?name,label}",
-                }),
-                _mock_response(json_data={"browser_download_url": "https://example.com/v.mp4"}),
-            ]
-            instagram_client.upload_video_to_github(str(video))
+    with patch.dict("os.environ", ENV):
+        with patch("instagram_client.requests.get", return_value=get_resp), \
+             patch("instagram_client.requests.post", side_effect=post_side_effects), \
+             patch("instagram_client.requests.patch", return_value=patch_resp) as mock_patch:
+
+            url = instagram_client.upload_video_to_github(str(video))
+
+    assert url == "https://raw.githubusercontent.com/user/quizvid/commitsha789/quiz_video.mp4"
+    mock_patch.assert_called_once()
 
 
 def test_post_reel_success():
