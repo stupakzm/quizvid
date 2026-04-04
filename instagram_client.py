@@ -91,6 +91,7 @@ def post_reel(video_url, caption):
             "media_type": "REELS",
             "video_url": video_url,
             "caption": caption,
+            "share_to_feed": "true",
             "access_token": access_token,
         },
     )

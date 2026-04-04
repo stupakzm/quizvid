@@ -6,20 +6,43 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which AI model released a major update in late 2023, significantly improving its capabilities?",
+      "question": "Q?",
       "answers": [
-        "GPT-3",
-        "LaMDA",
-        "Claude 2",
-        "Gemini"
+        "A",
+        "B",
+        "C"
       ],
       "correct": [
-        3
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Q?",
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Q?",
+      "answers": [
+        "A",
+        "B",
+        "C"
+      ],
+      "correct": [
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The movie 'Oppenheimer' swept the major acting categories at the 2024 Oscars.",
+      "question": "Q?",
       "answers": [
         "True",
         "False"
@@ -29,43 +52,16 @@
       ]
     },
     {
-      "type": "standard",
-      "question": "Which social media platform saw a surge in popularity for short-form video content with its Reels feature?",
-      "answers": [
-        "TikTok",
-        "YouTube",
-        "Instagram",
-        "X (Twitter)"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
       "type": "multi",
-      "question": "Which of these were trending TV shows or limited series in early 2024?",
+      "question": "Q?",
       "answers": [
-        "The Bear",
-        "Squid Game",
-        "Fallout",
-        "The Last of Us"
+        "A",
+        "B",
+        "C",
+        "D"
       ],
       "correct": [
         0,
-        2,
-        3
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What popular viral challenge involved people acting like characters from a specific video game?",
-      "answers": [
-        "Ice Bucket",
-        "Harlem Shake",
-        "Among Us",
-        "Planking"
-      ],
-      "correct": [
         2
       ]
     }
