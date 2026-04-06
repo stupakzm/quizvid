@@ -1,68 +1,73 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Q?",
+      "question": "What is the chemical symbol for gold?",
       "answers": [
-        "A",
-        "B",
-        "C"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Q?",
-      "answers": [
-        "A",
-        "B",
-        "C"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Q?",
-      "answers": [
-        "A",
-        "B",
-        "C"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "truefalse",
-      "question": "Q?",
-      "answers": [
-        "True",
-        "False"
+        "Ag",
+        "Au",
+        "Fe",
+        "Cu"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "multi",
-      "question": "Q?",
+      "type": "truefalse",
+      "question": "The Earth revolves around the Sun.",
       "answers": [
-        "A",
-        "B",
-        "C",
-        "D"
+        "True",
+        "False"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Which gas do plants absorb from the atmosphere?",
+      "answers": [
+        "Oxygen",
+        "Nitrogen",
+        "Carbon dioxide",
+        "Methane"
+      ],
+      "correct": [
+        2
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these are planets in our solar system?",
+      "answers": [
+        "Mars",
+        "Pluto",
+        "Jupiter",
+        "Moon",
+        "Venus"
       ],
       "correct": [
         0,
-        2
+        2,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the powerhouse of the cell?",
+      "answers": [
+        "Nucleus",
+        "Mitochondrion",
+        "Ribosome",
+        "Golgi apparatus"
+      ],
+      "correct": [
+        1
       ]
     }
   ]
