@@ -1,25 +1,25 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What is the chemical symbol for gold?",
+      "question": "Which ancient civilization built Machu Picchu?",
       "answers": [
-        "Ag",
-        "Au",
-        "Fe",
-        "Cu"
+        "Maya",
+        "Aztec",
+        "Inca",
+        "Egyptian"
       ],
       "correct": [
-        1
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Earth revolves around the Sun.",
+      "question": "The Battle of Waterloo marked the end of Napoleon's reign.",
       "answers": [
         "True",
         "False"
@@ -29,42 +29,42 @@
       ]
     },
     {
-      "type": "standard",
-      "question": "Which gas do plants absorb from the atmosphere?",
-      "answers": [
-        "Oxygen",
-        "Nitrogen",
-        "Carbon dioxide",
-        "Methane"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
       "type": "multi",
-      "question": "Which of these are planets in our solar system?",
+      "question": "Which of these were major Silk Road cities?",
       "answers": [
-        "Mars",
-        "Pluto",
-        "Jupiter",
-        "Moon",
-        "Venus"
+        "Rome",
+        "Xi'an",
+        "Samarkand",
+        "Alexandria",
+        "Constantinople"
       ],
       "correct": [
-        0,
+        1,
         2,
         4
       ]
     },
     {
       "type": "standard",
-      "question": "What is the powerhouse of the cell?",
+      "question": "Who was the first Roman Emperor?",
       "answers": [
-        "Nucleus",
-        "Mitochondrion",
-        "Ribosome",
-        "Golgi apparatus"
+        "Julius Caesar",
+        "Augustus",
+        "Nero",
+        "Constantine"
+      ],
+      "correct": [
+        1
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What year did the Berlin Wall fall?",
+      "answers": [
+        "1985",
+        "1989",
+        "1991",
+        "1995"
       ],
       "correct": [
         1
