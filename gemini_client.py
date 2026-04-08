@@ -20,8 +20,9 @@ QUIZ_SCHEMA_EXAMPLE = """{
 
 FALLBACK_MODELS = [
     "gemini-2.5-flash-lite",
+    "gemini-3.1-flash-lite-preview",
     "gemini-2.5-flash",
-    "gemini-3.1-flash-lite",
+    "gemini-3-flash-preview",
 ]
 
 
@@ -115,7 +116,10 @@ def _parse_and_validate(text):
             if len(q["correct"]) == 1:
                 # Gemini sometimes generates multi with 1 correct — downgrade to standard
                 q["type"] = "standard"
-            elif not (2 <= len(q["correct"]) <= 3):
+            elif len(q["correct"]) > 3:
+                # Too many correct — keep first 3
+                q["correct"] = q["correct"][:3]
+            elif len(q["correct"]) == 0:
                 raise ValueError(
                     f"Question {i}: multi must have 2-3 correct"
                 )
