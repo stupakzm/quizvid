@@ -1,17 +1,17 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Which ancient civilization built Machu Picchu?",
+      "question": "What is the capital of Australia?",
       "answers": [
-        "Maya",
-        "Aztec",
-        "Inca",
-        "Egyptian"
+        "Sydney",
+        "Melbourne",
+        "Canberra",
+        "Brisbane"
       ],
       "correct": [
         2
@@ -19,7 +19,7 @@
     },
     {
       "type": "truefalse",
-      "question": "The Battle of Waterloo marked the end of Napoleon's reign.",
+      "question": "Mount Everest is the highest mountain in the world.",
       "answers": [
         "True",
         "False"
@@ -29,42 +29,42 @@
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these were major Silk Road cities?",
-      "answers": [
-        "Rome",
-        "Xi'an",
-        "Samarkand",
-        "Alexandria",
-        "Constantinople"
-      ],
-      "correct": [
-        1,
-        2,
-        4
-      ]
-    },
-    {
       "type": "standard",
-      "question": "Who was the first Roman Emperor?",
+      "question": "Which continent is home to the Sahara Desert?",
       "answers": [
-        "Julius Caesar",
-        "Augustus",
-        "Nero",
-        "Constantine"
+        "Asia",
+        "Africa",
+        "South America",
+        "Australia"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "standard",
-      "question": "What year did the Berlin Wall fall?",
+      "type": "multi",
+      "question": "Which of these are major oceans?",
       "answers": [
-        "1985",
-        "1989",
-        "1991",
-        "1995"
+        "Atlantic",
+        "Mediterranean",
+        "Pacific",
+        "Caribbean",
+        "Indian"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the longest river in South America?",
+      "answers": [
+        "Nile",
+        "Amazon",
+        "Congo",
+        "Yangtze"
       ],
       "correct": [
         1
