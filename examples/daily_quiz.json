@@ -1,28 +1,17 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What is the capital of Australia?",
+      "question": "Who holds the record for most Olympic gold medals?",
       "answers": [
-        "Sydney",
-        "Melbourne",
-        "Canberra",
-        "Brisbane"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
-      "type": "truefalse",
-      "question": "Mount Everest is the highest mountain in the world.",
-      "answers": [
-        "True",
-        "False"
+        "Michael Phelps",
+        "Usain Bolt",
+        "Simone Biles",
+        "Carl Lewis"
       ],
       "correct": [
         0
@@ -30,44 +19,55 @@
     },
     {
       "type": "standard",
-      "question": "Which continent is home to the Sahara Desert?",
+      "question": "Which country has won the most FIFA World Cups?",
       "answers": [
-        "Asia",
-        "Africa",
-        "South America",
-        "Australia"
+        "Germany",
+        "Italy",
+        "Brazil",
+        "Argentina"
+      ],
+      "correct": [
+        2
+      ]
+    },
+    {
+      "type": "truefalse",
+      "question": "Roger Federer has won more Grand Slam titles than Novak Djokovic.",
+      "answers": [
+        "True",
+        "False"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these are major oceans?",
+      "type": "standard",
+      "question": "What is the highest score possible in a single frame of ten-pin bowling?",
       "answers": [
-        "Atlantic",
-        "Mediterranean",
-        "Pacific",
-        "Caribbean",
-        "Indian"
+        "20",
+        "27",
+        "30",
+        "10"
+      ],
+      "correct": [
+        2
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these athletes are known for their achievements in basketball?",
+      "answers": [
+        "LeBron James",
+        "Tom Brady",
+        "Michael Jordan",
+        "Serena Williams",
+        "Kobe Bryant"
       ],
       "correct": [
         0,
         2,
         4
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What is the longest river in South America?",
-      "answers": [
-        "Nile",
-        "Amazon",
-        "Congo",
-        "Yangtze"
-      ],
-      "correct": [
-        1
       ]
     }
   ]
