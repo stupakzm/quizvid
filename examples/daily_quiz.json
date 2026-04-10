@@ -6,33 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Who holds the record for most Olympic gold medals?",
+      "question": "Who directed 'Pulp Fiction'?",
       "answers": [
-        "Michael Phelps",
-        "Usain Bolt",
-        "Simone Biles",
-        "Carl Lewis"
+        "Scorsese",
+        "Tarantino",
+        "Spielberg",
+        "Nolan"
       ],
       "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which country has won the most FIFA World Cups?",
-      "answers": [
-        "Germany",
-        "Italy",
-        "Brazil",
-        "Argentina"
-      ],
-      "correct": [
-        2
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "Roger Federer has won more Grand Slam titles than Novak Djokovic.",
+      "question": "'Avatar' grossed over $3 billion worldwide.",
       "answers": [
         "True",
         "False"
@@ -43,31 +30,42 @@
     },
     {
       "type": "standard",
-      "question": "What is the highest score possible in a single frame of ten-pin bowling?",
+      "question": "Which film won Best Picture Oscar in 2020?",
       "answers": [
-        "20",
-        "27",
-        "30",
-        "10"
+        "Parasite",
+        "Joker",
+        "1917",
+        "Once Upon a Time"
       ],
       "correct": [
-        2
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these athletes are known for their achievements in basketball?",
+      "question": "Which of these are cult classic sci-fi films?",
       "answers": [
-        "LeBron James",
-        "Tom Brady",
-        "Michael Jordan",
-        "Serena Williams",
-        "Kobe Bryant"
+        "Blade Runner",
+        "Star Wars",
+        "Donnie Darko",
+        "The Matrix"
       ],
       "correct": [
         0,
-        2,
-        4
+        2
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the highest-grossing film ever?",
+      "answers": [
+        "Avatar",
+        "Avengers: Endgame",
+        "Titanic",
+        "Star Wars: Force Awakens"
+      ],
+      "correct": [
+        0
       ]
     }
   ]
