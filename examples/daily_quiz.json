@@ -6,66 +6,66 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Who directed 'Pulp Fiction'?",
+      "question": "Which film won Best Picture at the 2024 Oscars?",
       "answers": [
-        "Scorsese",
-        "Tarantino",
-        "Spielberg",
-        "Nolan"
+        "Oppenheimer",
+        "Poor Things",
+        "Barbie",
+        "Killers of the Flower Moon"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "'Avatar' grossed over $3 billion worldwide.",
+      "question": "Taylor Swift's 'The Tortured Poets Department' broke Spotify's single-day streaming record?",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What AI model is ChatGPT based on?",
+      "answers": [
+        "DALL-E",
+        "GPT-3.5",
+        "Midjourney",
+        "LLaMA"
+      ],
+      "correct": [
         1
       ]
     },
     {
-      "type": "standard",
-      "question": "Which film won Best Picture Oscar in 2020?",
-      "answers": [
-        "Parasite",
-        "Joker",
-        "1917",
-        "Once Upon a Time"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
       "type": "multi",
-      "question": "Which of these are cult classic sci-fi films?",
+      "question": "Which of these creators saw significant subscriber milestones recently?",
       "answers": [
-        "Blade Runner",
-        "Star Wars",
-        "Donnie Darko",
-        "The Matrix"
+        "MrBeast",
+        "Emma Chamberlain",
+        "Addison Rae",
+        "Dream"
       ],
       "correct": [
         0,
-        2
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "What is the highest-grossing film ever?",
+      "question": "What was a major viral challenge on TikTok in early 2024?",
       "answers": [
-        "Avatar",
-        "Avengers: Endgame",
-        "Titanic",
-        "Star Wars: Force Awakens"
+        "Ice Bucket",
+        "Plank",
+        "Grimace Shake",
+        "Bottle Flip"
       ],
       "correct": [
-        0
+        2
       ]
     }
   ]
