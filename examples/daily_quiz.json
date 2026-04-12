@@ -6,36 +6,36 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which film won Best Picture at the 2024 Oscars?",
+      "question": "Who co-founded Apple Computer in 1976?",
       "answers": [
-        "Oppenheimer",
-        "Poor Things",
-        "Barbie",
-        "Killers of the Flower Moon"
+        "Bill Gates",
+        "Steve Jobs",
+        "Mark Zuckerberg",
+        "Larry Page"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "Taylor Swift's 'The Tortured Poets Department' broke Spotify's single-day streaming record?",
+      "question": "The first widely used web browser was Netscape Navigator.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "standard",
-      "question": "What AI model is ChatGPT based on?",
+      "question": "What is the primary function of RAM?",
       "answers": [
-        "DALL-E",
-        "GPT-3.5",
-        "Midjourney",
-        "LLaMA"
+        "Long-term storage",
+        "Temporary data",
+        "Processor speed",
+        "Network connection"
       ],
       "correct": [
         1
@@ -43,29 +43,31 @@
     },
     {
       "type": "multi",
-      "question": "Which of these creators saw significant subscriber milestones recently?",
+      "question": "Which of these are popular programming languages?",
       "answers": [
-        "MrBeast",
-        "Emma Chamberlain",
-        "Addison Rae",
-        "Dream"
+        "Python",
+        "HTML",
+        "Java",
+        "CSS",
+        "SQL"
       ],
       "correct": [
         0,
-        3
+        2,
+        4
       ]
     },
     {
       "type": "standard",
-      "question": "What was a major viral challenge on TikTok in early 2024?",
+      "question": "What does CPU stand for?",
       "answers": [
-        "Ice Bucket",
-        "Plank",
-        "Grimace Shake",
-        "Bottle Flip"
+        "Central Processing Unit",
+        "Computer Power Unit",
+        "Core Programming Utility",
+        "Control Program Unit"
       ],
       "correct": [
-        2
+        0
       ]
     }
   ]
