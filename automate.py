@@ -24,7 +24,7 @@ _load_env_local()
 
 from categories import SCHEDULE
 from counters import get_post_number, increment
-from dedup import is_duplicate, record_quiz, get_question_texts
+from dedup import is_duplicate, record_quiz, get_question_texts, get_past_questions
 from gemini_client import generate_quiz, FALLBACK_MODELS
 from caption import build_caption
 from video_renderer import compile_quizvid, render_video
@@ -69,11 +69,15 @@ def main():
 
     # 1. Generate quiz (try primary model twice, then fallbacks once each)
     print("Generating quiz questions...")
+    past_questions = get_past_questions(category["name"])
+    if past_questions:
+        print(f"Avoiding {len(past_questions)} past questions for {category['name']}.")
+
     quiz_data = None
     attempts = [FALLBACK_MODELS[0], FALLBACK_MODELS[0]] + FALLBACK_MODELS[1:]
     for i, model in enumerate(attempts):
         try:
-            quiz_data = generate_quiz(category, model=model)
+            quiz_data = generate_quiz(category, model=model, avoid_questions=past_questions or None)
             break
         except Exception as e:
             print(f"Attempt {i + 1} ({model}) failed: {e}")
@@ -90,7 +94,7 @@ def main():
         if not is_duplicate(quiz_data):
             break
         print(f"Duplicate detected (retry {retry + 1}/{MAX_DEDUP_RETRIES}), regenerating...")
-        avoid = get_question_texts(quiz_data)
+        avoid = past_questions + get_question_texts(quiz_data)
         quiz_data = generate_quiz(category, model=FALLBACK_MODELS[0], avoid_questions=avoid)
     else:
         if is_duplicate(quiz_data):

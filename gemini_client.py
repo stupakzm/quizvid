@@ -52,9 +52,11 @@ def generate_quiz(category, model=None, avoid_questions=None):
 
     if avoid_questions:
         prompt += (
-            "\n\nIMPORTANT: Do NOT reuse any of these questions — "
-            "generate completely different ones:\n"
+            "\n\nCRITICAL: The following questions have already been used. "
+            "You MUST NOT reuse or rephrase any of them. "
+            "Pick entirely different topics, facts, and angles:\n"
             + "\n".join(f"- {q}" for q in avoid_questions)
+            + "\n\nGenerate questions about topics NOT covered by the list above."
         )
 
     response = client.models.generate_content(model=model, contents=prompt)

@@ -59,3 +59,14 @@ def record_quiz(quiz_data, category_name):
 def get_question_texts(quiz_data):
     """Extract question text strings for avoid_questions retry prompt."""
     return [q["question"] for q in quiz_data["questions"]]
+
+
+def get_past_questions(category_name=None):
+    """Return all recorded question texts, optionally filtered by category."""
+    posted = load_posted_quizzes()
+    return [
+        q
+        for entry in posted
+        if (category_name is None or entry.get("category") == category_name)
+        for q in entry.get("questions", [])
+    ]
