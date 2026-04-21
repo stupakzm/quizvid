@@ -1,1 +1,13 @@
-[]
+[
+  {
+    "questions": [
+      "Who was the first Roman Emperor?",
+      "The Magna Carta was signed in which year?",
+      "The Great Wall of China was built to keep out the Mongols.",
+      "Which of the following were major civilizations of ancient Mesopotamia?",
+      "Who is credited with discovering America for Europeans in 1492?"
+    ],
+    "category": "History",
+    "date": "2026-04-21"
+  }
+]

@@ -1,17 +1,30 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Who co-founded Apple Computer in 1976?",
+      "question": "Who was the first Roman Emperor?",
       "answers": [
-        "Bill Gates",
-        "Steve Jobs",
-        "Mark Zuckerberg",
-        "Larry Page"
+        "Julius Caesar",
+        "Augustus",
+        "Nero",
+        "Constantine"
+      ],
+      "correct": [
+        1
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "The Magna Carta was signed in which year?",
+      "answers": [
+        "1066",
+        "1215",
+        "1492",
+        "1776"
       ],
       "correct": [
         1
@@ -19,55 +32,40 @@
     },
     {
       "type": "truefalse",
-      "question": "The first widely used web browser was Netscape Navigator.",
+      "question": "The Great Wall of China was built to keep out the Mongols.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        1
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What is the primary function of RAM?",
-      "answers": [
-        "Long-term storage",
-        "Temporary data",
-        "Processor speed",
-        "Network connection"
-      ],
-      "correct": [
-        1
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are popular programming languages?",
+      "question": "Which of the following were major civilizations of ancient Mesopotamia?",
       "answers": [
-        "Python",
-        "HTML",
-        "Java",
-        "CSS",
-        "SQL"
+        "Sumerians",
+        "Egyptians",
+        "Babylonians",
+        "Greeks"
       ],
       "correct": [
         0,
-        2,
-        4
+        2
       ]
     },
     {
       "type": "standard",
-      "question": "What does CPU stand for?",
+      "question": "Who is credited with discovering America for Europeans in 1492?",
       "answers": [
-        "Central Processing Unit",
-        "Computer Power Unit",
-        "Core Programming Utility",
-        "Control Program Unit"
+        "Ferdinand Magellan",
+        "Marco Polo",
+        "Christopher Columbus",
+        "Vasco da Gama"
       ],
       "correct": [
-        0
+        2
       ]
     }
   ]
