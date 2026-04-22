@@ -89,15 +89,17 @@ def main():
         sys.exit(1)
 
     # 1b. Dedup check — regenerate if duplicate (per D-04, D-05, D-06)
-    MAX_DEDUP_RETRIES = 3
+    MAX_DEDUP_RETRIES = 5
+    accumulated_avoid = list(past_questions)
     for retry in range(MAX_DEDUP_RETRIES):
-        if not is_duplicate(quiz_data):
+        if not is_duplicate(quiz_data, category_name=category["name"]):
             break
         print(f"Duplicate detected (retry {retry + 1}/{MAX_DEDUP_RETRIES}), regenerating...")
-        avoid = past_questions + get_question_texts(quiz_data)
-        quiz_data = generate_quiz(category, model=FALLBACK_MODELS[0], avoid_questions=avoid)
+        accumulated_avoid += get_question_texts(quiz_data)
+        dedup_model = FALLBACK_MODELS[2]  # escalate to gemini-2.5-flash for retries
+        quiz_data = generate_quiz(category, model=dedup_model, avoid_questions=accumulated_avoid)
     else:
-        if is_duplicate(quiz_data):
+        if is_duplicate(quiz_data, category_name=category["name"]):
             print("All dedup retries exhausted — quiz is still a duplicate. Aborting.")
             sys.exit(1)
 
