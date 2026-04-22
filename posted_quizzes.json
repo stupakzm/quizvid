@@ -9,5 +9,16 @@
     ],
     "category": "History",
     "date": "2026-04-21"
+  },
+  {
+    "questions": [
+      "What is the capital of Australia?",
+      "Mount Everest is the tallest mountain in Africa.",
+      "Which of these countries are located in South America?",
+      "Which ocean is the largest by area?",
+      "Which continent has the most countries?"
+    ],
+    "category": "Geography",
+    "date": "2026-04-22"
   }
 ]

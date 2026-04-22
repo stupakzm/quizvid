@@ -6,66 +6,68 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Who was the first Roman Emperor?",
+      "question": "What is the capital of Australia?",
       "answers": [
-        "Julius Caesar",
-        "Augustus",
-        "Nero",
-        "Constantine"
+        "Sydney",
+        "Melbourne",
+        "Canberra",
+        "Brisbane"
       ],
       "correct": [
-        1
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "The Magna Carta was signed in which year?",
-      "answers": [
-        "1066",
-        "1215",
-        "1492",
-        "1776"
-      ],
-      "correct": [
-        1
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Great Wall of China was built to keep out the Mongols.",
+      "question": "Mount Everest is the tallest mountain in Africa.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "multi",
-      "question": "Which of the following were major civilizations of ancient Mesopotamia?",
+      "question": "Which of these countries are located in South America?",
       "answers": [
-        "Sumerians",
-        "Egyptians",
-        "Babylonians",
-        "Greeks"
+        "Brazil",
+        "India",
+        "Argentina",
+        "Canada",
+        "Chile"
       ],
       "correct": [
         0,
-        2
+        2,
+        4
       ]
     },
     {
       "type": "standard",
-      "question": "Who is credited with discovering America for Europeans in 1492?",
+      "question": "Which ocean is the largest by area?",
       "answers": [
-        "Ferdinand Magellan",
-        "Marco Polo",
-        "Christopher Columbus",
-        "Vasco da Gama"
+        "Atlantic",
+        "Indian",
+        "Arctic",
+        "Pacific"
       ],
       "correct": [
-        2
+        3
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Which continent has the most countries?",
+      "answers": [
+        "Asia",
+        "Africa",
+        "Europe",
+        "North America"
+      ],
+      "correct": [
+        1
       ]
     }
   ]
