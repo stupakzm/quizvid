@@ -20,5 +20,16 @@
     ],
     "category": "Geography",
     "date": "2026-04-22"
+  },
+  {
+    "questions": [
+      "Which country has won the most Olympic medals overall?",
+      "Michael Jordan played for the Chicago Bulls for his entire NBA career.",
+      "In which year were the first modern Olympic Games held?",
+      "Which of these athletes are considered tennis legends?",
+      "Who holds the record for most Grand Slam singles titles in men's tennis?"
+    ],
+    "category": "Sports",
+    "date": "2026-04-23"
   }
 ]

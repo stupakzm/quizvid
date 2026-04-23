@@ -6,12 +6,12 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the capital of Australia?",
+      "question": "Which country has won the most Olympic medals overall?",
       "answers": [
-        "Sydney",
-        "Melbourne",
-        "Canberra",
-        "Brisbane"
+        "China",
+        "Russia",
+        "USA",
+        "Germany"
       ],
       "correct": [
         2
@@ -19,7 +19,7 @@
     },
     {
       "type": "truefalse",
-      "question": "Mount Everest is the tallest mountain in Africa.",
+      "question": "Michael Jordan played for the Chicago Bulls for his entire NBA career.",
       "answers": [
         "True",
         "False"
@@ -29,45 +29,45 @@
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these countries are located in South America?",
+      "type": "standard",
+      "question": "In which year were the first modern Olympic Games held?",
       "answers": [
-        "Brazil",
-        "India",
-        "Argentina",
-        "Canada",
-        "Chile"
+        "1892",
+        "1900",
+        "1896",
+        "1904"
+      ],
+      "correct": [
+        2
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these athletes are considered tennis legends?",
+      "answers": [
+        "Roger Federer",
+        "Serena Williams",
+        "Lionel Messi",
+        "Usain Bolt",
+        "Rafael Nadal"
       ],
       "correct": [
         0,
-        2,
+        1,
         4
       ]
     },
     {
       "type": "standard",
-      "question": "Which ocean is the largest by area?",
+      "question": "Who holds the record for most Grand Slam singles titles in men's tennis?",
       "answers": [
-        "Atlantic",
-        "Indian",
-        "Arctic",
-        "Pacific"
+        "Roger Federer",
+        "Rafael Nadal",
+        "Novak Djokovic",
+        "Pete Sampras"
       ],
       "correct": [
-        3
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which continent has the most countries?",
-      "answers": [
-        "Asia",
-        "Africa",
-        "Europe",
-        "North America"
-      ],
-      "correct": [
-        1
+        2
       ]
     }
   ]
