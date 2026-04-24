@@ -31,5 +31,16 @@
     ],
     "category": "Sports",
     "date": "2026-04-23"
+  },
+  {
+    "questions": [
+      "Which director has won the most Best Director Oscars?",
+      "The movie 'Parasite' was the first non-English language film to win Best Picture at the Oscars.",
+      "What is the highest-grossing film of all time (unadjusted for inflation)?",
+      "Which of these are iconic quotes from 'The Godfather'?",
+      "Who directed the science fiction classic '2001: A Space Odyssey'?"
+    ],
+    "category": "Movies",
+    "date": "2026-04-24"
   }
 ]

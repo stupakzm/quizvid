@@ -1,17 +1,17 @@
 {
   "config": {
     "question_duration": 10,
-    "reveal_duration": 3
+    "reveal_duration": 5
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Which country has won the most Olympic medals overall?",
+      "question": "Which director has won the most Best Director Oscars?",
       "answers": [
-        "China",
-        "Russia",
-        "USA",
-        "Germany"
+        "Steven Spielberg",
+        "Alfred Hitchcock",
+        "John Ford",
+        "Quentin Tarantino"
       ],
       "correct": [
         2
@@ -19,10 +19,36 @@
     },
     {
       "type": "truefalse",
-      "question": "Michael Jordan played for the Chicago Bulls for his entire NBA career.",
+      "question": "The movie 'Parasite' was the first non-English language film to win Best Picture at the Oscars.",
       "answers": [
         "True",
         "False"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the highest-grossing film of all time (unadjusted for inflation)?",
+      "answers": [
+        "Avatar",
+        "Avengers: Endgame",
+        "Titanic",
+        "Star Wars: Force Awakens"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Which of these are iconic quotes from 'The Godfather'?",
+      "answers": [
+        "Here's Johnny!",
+        "I'm gonna make him an offer he can't refuse.",
+        "May the Force be with you.",
+        "You talkin' to me?"
       ],
       "correct": [
         1
@@ -30,41 +56,12 @@
     },
     {
       "type": "standard",
-      "question": "In which year were the first modern Olympic Games held?",
+      "question": "Who directed the science fiction classic '2001: A Space Odyssey'?",
       "answers": [
-        "1892",
-        "1900",
-        "1896",
-        "1904"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
-      "type": "multi",
-      "question": "Which of these athletes are considered tennis legends?",
-      "answers": [
-        "Roger Federer",
-        "Serena Williams",
-        "Lionel Messi",
-        "Usain Bolt",
-        "Rafael Nadal"
-      ],
-      "correct": [
-        0,
-        1,
-        4
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Who holds the record for most Grand Slam singles titles in men's tennis?",
-      "answers": [
-        "Roger Federer",
-        "Rafael Nadal",
-        "Novak Djokovic",
-        "Pete Sampras"
+        "George Lucas",
+        "Ridley Scott",
+        "Stanley Kubrick",
+        "Christopher Nolan"
       ],
       "correct": [
         2
