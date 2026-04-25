@@ -1,25 +1,25 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 5
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Which director has won the most Best Director Oscars?",
+      "question": "Which film won Best Picture at the 96th Academy Awards?",
       "answers": [
-        "Steven Spielberg",
-        "Alfred Hitchcock",
-        "John Ford",
-        "Quentin Tarantino"
+        "Oppenheimer",
+        "Barbie",
+        "Poor Things",
+        "Killers of the Flower Moon"
       ],
       "correct": [
-        2
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The movie 'Parasite' was the first non-English language film to win Best Picture at the Oscars.",
+      "question": "The latest iPhone model features a periscope lens for enhanced zoom.",
       "answers": [
         "True",
         "False"
@@ -30,41 +30,44 @@
     },
     {
       "type": "standard",
-      "question": "What is the highest-grossing film of all time (unadjusted for inflation)?",
+      "question": "What AI model, released by Google, is known for advanced multimodal capabilities?",
       "answers": [
-        "Avatar",
-        "Avengers: Endgame",
-        "Titanic",
-        "Star Wars: Force Awakens"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which of these are iconic quotes from 'The Godfather'?",
-      "answers": [
-        "Here's Johnny!",
-        "I'm gonna make him an offer he can't refuse.",
-        "May the Force be with you.",
-        "You talkin' to me?"
+        "GPT-4",
+        "Gemini",
+        "Claude 3",
+        "Llama 3"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "standard",
-      "question": "Who directed the science fiction classic '2001: A Space Odyssey'?",
+      "type": "multi",
+      "question": "Which of these artists had multiple wins at the 2024 Grammy Awards?",
       "answers": [
-        "George Lucas",
-        "Ridley Scott",
-        "Stanley Kubrick",
-        "Christopher Nolan"
+        "Taylor Swift",
+        "Billie Eilish",
+        "SZA",
+        "Olivia Rodrigo",
+        "Travis Scott"
       ],
       "correct": [
+        0,
+        1,
         2
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What viral TikTok creator recently surpassed 200 million followers?",
+      "answers": [
+        "MrBeast",
+        "Charli D'Amelio",
+        "Khaby Lame",
+        "Addison Rae"
+      ],
+      "correct": [
+        0
       ]
     }
   ]

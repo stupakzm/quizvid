@@ -42,5 +42,16 @@
     ],
     "category": "Movies",
     "date": "2026-04-24"
+  },
+  {
+    "questions": [
+      "Which film won Best Picture at the 96th Academy Awards?",
+      "The latest iPhone model features a periscope lens for enhanced zoom.",
+      "What AI model, released by Google, is known for advanced multimodal capabilities?",
+      "Which of these artists had multiple wins at the 2024 Grammy Awards?",
+      "What viral TikTok creator recently surpassed 200 million followers?"
+    ],
+    "category": "Trends",
+    "date": "2026-04-25"
   }
 ]
