@@ -53,5 +53,16 @@
     ],
     "category": "Trends",
     "date": "2026-04-25"
+  },
+  {
+    "questions": [
+      "Who co-founded Apple Inc. with Steve Jobs and Ronald Wayne?",
+      "The first widely successful graphical web browser was Mosaic.",
+      "Which programming language is known for its use in web development, especially on the frontend?",
+      "Which of these are fundamental data structures?",
+      "What does CPU stand for?"
+    ],
+    "category": "Tech",
+    "date": "2026-04-26"
   }
 ]
