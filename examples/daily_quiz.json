@@ -1,25 +1,25 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Who co-founded Apple Inc. with Steve Jobs and Ronald Wayne?",
+      "question": "What is the chemical symbol for gold?",
       "answers": [
-        "Bill Gates",
-        "Steve Wozniak",
-        "Mark Zuckerberg",
-        "Larry Page"
+        "Au",
+        "Ag",
+        "Fe",
+        "Pb"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The first widely successful graphical web browser was Mosaic.",
+      "question": "The Earth revolves around the Sun.",
       "answers": [
         "True",
         "False"
@@ -30,45 +30,44 @@
     },
     {
       "type": "standard",
-      "question": "Which programming language is known for its use in web development, especially on the frontend?",
+      "question": "Which planet is known as the Red Planet?",
       "answers": [
-        "Python",
-        "Java",
-        "JavaScript",
-        "C++"
+        "Venus",
+        "Mars",
+        "Jupiter",
+        "Saturn"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are fundamental data structures?",
+      "question": "Which of the following are states of matter?",
       "answers": [
-        "Array",
-        "Compiler",
-        "Linked List",
-        "Database",
-        "Stack",
-        "Operating System"
+        "Solid",
+        "Liquid",
+        "Gas",
+        "Plasma",
+        "Energy"
       ],
       "correct": [
         0,
-        2,
-        4
+        1,
+        2
       ]
     },
     {
       "type": "standard",
-      "question": "What does CPU stand for?",
+      "question": "What force keeps us on the ground?",
       "answers": [
-        "Central Processing Unit",
-        "Computer Personal Unit",
-        "Core Processing Unit",
-        "Central Performance Unit"
+        "Magnetism",
+        "Friction",
+        "Gravity",
+        "Inertia"
       ],
       "correct": [
-        0
+        2
       ]
     }
   ]

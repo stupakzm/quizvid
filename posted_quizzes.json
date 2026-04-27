@@ -64,5 +64,16 @@
     ],
     "category": "Tech",
     "date": "2026-04-26"
+  },
+  {
+    "questions": [
+      "What is the chemical symbol for gold?",
+      "The Earth revolves around the Sun.",
+      "Which planet is known as the Red Planet?",
+      "Which of the following are states of matter?",
+      "What force keeps us on the ground?"
+    ],
+    "category": "Science",
+    "date": "2026-04-27"
   }
 ]
