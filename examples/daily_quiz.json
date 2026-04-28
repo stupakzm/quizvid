@@ -1,25 +1,25 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What is the chemical symbol for gold?",
+      "question": "What ancient civilization built Machu Picchu?",
       "answers": [
-        "Au",
-        "Ag",
-        "Fe",
-        "Pb"
+        "Maya",
+        "Inca",
+        "Aztec",
+        "Olmec"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Earth revolves around the Sun.",
+      "question": "The Battle of Thermopylae involved Spartans against the Persians.",
       "answers": [
         "True",
         "False"
@@ -30,44 +30,44 @@
     },
     {
       "type": "standard",
-      "question": "Which planet is known as the Red Planet?",
+      "question": "Who was the last Pharaoh of Egypt?",
       "answers": [
-        "Venus",
-        "Mars",
-        "Jupiter",
-        "Saturn"
+        "Ramses II",
+        "Tutankhamun",
+        "Cleopatra VII",
+        "Hatshepsut"
       ],
       "correct": [
-        1
+        2
       ]
     },
     {
       "type": "multi",
-      "question": "Which of the following are states of matter?",
+      "question": "Which of these were key figures in the French Revolution?",
       "answers": [
-        "Solid",
-        "Liquid",
-        "Gas",
-        "Plasma",
-        "Energy"
+        "Maximilien Robespierre",
+        "Napoleon Bonaparte",
+        "King Louis XVI",
+        "Marie Antoinette",
+        "Marquis de Lafayette"
       ],
       "correct": [
         0,
-        1,
-        2
+        2,
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "What force keeps us on the ground?",
+      "question": "The Cold War primarily involved a rivalry between which two superpowers?",
       "answers": [
-        "Magnetism",
-        "Friction",
-        "Gravity",
-        "Inertia"
+        "UK and France",
+        "USA and Soviet Union",
+        "Germany and Japan",
+        "China and India"
       ],
       "correct": [
-        2
+        1
       ]
     }
   ]

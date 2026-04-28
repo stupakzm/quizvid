@@ -75,5 +75,16 @@
     ],
     "category": "Science",
     "date": "2026-04-27"
+  },
+  {
+    "questions": [
+      "What ancient civilization built Machu Picchu?",
+      "The Battle of Thermopylae involved Spartans against the Persians.",
+      "Who was the last Pharaoh of Egypt?",
+      "Which of these were key figures in the French Revolution?",
+      "The Cold War primarily involved a rivalry between which two superpowers?"
+    ],
+    "category": "History",
+    "date": "2026-04-28"
   }
 ]
