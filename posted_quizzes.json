@@ -86,5 +86,16 @@
     ],
     "category": "History",
     "date": "2026-04-28"
+  },
+  {
+    "questions": [
+      "What is the longest river in Africa?",
+      "The Amazon rainforest is primarily located in Africa.",
+      "Which of these are major mountain ranges in Asia?",
+      "Which country is known as the 'Land of a Thousand Lakes'?",
+      "What is the smallest continent by land area?"
+    ],
+    "category": "Geography",
+    "date": "2026-04-29"
   }
 ]

@@ -6,12 +6,12 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What ancient civilization built Machu Picchu?",
+      "question": "What is the longest river in Africa?",
       "answers": [
-        "Maya",
-        "Inca",
-        "Aztec",
-        "Olmec"
+        "Congo",
+        "Nile",
+        "Niger",
+        "Zambezi"
       ],
       "correct": [
         1
@@ -19,55 +19,54 @@
     },
     {
       "type": "truefalse",
-      "question": "The Battle of Thermopylae involved Spartans against the Persians.",
+      "question": "The Amazon rainforest is primarily located in Africa.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
+        1
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these are major mountain ranges in Asia?",
+      "answers": [
+        "Andes",
+        "Himalayas",
+        "Alps",
+        "Karakoram",
+        "Rockies"
+      ],
+      "correct": [
+        1,
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "Who was the last Pharaoh of Egypt?",
+      "question": "Which country is known as the 'Land of a Thousand Lakes'?",
       "answers": [
-        "Ramses II",
-        "Tutankhamun",
-        "Cleopatra VII",
-        "Hatshepsut"
+        "Sweden",
+        "Norway",
+        "Finland",
+        "Estonia"
       ],
       "correct": [
         2
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these were key figures in the French Revolution?",
-      "answers": [
-        "Maximilien Robespierre",
-        "Napoleon Bonaparte",
-        "King Louis XVI",
-        "Marie Antoinette",
-        "Marquis de Lafayette"
-      ],
-      "correct": [
-        0,
-        2,
-        3
-      ]
-    },
-    {
       "type": "standard",
-      "question": "The Cold War primarily involved a rivalry between which two superpowers?",
+      "question": "What is the smallest continent by land area?",
       "answers": [
-        "UK and France",
-        "USA and Soviet Union",
-        "Germany and Japan",
-        "China and India"
+        "Antarctica",
+        "Europe",
+        "Australia",
+        "South America"
       ],
       "correct": [
-        1
+        2
       ]
     }
   ]
