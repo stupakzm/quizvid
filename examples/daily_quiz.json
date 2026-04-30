@@ -1,69 +1,70 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What is the longest river in Africa?",
+      "question": "Which sport is known as the 'King of Sports'?",
       "answers": [
-        "Congo",
-        "Nile",
-        "Niger",
-        "Zambezi"
-      ],
-      "correct": [
-        1
-      ]
-    },
-    {
-      "type": "truefalse",
-      "question": "The Amazon rainforest is primarily located in Africa.",
-      "answers": [
-        "True",
-        "False"
-      ],
-      "correct": [
-        1
-      ]
-    },
-    {
-      "type": "multi",
-      "question": "Which of these are major mountain ranges in Asia?",
-      "answers": [
-        "Andes",
-        "Himalayas",
-        "Alps",
-        "Karakoram",
-        "Rockies"
-      ],
-      "correct": [
-        1,
-        3
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which country is known as the 'Land of a Thousand Lakes'?",
-      "answers": [
-        "Sweden",
-        "Norway",
-        "Finland",
-        "Estonia"
+        "Boxing",
+        "Football",
+        "Athletics",
+        "Swimming"
       ],
       "correct": [
         2
       ]
     },
     {
-      "type": "standard",
-      "question": "What is the smallest continent by land area?",
+      "type": "truefalse",
+      "question": "The first FIFA World Cup was held in 1930.",
       "answers": [
-        "Antarctica",
-        "Europe",
-        "Australia",
-        "South America"
+        "True",
+        "False"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these are iconic F1 constructors?",
+      "answers": [
+        "Ferrari",
+        "Williams",
+        "Red Bull",
+        "McLaren",
+        "Mercedes"
+      ],
+      "correct": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Who holds the NFL record for most career rushing yards?",
+      "answers": [
+        "Emmitt Smith",
+        "Walter Payton",
+        "Barry Sanders",
+        "Adrian Peterson"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "In which sport would you perform a slam dunk?",
+      "answers": [
+        "Soccer",
+        "Volleyball",
+        "Basketball",
+        "Handball"
       ],
       "correct": [
         2

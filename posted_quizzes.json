@@ -97,5 +97,16 @@
     ],
     "category": "Geography",
     "date": "2026-04-29"
+  },
+  {
+    "questions": [
+      "Which sport is known as the 'King of Sports'?",
+      "The first FIFA World Cup was held in 1930.",
+      "Which of these are iconic F1 constructors?",
+      "Who holds the NFL record for most career rushing yards?",
+      "In which sport would you perform a slam dunk?"
+    ],
+    "category": "Sports",
+    "date": "2026-04-30"
   }
 ]
