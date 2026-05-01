@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which sport is known as the 'King of Sports'?",
+      "question": "Which actor starred in both 'The Dark Knight' and 'Inception'?",
       "answers": [
-        "Boxing",
-        "Football",
-        "Athletics",
-        "Swimming"
+        "Christian Bale",
+        "Leonardo DiCaprio",
+        "Michael Caine",
+        "Tom Hardy"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "The first FIFA World Cup was held in 1930.",
+      "question": "The film 'E.T. the Extra-Terrestrial' was originally titled 'A Boy's Life'.",
       "answers": [
         "True",
         "False"
@@ -29,45 +29,45 @@
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these are iconic F1 constructors?",
-      "answers": [
-        "Ferrari",
-        "Williams",
-        "Red Bull",
-        "McLaren",
-        "Mercedes"
-      ],
-      "correct": [
-        0,
-        1,
-        3
-      ]
-    },
-    {
       "type": "standard",
-      "question": "Who holds the NFL record for most career rushing yards?",
+      "question": "What is the primary genre of the film 'Drive'?",
       "answers": [
-        "Emmitt Smith",
-        "Walter Payton",
-        "Barry Sanders",
-        "Adrian Peterson"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "In which sport would you perform a slam dunk?",
-      "answers": [
-        "Soccer",
-        "Volleyball",
-        "Basketball",
-        "Handball"
+        "Horror",
+        "Comedy",
+        "Neo-noir crime",
+        "Romance"
       ],
       "correct": [
         2
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these are considered cult classics from the 1970s?",
+      "answers": [
+        "The Rocky Horror Picture Show",
+        "Star Wars",
+        "Harold and Maude",
+        "Jaws",
+        "A Clockwork Orange"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Which studio produced the 'Harry Potter' film series?",
+      "answers": [
+        "Universal",
+        "Warner Bros.",
+        "Paramount",
+        "Disney"
+      ],
+      "correct": [
+        1
       ]
     }
   ]

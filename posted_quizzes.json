@@ -108,5 +108,16 @@
     ],
     "category": "Sports",
     "date": "2026-04-30"
+  },
+  {
+    "questions": [
+      "Which actor starred in both 'The Dark Knight' and 'Inception'?",
+      "The film 'E.T. the Extra-Terrestrial' was originally titled 'A Boy's Life'.",
+      "What is the primary genre of the film 'Drive'?",
+      "Which of these are considered cult classics from the 1970s?",
+      "Which studio produced the 'Harry Potter' film series?"
+    ],
+    "category": "Movies",
+    "date": "2026-05-01"
   }
 ]
