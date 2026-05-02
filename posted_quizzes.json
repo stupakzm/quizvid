@@ -119,5 +119,16 @@
     ],
     "category": "Movies",
     "date": "2026-05-01"
+  },
+  {
+    "questions": [
+      "Which show dominated the 2024 Emmy Awards for Outstanding Drama Series?",
+      "The popular AI chatbot, ChatGPT, has recently been updated to include voice capabilities.",
+      "What video game console recently received a significant price drop?",
+      "Which of the following are popular internet memes that gained traction in early 2024?",
+      "What new streaming service launched in late 2023, merging content from HBO Max and Discovery+?"
+    ],
+    "category": "Trends",
+    "date": "2026-05-02"
   }
 ]

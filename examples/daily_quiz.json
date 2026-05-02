@@ -6,12 +6,12 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which actor starred in both 'The Dark Knight' and 'Inception'?",
+      "question": "Which show dominated the 2024 Emmy Awards for Outstanding Drama Series?",
       "answers": [
-        "Christian Bale",
-        "Leonardo DiCaprio",
-        "Michael Caine",
-        "Tom Hardy"
+        "The Bear",
+        "Succession",
+        "The Last of Us",
+        "House of the Dragon"
       ],
       "correct": [
         1
@@ -19,7 +19,7 @@
     },
     {
       "type": "truefalse",
-      "question": "The film 'E.T. the Extra-Terrestrial' was originally titled 'A Boy's Life'.",
+      "question": "The popular AI chatbot, ChatGPT, has recently been updated to include voice capabilities.",
       "answers": [
         "True",
         "False"
@@ -30,44 +30,42 @@
     },
     {
       "type": "standard",
-      "question": "What is the primary genre of the film 'Drive'?",
+      "question": "What video game console recently received a significant price drop?",
       "answers": [
-        "Horror",
-        "Comedy",
-        "Neo-noir crime",
-        "Romance"
+        "PlayStation 5",
+        "Xbox Series X",
+        "Nintendo Switch",
+        "Steam Deck"
       ],
       "correct": [
-        2
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are considered cult classics from the 1970s?",
+      "question": "Which of the following are popular internet memes that gained traction in early 2024?",
       "answers": [
-        "The Rocky Horror Picture Show",
-        "Star Wars",
-        "Harold and Maude",
-        "Jaws",
-        "A Clockwork Orange"
+        "Grimace Shake",
+        "The 'Can I Get Uhhh' meme",
+        "Woman Yelling at Cat",
+        "Distracted Boyfriend"
       ],
       "correct": [
         0,
-        2,
-        4
+        1
       ]
     },
     {
       "type": "standard",
-      "question": "Which studio produced the 'Harry Potter' film series?",
+      "question": "What new streaming service launched in late 2023, merging content from HBO Max and Discovery+?",
       "answers": [
-        "Universal",
-        "Warner Bros.",
-        "Paramount",
-        "Disney"
+        "Max",
+        "Paramount+",
+        "Peacock",
+        "Hulu"
       ],
       "correct": [
-        1
+        0
       ]
     }
   ]
