@@ -6,12 +6,12 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which show dominated the 2024 Emmy Awards for Outstanding Drama Series?",
+      "question": "What year was the first iPhone released?",
       "answers": [
-        "The Bear",
-        "Succession",
-        "The Last of Us",
-        "House of the Dragon"
+        "2005",
+        "2007",
+        "2009",
+        "2010"
       ],
       "correct": [
         1
@@ -19,53 +19,55 @@
     },
     {
       "type": "truefalse",
-      "question": "The popular AI chatbot, ChatGPT, has recently been updated to include voice capabilities.",
+      "question": "The internet was originally conceived as a project by IBM.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What video game console recently received a significant price drop?",
-      "answers": [
-        "PlayStation 5",
-        "Xbox Series X",
-        "Nintendo Switch",
-        "Steam Deck"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "multi",
-      "question": "Which of the following are popular internet memes that gained traction in early 2024?",
-      "answers": [
-        "Grimace Shake",
-        "The 'Can I Get Uhhh' meme",
-        "Woman Yelling at Cat",
-        "Distracted Boyfriend"
-      ],
-      "correct": [
-        0,
         1
       ]
     },
     {
       "type": "standard",
-      "question": "What new streaming service launched in late 2023, merging content from HBO Max and Discovery+?",
+      "question": "Which company developed the Android operating system?",
       "answers": [
-        "Max",
-        "Paramount+",
-        "Peacock",
-        "Hulu"
+        "Apple",
+        "Microsoft",
+        "Google",
+        "Nokia"
       ],
       "correct": [
-        0
+        2
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these are common types of cloud computing services?",
+      "answers": [
+        "SaaS",
+        "PaaS",
+        "IaaS",
+        "DaaS",
+        "FaaS"
+      ],
+      "correct": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the primary function of a RAM module?",
+      "answers": [
+        "Long-term storage",
+        "Temporary data storage",
+        "Processing calculations",
+        "Network connectivity"
+      ],
+      "correct": [
+        1
       ]
     }
   ]

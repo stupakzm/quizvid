@@ -130,5 +130,16 @@
     ],
     "category": "Trends",
     "date": "2026-05-02"
+  },
+  {
+    "questions": [
+      "What year was the first iPhone released?",
+      "The internet was originally conceived as a project by IBM.",
+      "Which company developed the Android operating system?",
+      "Which of these are common types of cloud computing services?",
+      "What is the primary function of a RAM module?"
+    ],
+    "category": "Tech",
+    "date": "2026-05-03"
   }
 ]
