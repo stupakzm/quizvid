@@ -141,5 +141,16 @@
     ],
     "category": "Tech",
     "date": "2026-05-03"
+  },
+  {
+    "questions": [
+      "What is the powerhouse of the cell?",
+      "Water boils at 100 degrees Fahrenheit.",
+      "Which of these are noble gases?",
+      "What is the most abundant gas in Earth's atmosphere?",
+      "Who developed the theory of relativity?"
+    ],
+    "category": "Science",
+    "date": "2026-05-04"
   }
 ]

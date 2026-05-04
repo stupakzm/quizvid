@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What year was the first iPhone released?",
+      "question": "What is the powerhouse of the cell?",
       "answers": [
-        "2005",
-        "2007",
-        "2009",
-        "2010"
+        "Nucleus",
+        "Ribosome",
+        "Mitochondrion",
+        "Endoplasmic Reticulum"
       ],
       "correct": [
-        1
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The internet was originally conceived as a project by IBM.",
+      "question": "Water boils at 100 degrees Fahrenheit.",
       "answers": [
         "True",
         "False"
@@ -29,45 +29,44 @@
       ]
     },
     {
-      "type": "standard",
-      "question": "Which company developed the Android operating system?",
-      "answers": [
-        "Apple",
-        "Microsoft",
-        "Google",
-        "Nokia"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
       "type": "multi",
-      "question": "Which of these are common types of cloud computing services?",
+      "question": "Which of these are noble gases?",
       "answers": [
-        "SaaS",
-        "PaaS",
-        "IaaS",
-        "DaaS",
-        "FaaS"
+        "Oxygen",
+        "Neon",
+        "Nitrogen",
+        "Argon",
+        "Hydrogen"
       ],
       "correct": [
-        0,
         1,
-        2
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "What is the primary function of a RAM module?",
+      "question": "What is the most abundant gas in Earth's atmosphere?",
       "answers": [
-        "Long-term storage",
-        "Temporary data storage",
-        "Processing calculations",
-        "Network connectivity"
+        "Oxygen",
+        "Nitrogen",
+        "Carbon Dioxide",
+        "Argon"
       ],
       "correct": [
         1
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Who developed the theory of relativity?",
+      "answers": [
+        "Isaac Newton",
+        "Galileo Galilei",
+        "Albert Einstein",
+        "Nikola Tesla"
+      ],
+      "correct": [
+        2
       ]
     }
   ]
