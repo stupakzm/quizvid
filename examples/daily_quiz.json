@@ -6,67 +6,68 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the powerhouse of the cell?",
+      "question": "Which ancient civilization developed cuneiform writing?",
       "answers": [
-        "Nucleus",
-        "Ribosome",
-        "Mitochondrion",
-        "Endoplasmic Reticulum"
+        "Egyptian",
+        "Sumerian",
+        "Indus Valley",
+        "Minoan"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "Water boils at 100 degrees Fahrenheit.",
+      "question": "The Peloponnesian War was fought between Athens and Sparta.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are noble gases?",
+      "question": "Which of the following were major achievements of the Islamic Golden Age?",
       "answers": [
-        "Oxygen",
-        "Neon",
-        "Nitrogen",
-        "Argon",
-        "Hydrogen"
+        "Development of algebra",
+        "Invention of printing press",
+        "Establishment of universities",
+        "Discovery of penicillin",
+        "Advancements in optics"
       ],
       "correct": [
-        1,
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What event marked the end of World War I?",
+      "answers": [
+        "Armistice Day",
+        "Bombing of Hiroshima",
+        "Fall of Berlin Wall",
+        "Assassination of Archduke Ferdinand"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "The Bronze Age followed which earlier period?",
+      "answers": [
+        "Iron Age",
+        "Neolithic Age",
+        "Paleolithic Age",
+        "Stone Age"
+      ],
+      "correct": [
         3
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What is the most abundant gas in Earth's atmosphere?",
-      "answers": [
-        "Oxygen",
-        "Nitrogen",
-        "Carbon Dioxide",
-        "Argon"
-      ],
-      "correct": [
-        1
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Who developed the theory of relativity?",
-      "answers": [
-        "Isaac Newton",
-        "Galileo Galilei",
-        "Albert Einstein",
-        "Nikola Tesla"
-      ],
-      "correct": [
-        2
       ]
     }
   ]

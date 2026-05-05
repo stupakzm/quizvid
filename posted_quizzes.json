@@ -152,5 +152,16 @@
     ],
     "category": "Science",
     "date": "2026-05-04"
+  },
+  {
+    "questions": [
+      "Which ancient civilization developed cuneiform writing?",
+      "The Peloponnesian War was fought between Athens and Sparta.",
+      "Which of the following were major achievements of the Islamic Golden Age?",
+      "What event marked the end of World War I?",
+      "The Bronze Age followed which earlier period?"
+    ],
+    "category": "History",
+    "date": "2026-05-05"
   }
 ]
