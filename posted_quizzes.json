@@ -163,5 +163,16 @@
     ],
     "category": "History",
     "date": "2026-05-05"
+  },
+  {
+    "questions": [
+      "Which desert is the largest hot desert in the world?",
+      "What is the most populous country in the world?",
+      "The Great Barrier Reef is the world's largest coral reef system.",
+      "Which of these are islands?",
+      "Which European capital city is built on over 14 islands?"
+    ],
+    "category": "Geography",
+    "date": "2026-05-06"
   }
 ]

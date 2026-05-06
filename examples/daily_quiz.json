@@ -6,20 +6,33 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which ancient civilization developed cuneiform writing?",
+      "question": "Which desert is the largest hot desert in the world?",
       "answers": [
-        "Egyptian",
-        "Sumerian",
-        "Indus Valley",
-        "Minoan"
+        "Gobi",
+        "Kalahari",
+        "Sahara",
+        "Arabian"
       ],
       "correct": [
-        1
+        2
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the most populous country in the world?",
+      "answers": [
+        "India",
+        "China",
+        "United States",
+        "Indonesia"
+      ],
+      "correct": [
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Peloponnesian War was fought between Athens and Sparta.",
+      "question": "The Great Barrier Reef is the world's largest coral reef system.",
       "answers": [
         "True",
         "False"
@@ -30,44 +43,31 @@
     },
     {
       "type": "multi",
-      "question": "Which of the following were major achievements of the Islamic Golden Age?",
+      "question": "Which of these are islands?",
       "answers": [
-        "Development of algebra",
-        "Invention of printing press",
-        "Establishment of universities",
-        "Discovery of penicillin",
-        "Advancements in optics"
+        "Madagascar",
+        "Greenland",
+        "Mongolia",
+        "Australia",
+        "New Zealand"
       ],
       "correct": [
         0,
-        2,
+        1,
         4
       ]
     },
     {
       "type": "standard",
-      "question": "What event marked the end of World War I?",
+      "question": "Which European capital city is built on over 14 islands?",
       "answers": [
-        "Armistice Day",
-        "Bombing of Hiroshima",
-        "Fall of Berlin Wall",
-        "Assassination of Archduke Ferdinand"
+        "Oslo",
+        "Stockholm",
+        "Helsinki",
+        "Copenhagen"
       ],
       "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "The Bronze Age followed which earlier period?",
-      "answers": [
-        "Iron Age",
-        "Neolithic Age",
-        "Paleolithic Age",
-        "Stone Age"
-      ],
-      "correct": [
-        3
+        1
       ]
     }
   ]
