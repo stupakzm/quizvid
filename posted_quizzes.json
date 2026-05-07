@@ -174,5 +174,16 @@
     ],
     "category": "Geography",
     "date": "2026-05-06"
+  },
+  {
+    "questions": [
+      "Which country won the most gold medals at the 2020 Tokyo Olympics?",
+      "The fastest recorded speed in an F1 race is over 400 km/h.",
+      "Which of these are traditional major sports in Canada?",
+      "Who is often referred to as 'The Greatest' in boxing history?",
+      "How many players are on a standard cricket team on the field?"
+    ],
+    "category": "Sports",
+    "date": "2026-05-07"
   }
 ]

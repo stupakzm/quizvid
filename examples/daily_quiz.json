@@ -1,30 +1,17 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Which desert is the largest hot desert in the world?",
+      "question": "Which country won the most gold medals at the 2020 Tokyo Olympics?",
       "answers": [
-        "Gobi",
-        "Kalahari",
-        "Sahara",
-        "Arabian"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What is the most populous country in the world?",
-      "answers": [
-        "India",
+        "USA",
         "China",
-        "United States",
-        "Indonesia"
+        "Japan",
+        "Great Britain"
       ],
       "correct": [
         0
@@ -32,7 +19,7 @@
     },
     {
       "type": "truefalse",
-      "question": "The Great Barrier Reef is the world's largest coral reef system.",
+      "question": "The fastest recorded speed in an F1 race is over 400 km/h.",
       "answers": [
         "True",
         "False"
@@ -43,31 +30,44 @@
     },
     {
       "type": "multi",
-      "question": "Which of these are islands?",
+      "question": "Which of these are traditional major sports in Canada?",
       "answers": [
-        "Madagascar",
-        "Greenland",
-        "Mongolia",
-        "Australia",
-        "New Zealand"
+        "Ice Hockey",
+        "Lacrosse",
+        "Curling",
+        "American Football",
+        "Baseball"
       ],
       "correct": [
         0,
         1,
-        4
+        2
       ]
     },
     {
       "type": "standard",
-      "question": "Which European capital city is built on over 14 islands?",
+      "question": "Who is often referred to as 'The Greatest' in boxing history?",
       "answers": [
-        "Oslo",
-        "Stockholm",
-        "Helsinki",
-        "Copenhagen"
+        "Joe Louis",
+        "Rocky Marciano",
+        "Muhammad Ali",
+        "Sugar Ray Robinson"
       ],
       "correct": [
-        1
+        2
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "How many players are on a standard cricket team on the field?",
+      "answers": [
+        "9",
+        "10",
+        "11",
+        "12"
+      ],
+      "correct": [
+        2
       ]
     }
   ]
