@@ -6,68 +6,68 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which country won the most gold medals at the 2020 Tokyo Olympics?",
+      "question": "Which film holds the record for the most Oscar nominations without winning any?",
       "answers": [
-        "USA",
-        "China",
-        "Japan",
-        "Great Britain"
+        "The Turning",
+        "The Color Purple",
+        "Gangs of New York",
+        "Amour"
       ],
       "correct": [
-        0
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The fastest recorded speed in an F1 race is over 400 km/h.",
+      "question": "The original 'Star Wars' (A New Hope) was initially a box office flop.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are traditional major sports in Canada?",
+      "question": "Which of these films are part of the 'Lord of the Rings' trilogy?",
       "answers": [
-        "Ice Hockey",
-        "Lacrosse",
-        "Curling",
-        "American Football",
-        "Baseball"
+        "The Fellowship of the Ring",
+        "The Hobbit: An Unexpected Journey",
+        "The Two Towers",
+        "The Return of the King",
+        "The Silmarillion"
       ],
       "correct": [
         0,
-        1,
-        2
+        2,
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "Who is often referred to as 'The Greatest' in boxing history?",
+      "question": "What is the name of the fictional city where Batman operates?",
       "answers": [
-        "Joe Louis",
-        "Rocky Marciano",
-        "Muhammad Ali",
-        "Sugar Ray Robinson"
+        "Metropolis",
+        "Gotham City",
+        "Star City",
+        "Central City"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "standard",
-      "question": "How many players are on a standard cricket team on the field?",
+      "question": "Which film won the Palme d'Or at Cannes and Best Picture Oscar?",
       "answers": [
-        "9",
-        "10",
-        "11",
-        "12"
+        "Oldboy",
+        "The Artist",
+        "La La Land",
+        "Moonlight"
       ],
       "correct": [
-        2
+        1
       ]
     }
   ]

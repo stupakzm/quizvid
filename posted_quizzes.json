@@ -185,5 +185,16 @@
     ],
     "category": "Sports",
     "date": "2026-05-07"
+  },
+  {
+    "questions": [
+      "Which film holds the record for the most Oscar nominations without winning any?",
+      "The original 'Star Wars' (A New Hope) was initially a box office flop.",
+      "Which of these films are part of the 'Lord of the Rings' trilogy?",
+      "What is the name of the fictional city where Batman operates?",
+      "Which film won the Palme d'Or at Cannes and Best Picture Oscar?"
+    ],
+    "category": "Movies",
+    "date": "2026-05-08"
   }
 ]
