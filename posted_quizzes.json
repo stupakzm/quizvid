@@ -196,5 +196,16 @@
     ],
     "category": "Movies",
     "date": "2026-05-08"
+  },
+  {
+    "questions": [
+      "Who won Best Actor at the 2024 BAFTA Awards?",
+      "The movie 'Dune: Part Two' broke box office records for its opening weekend in March 2024.",
+      "Which of these were significant tech product launches in early 2024?",
+      "Which artist dominated the 2024 Brit Awards?",
+      "What viral internet challenge involved people dancing to a specific song in a synchronized manner?"
+    ],
+    "category": "Trends",
+    "date": "2026-05-09"
   }
 ]

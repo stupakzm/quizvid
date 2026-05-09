@@ -1,57 +1,55 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Which film holds the record for the most Oscar nominations without winning any?",
+      "question": "Who won Best Actor at the 2024 BAFTA Awards?",
       "answers": [
-        "The Turning",
-        "The Color Purple",
-        "Gangs of New York",
-        "Amour"
+        "Bradley Cooper",
+        "Cillian Murphy",
+        "Paul Mescal",
+        "Jeffrey Wright"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "The original 'Star Wars' (A New Hope) was initially a box office flop.",
+      "question": "The movie 'Dune: Part Two' broke box office records for its opening weekend in March 2024.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these films are part of the 'Lord of the Rings' trilogy?",
+      "question": "Which of these were significant tech product launches in early 2024?",
       "answers": [
-        "The Fellowship of the Ring",
-        "The Hobbit: An Unexpected Journey",
-        "The Two Towers",
-        "The Return of the King",
-        "The Silmarillion"
+        "Meta Quest 3",
+        "Apple Vision Pro",
+        "Samsung Galaxy S24",
+        "PlayStation 5 Slim"
       ],
       "correct": [
-        0,
-        2,
-        3
+        1,
+        2
       ]
     },
     {
       "type": "standard",
-      "question": "What is the name of the fictional city where Batman operates?",
+      "question": "Which artist dominated the 2024 Brit Awards?",
       "answers": [
-        "Metropolis",
-        "Gotham City",
-        "Star City",
-        "Central City"
+        "Dua Lipa",
+        "Raye",
+        "Olivia Rodrigo",
+        "Fred Again.."
       ],
       "correct": [
         1
@@ -59,12 +57,12 @@
     },
     {
       "type": "standard",
-      "question": "Which film won the Palme d'Or at Cannes and Best Picture Oscar?",
+      "question": "What viral internet challenge involved people dancing to a specific song in a synchronized manner?",
       "answers": [
-        "Oldboy",
-        "The Artist",
-        "La La Land",
-        "Moonlight"
+        "Ice Bucket",
+        "Mannequin",
+        "Tide Pod",
+        "Planking"
       ],
       "correct": [
         1
