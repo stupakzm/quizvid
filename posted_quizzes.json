@@ -207,5 +207,16 @@
     ],
     "category": "Trends",
     "date": "2026-05-09"
+  },
+  {
+    "questions": [
+      "What does 'HTTP' stand for?",
+      "The Turing machine is a theoretical model of computation.",
+      "Which company developed the Windows operating system?",
+      "Which of these are common cybersecurity threats?",
+      "What is the basic unit of information in computing?"
+    ],
+    "category": "Tech",
+    "date": "2026-05-10"
   }
 ]

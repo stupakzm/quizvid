@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Who won Best Actor at the 2024 BAFTA Awards?",
+      "question": "What does 'HTTP' stand for?",
       "answers": [
-        "Bradley Cooper",
-        "Cillian Murphy",
-        "Paul Mescal",
-        "Jeffrey Wright"
+        "HyperText Transfer Protocol",
+        "High-Level Text Transmission",
+        "Hyperlink Text Transfer",
+        "Host Text Protocol"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The movie 'Dune: Part Two' broke box office records for its opening weekend in March 2024.",
+      "question": "The Turing machine is a theoretical model of computation.",
       "answers": [
         "True",
         "False"
@@ -29,43 +29,45 @@
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these were significant tech product launches in early 2024?",
+      "type": "standard",
+      "question": "Which company developed the Windows operating system?",
       "answers": [
-        "Meta Quest 3",
-        "Apple Vision Pro",
-        "Samsung Galaxy S24",
-        "PlayStation 5 Slim"
+        "Apple",
+        "Google",
+        "Microsoft",
+        "IBM"
       ],
       "correct": [
-        1,
         2
       ]
     },
     {
-      "type": "standard",
-      "question": "Which artist dominated the 2024 Brit Awards?",
+      "type": "multi",
+      "question": "Which of these are common cybersecurity threats?",
       "answers": [
-        "Dua Lipa",
-        "Raye",
-        "Olivia Rodrigo",
-        "Fred Again.."
+        "Phishing",
+        "Malware",
+        "Cloud Storage",
+        "Firewall",
+        "Ransomware"
       ],
       "correct": [
-        1
+        0,
+        1,
+        4
       ]
     },
     {
       "type": "standard",
-      "question": "What viral internet challenge involved people dancing to a specific song in a synchronized manner?",
+      "question": "What is the basic unit of information in computing?",
       "answers": [
-        "Ice Bucket",
-        "Mannequin",
-        "Tide Pod",
-        "Planking"
+        "Byte",
+        "Kilobyte",
+        "Bit",
+        "Megabyte"
       ],
       "correct": [
-        1
+        2
       ]
     }
   ]
