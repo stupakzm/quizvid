@@ -6,68 +6,68 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What does 'HTTP' stand for?",
+      "question": "What is the study of living organisms called?",
       "answers": [
-        "HyperText Transfer Protocol",
-        "High-Level Text Transmission",
-        "Hyperlink Text Transfer",
-        "Host Text Protocol"
+        "Geology",
+        "Astronomy",
+        "Biology",
+        "Chemistry"
       ],
       "correct": [
-        0
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Turing machine is a theoretical model of computation.",
+      "question": "Sound travels faster than light.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which company developed the Windows operating system?",
-      "answers": [
-        "Apple",
-        "Google",
-        "Microsoft",
-        "IBM"
-      ],
-      "correct": [
-        2
+        1
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these are common cybersecurity threats?",
+      "question": "Which of these are common forms of electromagnetic radiation?",
       "answers": [
-        "Phishing",
-        "Malware",
-        "Cloud Storage",
-        "Firewall",
-        "Ransomware"
+        "Sound waves",
+        "Visible light",
+        "Radio waves",
+        "Water waves",
+        "X-rays"
       ],
       "correct": [
-        0,
         1,
+        2,
         4
       ]
     },
     {
       "type": "standard",
-      "question": "What is the basic unit of information in computing?",
+      "question": "What is the largest organ in the human body?",
       "answers": [
-        "Byte",
-        "Kilobyte",
-        "Bit",
-        "Megabyte"
+        "Heart",
+        "Brain",
+        "Lungs",
+        "Skin"
       ],
       "correct": [
-        2
+        3
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What element has the atomic number 1?",
+      "answers": [
+        "Oxygen",
+        "Hydrogen",
+        "Helium",
+        "Carbon"
+      ],
+      "correct": [
+        1
       ]
     }
   ]
