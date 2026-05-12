@@ -229,5 +229,16 @@
     ],
     "category": "Science",
     "date": "2026-05-11"
+  },
+  {
+    "questions": [
+      "What ancient civilization is credited with inventing the concept of zero?",
+      "The Hanging Gardens of Babylon are a confirmed historical artifact.",
+      "The Code of Hammurabi originated in which empire?",
+      "Which of the following were significant explorers during the Age of Discovery?",
+      "The Renaissance began in which country?"
+    ],
+    "category": "History",
+    "date": "2026-05-12"
   }
 ]
