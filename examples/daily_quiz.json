@@ -1,25 +1,25 @@
 {
   "config": {
-    "question_duration": 10,
-    "reveal_duration": 3
+    "question_duration": 5,
+    "reveal_duration": 2
   },
   "questions": [
     {
       "type": "standard",
-      "question": "What ancient civilization is credited with inventing the concept of zero?",
+      "question": "Which desert spans parts of 10 countries in Southern Africa?",
       "answers": [
-        "Ancient Greece",
-        "Ancient Rome",
-        "Ancient India",
-        "Ancient China"
+        "Sahara",
+        "Kalahari",
+        "Arabian",
+        "Gobi"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Hanging Gardens of Babylon are a confirmed historical artifact.",
+      "question": "The Dead Sea is located on the continent of Africa.",
       "answers": [
         "True",
         "False"
@@ -29,44 +29,45 @@
       ]
     },
     {
-      "type": "standard",
-      "question": "The Code of Hammurabi originated in which empire?",
+      "type": "multi",
+      "question": "Which of these countries share a border with Switzerland?",
       "answers": [
-        "Egyptian",
-        "Persian",
-        "Babylonian",
-        "Assyrian"
+        "Italy",
+        "Spain",
+        "Austria",
+        "Portugal",
+        "Germany"
+      ],
+      "correct": [
+        0,
+        2,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the capital of Canada?",
+      "answers": [
+        "Toronto",
+        "Vancouver",
+        "Ottawa",
+        "Montreal"
       ],
       "correct": [
         2
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of the following were significant explorers during the Age of Discovery?",
-      "answers": [
-        "Leif Erikson",
-        "Ferdinand Magellan",
-        "Genghis Khan",
-        "Christopher Columbus",
-        "Alexander the Great"
-      ],
-      "correct": [
-        1,
-        3
-      ]
-    },
-    {
       "type": "standard",
-      "question": "The Renaissance began in which country?",
+      "question": "Which famous landmark is located in Agra, India?",
       "answers": [
-        "France",
-        "England",
-        "Germany",
-        "Italy"
+        "Eiffel Tower",
+        "Great Wall",
+        "Taj Mahal",
+        "Colosseum"
       ],
       "correct": [
-        3
+        2
       ]
     }
   ]

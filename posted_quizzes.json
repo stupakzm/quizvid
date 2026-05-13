@@ -240,5 +240,16 @@
     ],
     "category": "History",
     "date": "2026-05-12"
+  },
+  {
+    "questions": [
+      "Which desert spans parts of 10 countries in Southern Africa?",
+      "The Dead Sea is located on the continent of Africa.",
+      "Which of these countries share a border with Switzerland?",
+      "What is the capital of Canada?",
+      "Which famous landmark is located in Agra, India?"
+    ],
+    "category": "Geography",
+    "date": "2026-05-13"
   }
 ]
