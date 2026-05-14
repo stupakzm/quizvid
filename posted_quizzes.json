@@ -251,5 +251,16 @@
     ],
     "category": "Geography",
     "date": "2026-05-13"
+  },
+  {
+    "questions": [
+      "Who holds the record for the most career goals in international football (soccer)?",
+      "The first Super Bowl was played in 1967.",
+      "Which of these are current teams in Major League Baseball's National League?",
+      "In which sport would you see a 'hat-trick' scored?",
+      "Who is the only swimmer to have won 8 gold medals at a single Olympic Games?"
+    ],
+    "category": "Sports",
+    "date": "2026-05-14"
   }
 ]

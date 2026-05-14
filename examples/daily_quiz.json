@@ -1,17 +1,17 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "Which desert spans parts of 10 countries in Southern Africa?",
+      "question": "Who holds the record for the most career goals in international football (soccer)?",
       "answers": [
-        "Sahara",
-        "Kalahari",
-        "Arabian",
-        "Gobi"
+        "Lionel Messi",
+        "Cristiano Ronaldo",
+        "Pele",
+        "Ferenc Puskas"
       ],
       "correct": [
         1
@@ -19,52 +19,52 @@
     },
     {
       "type": "truefalse",
-      "question": "The Dead Sea is located on the continent of Africa.",
+      "question": "The first Super Bowl was played in 1967.",
       "answers": [
         "True",
         "False"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "multi",
+      "question": "Which of these are current teams in Major League Baseball's National League?",
+      "answers": [
+        "New York Yankees",
+        "Los Angeles Dodgers",
+        "Boston Red Sox",
+        "Chicago Cubs",
+        "Houston Astros"
+      ],
+      "correct": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "In which sport would you see a 'hat-trick' scored?",
+      "answers": [
+        "Basketball",
+        "Ice Hockey",
+        "Volleyball",
+        "Baseball"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these countries share a border with Switzerland?",
-      "answers": [
-        "Italy",
-        "Spain",
-        "Austria",
-        "Portugal",
-        "Germany"
-      ],
-      "correct": [
-        0,
-        2,
-        4
-      ]
-    },
-    {
       "type": "standard",
-      "question": "What is the capital of Canada?",
+      "question": "Who is the only swimmer to have won 8 gold medals at a single Olympic Games?",
       "answers": [
-        "Toronto",
-        "Vancouver",
-        "Ottawa",
-        "Montreal"
-      ],
-      "correct": [
-        2
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Which famous landmark is located in Agra, India?",
-      "answers": [
-        "Eiffel Tower",
-        "Great Wall",
-        "Taj Mahal",
-        "Colosseum"
+        "Mark Spitz",
+        "Ian Thorpe",
+        "Michael Phelps",
+        "Katie Ledecky"
       ],
       "correct": [
         2
