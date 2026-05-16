@@ -262,5 +262,16 @@
     ],
     "category": "Sports",
     "date": "2026-05-14"
+  },
+  {
+    "questions": [
+      "What film won the Palme d'Or at the 2023 Cannes Film Festival?",
+      "The AI tool 'Llama 3' was released by Meta in April 2024.",
+      "Which of these shows achieved significant viewership milestones on streaming platforms in late 2023/early 2024?",
+      "Who won the Best Actress award at the 2024 Screen Actors Guild Awards?",
+      "What major sports record did Noah Lyles break in 2023?"
+    ],
+    "category": "Trends",
+    "date": "2026-05-16"
   }
 ]
