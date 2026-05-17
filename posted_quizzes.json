@@ -273,5 +273,16 @@
     ],
     "category": "Trends",
     "date": "2026-05-16"
+  },
+  {
+    "questions": [
+      "Who is often credited with inventing the World Wide Web?",
+      "The term 'bug' in computing originated from an actual insect found in a computer.",
+      "Which of the following are major cloud service providers?",
+      "What is the primary purpose of an algorithm?",
+      "Which company pioneered the personal computer revolution with its 'Apple II'?"
+    ],
+    "category": "Tech",
+    "date": "2026-05-17"
   }
 ]
