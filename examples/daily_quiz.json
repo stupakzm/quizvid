@@ -6,12 +6,12 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Who is often credited with inventing the World Wide Web?",
+      "question": "What is the process by which plants make food?",
       "answers": [
-        "Bill Gates",
-        "Tim Berners-Lee",
-        "Mark Zuckerberg",
-        "Vint Cerf"
+        "Respiration",
+        "Photosynthesis",
+        "Transpiration",
+        "Germination"
       ],
       "correct": [
         1
@@ -19,54 +19,55 @@
     },
     {
       "type": "truefalse",
-      "question": "The term 'bug' in computing originated from an actual insect found in a computer.",
+      "question": "The Moon produces its own light.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "multi",
-      "question": "Which of the following are major cloud service providers?",
+      "question": "Which of the following are types of galaxies?",
       "answers": [
-        "Amazon Web Services",
-        "Microsoft Azure",
-        "Oracle Cloud",
-        "Salesforce"
+        "Spiral",
+        "Elliptical",
+        "Nebula",
+        "Quasar",
+        "Irregular"
       ],
       "correct": [
         0,
         1,
-        2
+        4
       ]
     },
     {
       "type": "standard",
-      "question": "What is the primary purpose of an algorithm?",
+      "question": "What is the hardest natural substance?",
       "answers": [
-        "To store data",
-        "To display graphics",
-        "To solve a problem",
-        "To connect to networks"
+        "Quartz",
+        "Diamond",
+        "Granite",
+        "Steel"
       ],
       "correct": [
-        2
+        1
       ]
     },
     {
       "type": "standard",
-      "question": "Which company pioneered the personal computer revolution with its 'Apple II'?",
+      "question": "What is the chemical symbol for iron?",
       "answers": [
-        "IBM",
-        "Microsoft",
-        "Apple",
-        "Xerox"
+        "Ir",
+        "Fe",
+        "Au",
+        "Ag"
       ],
       "correct": [
-        2
+        1
       ]
     }
   ]

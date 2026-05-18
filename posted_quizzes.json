@@ -284,5 +284,16 @@
     ],
     "category": "Tech",
     "date": "2026-05-17"
+  },
+  {
+    "questions": [
+      "What is the process by which plants make food?",
+      "The Moon produces its own light.",
+      "Which of the following are types of galaxies?",
+      "What is the hardest natural substance?",
+      "What is the chemical symbol for iron?"
+    ],
+    "category": "Science",
+    "date": "2026-05-18"
   }
 ]
