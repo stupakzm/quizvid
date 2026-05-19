@@ -295,5 +295,16 @@
     ],
     "category": "Science",
     "date": "2026-05-18"
+  },
+  {
+    "questions": [
+      "The ancient Egyptian Book of the Dead was a collection of spells and prayers to guide the deceased through which realm?",
+      "The Minoan civilization flourished on the island of Crete.",
+      "What was the primary purpose of the Roman aqueducts?",
+      "Which of these were prominent features of the Aztec civilization?",
+      "The Pax Romana refers to a period of relative peace and stability in which empire?"
+    ],
+    "category": "History",
+    "date": "2026-05-19"
   }
 ]

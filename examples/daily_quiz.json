@@ -6,23 +6,36 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the process by which plants make food?",
+      "question": "The ancient Egyptian Book of the Dead was a collection of spells and prayers to guide the deceased through which realm?",
       "answers": [
-        "Respiration",
-        "Photosynthesis",
-        "Transpiration",
-        "Germination"
+        "The underworld",
+        "The heavens",
+        "The mortal world",
+        "The dreams"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Moon produces its own light.",
+      "question": "The Minoan civilization flourished on the island of Crete.",
       "answers": [
         "True",
         "False"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What was the primary purpose of the Roman aqueducts?",
+      "answers": [
+        "Defense",
+        "Water supply",
+        "Religious ceremonies",
+        "Amphitheater access"
       ],
       "correct": [
         1
@@ -30,44 +43,29 @@
     },
     {
       "type": "multi",
-      "question": "Which of the following are types of galaxies?",
+      "question": "Which of these were prominent features of the Aztec civilization?",
       "answers": [
-        "Spiral",
-        "Elliptical",
-        "Nebula",
-        "Quasar",
-        "Irregular"
+        "Pyramids",
+        "Hieroglyphic writing",
+        "Tenochtitlan",
+        "The Pantheon"
       ],
       "correct": [
         0,
-        1,
-        4
+        2
       ]
     },
     {
       "type": "standard",
-      "question": "What is the hardest natural substance?",
+      "question": "The Pax Romana refers to a period of relative peace and stability in which empire?",
       "answers": [
-        "Quartz",
-        "Diamond",
-        "Granite",
-        "Steel"
+        "Greek",
+        "Persian",
+        "Roman",
+        "Ottoman"
       ],
       "correct": [
-        1
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What is the chemical symbol for iron?",
-      "answers": [
-        "Ir",
-        "Fe",
-        "Au",
-        "Ag"
-      ],
-      "correct": [
-        1
+        2
       ]
     }
   ]
