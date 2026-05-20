@@ -306,5 +306,16 @@
     ],
     "category": "History",
     "date": "2026-05-19"
+  },
+  {
+    "questions": [
+      "What is the currency of Japan?",
+      "The United States shares a land border with Russia.",
+      "Which is the deepest ocean trench?",
+      "Which of these countries are landlocked?",
+      "What is the capital of New Zealand?"
+    ],
+    "category": "Geography",
+    "date": "2026-05-20"
   }
 ]

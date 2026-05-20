@@ -6,63 +6,65 @@
   "questions": [
     {
       "type": "standard",
-      "question": "The ancient Egyptian Book of the Dead was a collection of spells and prayers to guide the deceased through which realm?",
+      "question": "What is the currency of Japan?",
       "answers": [
-        "The underworld",
-        "The heavens",
-        "The mortal world",
-        "The dreams"
+        "Dollar",
+        "Euro",
+        "Yen",
+        "Pound"
       ],
       "correct": [
-        0
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Minoan civilization flourished on the island of Crete.",
+      "question": "The United States shares a land border with Russia.",
       "answers": [
         "True",
         "False"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What was the primary purpose of the Roman aqueducts?",
-      "answers": [
-        "Defense",
-        "Water supply",
-        "Religious ceremonies",
-        "Amphitheater access"
       ],
       "correct": [
         1
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these were prominent features of the Aztec civilization?",
+      "type": "standard",
+      "question": "Which is the deepest ocean trench?",
       "answers": [
-        "Pyramids",
-        "Hieroglyphic writing",
-        "Tenochtitlan",
-        "The Pantheon"
+        "Java Trench",
+        "Puerto Rico Trench",
+        "Mariana Trench",
+        "Tonga Trench"
       ],
       "correct": [
-        0,
         2
       ]
     },
     {
-      "type": "standard",
-      "question": "The Pax Romana refers to a period of relative peace and stability in which empire?",
+      "type": "multi",
+      "question": "Which of these countries are landlocked?",
       "answers": [
-        "Greek",
-        "Persian",
-        "Roman",
-        "Ottoman"
+        "Switzerland",
+        "Mongolia",
+        "Peru",
+        "Chad",
+        "Nepal"
+      ],
+      "correct": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What is the capital of New Zealand?",
+      "answers": [
+        "Auckland",
+        "Christchurch",
+        "Wellington",
+        "Dunedin"
       ],
       "correct": [
         2
