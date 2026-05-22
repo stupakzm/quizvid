@@ -317,5 +317,16 @@
     ],
     "category": "Geography",
     "date": "2026-05-20"
+  },
+  {
+    "questions": [
+      "What is the name of the fictional island nation in 'Jurassic Park'?",
+      "The movie 'Citizen Kane' is often cited as one of the greatest films ever made.",
+      "Which actor famously played James Bond 007 seven times?",
+      "Which of these are iconic characters played by Tom Hanks?",
+      "What is the longest-running animated series on television?"
+    ],
+    "category": "Movies",
+    "date": "2026-05-22"
   }
 ]

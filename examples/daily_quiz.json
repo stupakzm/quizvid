@@ -6,68 +6,68 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the currency of Japan?",
+      "question": "What is the name of the fictional island nation in 'Jurassic Park'?",
       "answers": [
-        "Dollar",
-        "Euro",
-        "Yen",
-        "Pound"
+        "Isla Nublar",
+        "Isla Sorna",
+        "Isla Perdida",
+        "Isla Oscura"
       ],
       "correct": [
-        2
+        0
       ]
     },
     {
       "type": "truefalse",
-      "question": "The United States shares a land border with Russia.",
+      "question": "The movie 'Citizen Kane' is often cited as one of the greatest films ever made.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "standard",
-      "question": "Which is the deepest ocean trench?",
+      "question": "Which actor famously played James Bond 007 seven times?",
       "answers": [
-        "Java Trench",
-        "Puerto Rico Trench",
-        "Mariana Trench",
-        "Tonga Trench"
+        "Sean Connery",
+        "Roger Moore",
+        "Pierce Brosnan",
+        "Daniel Craig"
       ],
       "correct": [
-        2
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these countries are landlocked?",
+      "question": "Which of these are iconic characters played by Tom Hanks?",
       "answers": [
-        "Switzerland",
-        "Mongolia",
-        "Peru",
-        "Chad",
-        "Nepal"
+        "Forrest Gump",
+        "Woody",
+        "Buzz Lightyear",
+        "Captain Miller",
+        "Chuck Noland"
       ],
       "correct": [
+        0,
         1,
-        3,
-        4
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "What is the capital of New Zealand?",
+      "question": "What is the longest-running animated series on television?",
       "answers": [
-        "Auckland",
-        "Christchurch",
-        "Wellington",
-        "Dunedin"
+        "The Simpsons",
+        "SpongeBob SquarePants",
+        "Family Guy",
+        "South Park"
       ],
       "correct": [
-        2
+        0
       ]
     }
   ]
