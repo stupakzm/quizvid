@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the name of the fictional island nation in 'Jurassic Park'?",
+      "question": "Which actress won Best Supporting Actress at the 96th Academy Awards?",
       "answers": [
-        "Isla Nublar",
-        "Isla Sorna",
-        "Isla Perdida",
-        "Isla Oscura"
+        "Emma Stone",
+        "Jodie Foster",
+        "Da'Vine Joy Randolph",
+        "Emily Blunt"
       ],
       "correct": [
-        0
+        2
       ]
     },
     {
       "type": "truefalse",
-      "question": "The movie 'Citizen Kane' is often cited as one of the greatest films ever made.",
+      "question": "The 2024 VMAs are scheduled to take place in September.",
       "answers": [
         "True",
         "False"
@@ -29,45 +29,44 @@
       ]
     },
     {
-      "type": "standard",
-      "question": "Which actor famously played James Bond 007 seven times?",
-      "answers": [
-        "Sean Connery",
-        "Roger Moore",
-        "Pierce Brosnan",
-        "Daniel Craig"
-      ],
-      "correct": [
-        0
-      ]
-    },
-    {
       "type": "multi",
-      "question": "Which of these are iconic characters played by Tom Hanks?",
+      "question": "Which of these streaming series saw significant viewership or critical acclaim in early 2024?",
       "answers": [
-        "Forrest Gump",
-        "Woody",
-        "Buzz Lightyear",
-        "Captain Miller",
-        "Chuck Noland"
+        "Sh\u014dgun",
+        "The Bear",
+        "Bridgerton",
+        "Fallout",
+        "Squid Game"
       ],
       "correct": [
         0,
-        1,
         3
       ]
     },
     {
       "type": "standard",
-      "question": "What is the longest-running animated series on television?",
+      "question": "What social media platform is primarily associated with the viral 'Corecore' aesthetic?",
       "answers": [
-        "The Simpsons",
-        "SpongeBob SquarePants",
-        "Family Guy",
-        "South Park"
+        "Instagram",
+        "TikTok",
+        "X (Twitter)",
+        "YouTube"
       ],
       "correct": [
-        0
+        1
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Who won the Golden Boot at the 2022 FIFA World Cup?",
+      "answers": [
+        "Lionel Messi",
+        "Kylian Mbapp\u00e9",
+        "Olivier Giroud",
+        "Alvaro Morata"
+      ],
+      "correct": [
+        1
       ]
     }
   ]

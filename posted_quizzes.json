@@ -328,5 +328,16 @@
     ],
     "category": "Movies",
     "date": "2026-05-22"
+  },
+  {
+    "questions": [
+      "Which actress won Best Supporting Actress at the 96th Academy Awards?",
+      "The 2024 VMAs are scheduled to take place in September.",
+      "Which of these streaming series saw significant viewership or critical acclaim in early 2024?",
+      "What social media platform is primarily associated with the viral 'Corecore' aesthetic?",
+      "Who won the Golden Boot at the 2022 FIFA World Cup?"
+    ],
+    "category": "Trends",
+    "date": "2026-05-23"
   }
 ]
