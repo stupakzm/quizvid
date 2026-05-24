@@ -339,5 +339,16 @@
     ],
     "category": "Trends",
     "date": "2026-05-23"
+  },
+  {
+    "questions": [
+      "What is the name of the first commercially successful personal computer?",
+      "The 'bug' in computing famously discovered by Grace Hopper was a literal insect.",
+      "Which of these are foundational concepts in computer science?",
+      "What does 'GUI' stand for in computing?",
+      "Which company launched the first widely adopted gaming console, the Atari 2600?"
+    ],
+    "category": "Tech",
+    "date": "2026-05-24"
   }
 ]

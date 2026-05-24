@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which actress won Best Supporting Actress at the 96th Academy Awards?",
+      "question": "What is the name of the first commercially successful personal computer?",
       "answers": [
-        "Emma Stone",
-        "Jodie Foster",
-        "Da'Vine Joy Randolph",
-        "Emily Blunt"
+        "IBM PC",
+        "Apple Macintosh",
+        "Commodore PET",
+        "Altair 8800"
       ],
       "correct": [
-        2
+        3
       ]
     },
     {
       "type": "truefalse",
-      "question": "The 2024 VMAs are scheduled to take place in September.",
+      "question": "The 'bug' in computing famously discovered by Grace Hopper was a literal insect.",
       "answers": [
         "True",
         "False"
@@ -30,43 +30,42 @@
     },
     {
       "type": "multi",
-      "question": "Which of these streaming series saw significant viewership or critical acclaim in early 2024?",
+      "question": "Which of these are foundational concepts in computer science?",
       "answers": [
-        "Sh\u014dgun",
-        "The Bear",
-        "Bridgerton",
-        "Fallout",
-        "Squid Game"
+        "Boolean Algebra",
+        "Quantum Mechanics",
+        "Set Theory",
+        "Astrophysics"
       ],
       "correct": [
         0,
+        2
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "What does 'GUI' stand for in computing?",
+      "answers": [
+        "Graphical User Interface",
+        "General Utility Interface",
+        "Global User Interaction",
+        "Guided User Input"
+      ],
+      "correct": [
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Which company launched the first widely adopted gaming console, the Atari 2600?",
+      "answers": [
+        "Nintendo",
+        "Sega",
+        "Magnavox",
+        "Atari"
+      ],
+      "correct": [
         3
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "What social media platform is primarily associated with the viral 'Corecore' aesthetic?",
-      "answers": [
-        "Instagram",
-        "TikTok",
-        "X (Twitter)",
-        "YouTube"
-      ],
-      "correct": [
-        1
-      ]
-    },
-    {
-      "type": "standard",
-      "question": "Who won the Golden Boot at the 2022 FIFA World Cup?",
-      "answers": [
-        "Lionel Messi",
-        "Kylian Mbapp\u00e9",
-        "Olivier Giroud",
-        "Alvaro Morata"
-      ],
-      "correct": [
-        1
       ]
     }
   ]
