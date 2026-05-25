@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "What is the name of the first commercially successful personal computer?",
+      "question": "What is the process of a liquid turning into a gas?",
       "answers": [
-        "IBM PC",
-        "Apple Macintosh",
-        "Commodore PET",
-        "Altair 8800"
+        "Condensation",
+        "Evaporation",
+        "Sublimation",
+        "Freezing"
       ],
       "correct": [
-        3
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "The 'bug' in computing famously discovered by Grace Hopper was a literal insect.",
+      "question": "The human heart has four chambers.",
       "answers": [
         "True",
         "False"
@@ -29,43 +29,44 @@
       ]
     },
     {
-      "type": "multi",
-      "question": "Which of these are foundational concepts in computer science?",
+      "type": "standard",
+      "question": "What type of energy does a moving object possess?",
       "answers": [
-        "Boolean Algebra",
-        "Quantum Mechanics",
-        "Set Theory",
-        "Astrophysics"
+        "Potential",
+        "Thermal",
+        "Kinetic",
+        "Chemical"
       ],
       "correct": [
-        0,
         2
       ]
     },
     {
-      "type": "standard",
-      "question": "What does 'GUI' stand for in computing?",
+      "type": "multi",
+      "question": "Which of the following are forms of non-renewable energy?",
       "answers": [
-        "Graphical User Interface",
-        "General Utility Interface",
-        "Global User Interaction",
-        "Guided User Input"
+        "Solar",
+        "Coal",
+        "Wind",
+        "Natural Gas",
+        "Hydroelectric"
       ],
       "correct": [
-        0
+        1,
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "Which company launched the first widely adopted gaming console, the Atari 2600?",
+      "question": "What is the basic unit of heredity?",
       "answers": [
-        "Nintendo",
-        "Sega",
-        "Magnavox",
-        "Atari"
+        "Cell",
+        "Molecule",
+        "Gene",
+        "Protein"
       ],
       "correct": [
-        3
+        2
       ]
     }
   ]

@@ -350,5 +350,16 @@
     ],
     "category": "Tech",
     "date": "2026-05-24"
+  },
+  {
+    "questions": [
+      "What is the process of a liquid turning into a gas?",
+      "The human heart has four chambers.",
+      "What type of energy does a moving object possess?",
+      "Which of the following are forms of non-renewable energy?",
+      "What is the basic unit of heredity?"
+    ],
+    "category": "Science",
+    "date": "2026-05-25"
   }
 ]
