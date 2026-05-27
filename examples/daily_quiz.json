@@ -1,17 +1,17 @@
 {
   "config": {
-    "question_duration": 5,
-    "reveal_duration": 2
+    "question_duration": 10,
+    "reveal_duration": 3
   },
   "questions": [
     {
       "type": "standard",
-      "question": "The unification of which two kingdoms is traditionally considered the founding of Egypt?",
+      "question": "What is the highest active volcano in Europe?",
       "answers": [
-        "Upper and Lower",
-        "North and South",
-        "East and West",
-        "Thebes and Memphis"
+        "Mount Etna",
+        "Mount Vesuvius",
+        "Mount Olympus",
+        "Mount Teide"
       ],
       "correct": [
         0
@@ -19,39 +19,38 @@
     },
     {
       "type": "truefalse",
-      "question": "The Silk Road was a single, paved road connecting Rome to China.",
+      "question": "The Nile River flows north through Egypt.",
       "answers": [
         "True",
         "False"
       ],
       "correct": [
-        1
+        0
       ]
     },
     {
       "type": "multi",
-      "question": "Which of these were significant innovations of the Indus Valley Civilization?",
+      "question": "Which of these are major islands in Oceania?",
       "answers": [
-        "Urban planning",
-        "Hieroglyphic writing",
-        "Advanced drainage systems",
-        "Bronze metallurgy",
-        "Alphabetical script"
+        "Borneo",
+        "Madagascar",
+        "New Guinea",
+        "Sumatra",
+        "Tasmania"
       ],
       "correct": [
-        0,
         2,
-        3
+        4
       ]
     },
     {
       "type": "standard",
-      "question": "The Peloponnesian League was primarily allied with which Greek city-state?",
+      "question": "Which country is shaped like a boot?",
       "answers": [
-        "Athens",
-        "Sparta",
-        "Corinth",
-        "Thebes"
+        "Greece",
+        "Italy",
+        "Spain",
+        "Portugal"
       ],
       "correct": [
         1
@@ -59,15 +58,15 @@
     },
     {
       "type": "standard",
-      "question": "The Byzantine Empire was the continuation of which former empire?",
+      "question": "What is the world's largest lake by surface area?",
       "answers": [
-        "Western Roman",
-        "Eastern Roman",
-        "Persian",
-        "Hellenistic"
+        "Lake Baikal",
+        "Lake Superior",
+        "Caspian Sea",
+        "Lake Victoria"
       ],
       "correct": [
-        1
+        2
       ]
     }
   ]

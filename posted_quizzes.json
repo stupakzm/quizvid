@@ -372,5 +372,16 @@
     ],
     "category": "History",
     "date": "2026-05-26"
+  },
+  {
+    "questions": [
+      "What is the highest active volcano in Europe?",
+      "The Nile River flows north through Egypt.",
+      "Which of these are major islands in Oceania?",
+      "Which country is shaped like a boot?",
+      "What is the world's largest lake by surface area?"
+    ],
+    "category": "Geography",
+    "date": "2026-05-27"
   }
 ]
