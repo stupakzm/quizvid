@@ -383,5 +383,16 @@
     ],
     "category": "Geography",
     "date": "2026-05-27"
+  },
+  {
+    "questions": [
+      "Which NFL team has won the most Super Bowl titles?",
+      "The Stanley Cup is awarded annually to the champion of the NHL.",
+      "Who holds the record for the most career home runs in MLB?",
+      "Which of these are considered major Grand Slam tennis tournaments?",
+      "What is the maximum number of players on a basketball court per team during a game?"
+    ],
+    "category": "Sports",
+    "date": "2026-05-28"
   }
 ]
