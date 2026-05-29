@@ -6,20 +6,20 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which NFL team has won the most Super Bowl titles?",
+      "question": "Which film was the first animated movie to be nominated for Best Picture at the Oscars?",
       "answers": [
-        "Dallas Cowboys",
-        "New England Patriots",
-        "Pittsburgh Steelers",
-        "San Francisco 49ers"
+        "Toy Story",
+        "Beauty and the Beast",
+        "Spirited Away",
+        "Up"
       ],
       "correct": [
-        0
+        1
       ]
     },
     {
       "type": "truefalse",
-      "question": "The Stanley Cup is awarded annually to the champion of the NHL.",
+      "question": "The silent film 'The Artist' won Best Picture at the Academy Awards.",
       "answers": [
         "True",
         "False"
@@ -30,12 +30,12 @@
     },
     {
       "type": "standard",
-      "question": "Who holds the record for the most career home runs in MLB?",
+      "question": "What is the highest-grossing R-rated film of all time?",
       "answers": [
-        "Babe Ruth",
-        "Barry Bonds",
-        "Hank Aaron",
-        "Alex Rodriguez"
+        "Deadpool",
+        "Joker",
+        "The Matrix",
+        "The Passion of the Christ"
       ],
       "correct": [
         1
@@ -43,28 +43,28 @@
     },
     {
       "type": "multi",
-      "question": "Which of these are considered major Grand Slam tennis tournaments?",
+      "question": "Which of these directors are known for their distinctive visual style and auteur status?",
       "answers": [
-        "Wimbledon",
-        "Australian Open",
-        "Indian Wells Masters",
-        "US Open",
-        "French Open"
+        "Wes Anderson",
+        "Christopher Nolan",
+        "Quentin Tarantino",
+        "Steven Spielberg",
+        "Martin Scorsese"
       ],
       "correct": [
         0,
-        1,
-        3
+        2,
+        4
       ]
     },
     {
       "type": "standard",
-      "question": "What is the maximum number of players on a basketball court per team during a game?",
+      "question": "Who composed the iconic score for 'Psycho'?",
       "answers": [
-        "4",
-        "5",
-        "6",
-        "7"
+        "John Williams",
+        "Bernard Herrmann",
+        "Hans Zimmer",
+        "Ennio Morricone"
       ],
       "correct": [
         1

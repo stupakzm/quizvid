@@ -394,5 +394,16 @@
     ],
     "category": "Sports",
     "date": "2026-05-28"
+  },
+  {
+    "questions": [
+      "Which film was the first animated movie to be nominated for Best Picture at the Oscars?",
+      "The silent film 'The Artist' won Best Picture at the Academy Awards.",
+      "What is the highest-grossing R-rated film of all time?",
+      "Which of these directors are known for their distinctive visual style and auteur status?",
+      "Who composed the iconic score for 'Psycho'?"
+    ],
+    "category": "Movies",
+    "date": "2026-05-29"
   }
 ]
