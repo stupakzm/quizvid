@@ -6,36 +6,23 @@
   "questions": [
     {
       "type": "standard",
-      "question": "Which film was the first animated movie to be nominated for Best Picture at the Oscars?",
+      "question": "Which film won the Golden Bear at Berlinale 2024?",
       "answers": [
-        "Toy Story",
-        "Beauty and the Beast",
-        "Spirited Away",
-        "Up"
-      ],
-      "correct": [
-        1
-      ]
-    },
-    {
-      "type": "truefalse",
-      "question": "The silent film 'The Artist' won Best Picture at the Academy Awards.",
-      "answers": [
-        "True",
-        "False"
+        "Reas",
+        "The Damned",
+        "Brothers",
+        "No Other Land"
       ],
       "correct": [
         0
       ]
     },
     {
-      "type": "standard",
-      "question": "What is the highest-grossing R-rated film of all time?",
+      "type": "truefalse",
+      "question": "The AI model 'Mistral Large' was released by OpenAI.",
       "answers": [
-        "Deadpool",
-        "Joker",
-        "The Matrix",
-        "The Passion of the Christ"
+        "True",
+        "False"
       ],
       "correct": [
         1
@@ -43,31 +30,43 @@
     },
     {
       "type": "multi",
-      "question": "Which of these directors are known for their distinctive visual style and auteur status?",
+      "question": "Which of these were nominated for Best Adapted Screenplay at the 96th Oscars?",
       "answers": [
-        "Wes Anderson",
-        "Christopher Nolan",
-        "Quentin Tarantino",
-        "Steven Spielberg",
-        "Martin Scorsese"
+        "Oppenheimer",
+        "Barbie",
+        "Poor Things",
+        "Killers of the Flower Moon",
+        "The Holdovers"
       ],
       "correct": [
-        0,
         2,
-        4
+        3
       ]
     },
     {
       "type": "standard",
-      "question": "Who composed the iconic score for 'Psycho'?",
+      "question": "Who won the Best Director award at the 2024 C\u00e9sar Awards?",
       "answers": [
-        "John Williams",
-        "Bernard Herrmann",
-        "Hans Zimmer",
-        "Ennio Morricone"
+        "Justine Triet",
+        "Christopher Nolan",
+        "Jonathan Glazer",
+        "Hirokazu Kore-eda"
       ],
       "correct": [
-        1
+        0
+      ]
+    },
+    {
+      "type": "standard",
+      "question": "Which band headlined the Super Bowl LVIII halftime show?",
+      "answers": [
+        "Usher",
+        "Taylor Swift",
+        "Beyonc\u00e9",
+        "Rihanna"
+      ],
+      "correct": [
+        0
       ]
     }
   ]

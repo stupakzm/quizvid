@@ -405,5 +405,16 @@
     ],
     "category": "Movies",
     "date": "2026-05-29"
+  },
+  {
+    "questions": [
+      "Which film won the Golden Bear at Berlinale 2024?",
+      "The AI model 'Mistral Large' was released by OpenAI.",
+      "Which of these were nominated for Best Adapted Screenplay at the 96th Oscars?",
+      "Who won the Best Director award at the 2024 C\u00e9sar Awards?",
+      "Which band headlined the Super Bowl LVIII halftime show?"
+    ],
+    "category": "Trends",
+    "date": "2026-05-30"
   }
 ]
