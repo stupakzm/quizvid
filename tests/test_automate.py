@@ -1,6 +1,9 @@
 # tests/test_automate.py
 import json
+import os
 import sys
+from datetime import datetime
+
 import pytest
 from unittest.mock import patch, MagicMock, mock_open
 
@@ -129,7 +132,9 @@ def test_duplicate_quiz_triggers_regeneration():
     """Mock is_duplicate returning True once then False — generate_quiz called twice."""
     is_dup_calls = {"n": 0}
 
-    def is_dup_side_effect(quiz):
+    # Signature must match automate.main()'s call:
+    # is_duplicate(quiz_data, category_name=category["name"])
+    def is_dup_side_effect(quiz, category_name=None):
         is_dup_calls["n"] += 1
         return is_dup_calls["n"] == 1  # True first time, False second
 
@@ -222,15 +227,28 @@ def test_preview_injected_into_config(tmp_path):
     import builtins
 
     original_open = builtins.open
+    original_makedirs = os.makedirs
 
     def tracking_open(path, *args, **kwargs):
         # For config.json reads/writes, use the tmp_path version
-        if str(path) == "config.json":
-            path = str(config_file)
-        return original_open(path, *args, **kwargs)
+        p = str(path)
+        if p == "config.json":
+            return original_open(str(config_file), *args, **kwargs)
+        # This test lets real file I/O through, so redirect every other write
+        # (the quiz file, outputs/) into tmp_path instead of the repo.
+        mode = args[0] if args else kwargs.get("mode", "r")
+        if not os.path.isabs(p) and ("w" in mode or "a" in mode or "x" in mode):
+            p = str(tmp_path / p)
+            original_makedirs(os.path.dirname(p), exist_ok=True)
+        return original_open(p, *args, **kwargs)
+
+    # A real datetime, not a MagicMock: save_outputs() calls .strftime() to build
+    # the outputs/ filename, so the double needs more than .weekday().
+    # 2026-01-05 is a Monday, matching SCHEDULE key 0.
+    fake_now = datetime(2026, 1, 5, 12, 0, 0)
 
     with patch("automate.SCHEDULE", {0: SCIENCE_CATEGORY}), \
-         patch("automate.datetime_utcnow", return_value=MagicMock(weekday=lambda: 0)), \
+         patch("automate.datetime_utcnow", return_value=fake_now), \
          patch("automate.generate_quiz", return_value=VALID_QUIZ), \
          patch("automate.is_duplicate", return_value=False), \
          patch("automate.record_quiz"), \
