@@ -6,7 +6,7 @@ from datetime import datetime
 from rapidfuzz import fuzz
 
 POSTED_QUIZZES_FILE = "posted_quizzes.json"
-SIMILARITY_THRESHOLD = 90  # WRatio score (0–100); near-identical wording only
+SIMILARITY_THRESHOLD = 75  # WRatio score (0–100); catches rephrasings, not unrelated topics
 OVERLAP_THRESHOLD = 3      # number of similar questions before flagged as duplicate
 
 
