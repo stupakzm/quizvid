@@ -1,7 +1,7 @@
 # dedup.py
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 
 from rapidfuzz import fuzz
 
@@ -56,7 +56,7 @@ def record_quiz(quiz_data, category_name):
     posted.append({
         "questions": get_question_texts(quiz_data),
         "category": category_name,
-        "date": datetime.utcnow().strftime("%Y-%m-%d"),
+        "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
     })
     save_posted_quizzes(posted)
 

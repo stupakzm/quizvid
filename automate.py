@@ -4,7 +4,7 @@ import os
 import shutil
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def _load_env_local(path=".env.local"):
@@ -35,8 +35,8 @@ OUTPUTS_DIR = "outputs"
 
 
 def datetime_utcnow():
-    """Thin wrapper around datetime.utcnow() — patched in tests."""
-    return datetime.utcnow()
+    """Current UTC time as an aware datetime — patched in tests."""
+    return datetime.now(timezone.utc)
 
 
 def save_outputs(video_path, quiz_data):
